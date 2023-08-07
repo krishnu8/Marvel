@@ -1,0 +1,226 @@
+a {
+    text-decoration: none;
+}
+
+.nav ul li a {
+    font-size: 13px;
+    color: #fff;
+}
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+nav {
+    display: flex;
+    flex-direction: row;
+    padding: 2% 0%;
+    justify-content: right;
+    align-items: center;
+}
+
+.nav {
+    min-height: fit-content;
+    background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)), url(bg1.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    border: #61d394 solid 2px;
+}
+
+.href {
+    padding: 6px 4px;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+    color: #ff0000;
+    font-size: 20px;
+    background: transparent;
+    border-radius: 15px;
+}
+
+.href:hover {
+    color: #fff;
+    border-radius: 5px;
+    border: 1px solid #ff1100;
+    background: #ff1100;
+    transition: 0.7s;
+
+}
+
+.nav ul li {
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 3px;
+    position: relative;
+    color: rgb(255, 255, 255);
+    position: relative;
+}
+
+.nav ul li::after {
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #f44336;
+    display: block;
+    margin: auto;
+    transition: 0.7s;
+}
+
+.nav li:hover::after {
+    width: 100%;
+}
+
+h4::after {
+    content: '';
+    width: 40%;
+    height: 2px;
+    background: #63d6b4;
+    display: block;
+    margin: auto;
+}
+
+h5::after {
+    content: '';
+    width: 60%;
+    height: 2px;
+    background: #f44336;
+    display: block;
+    margin: auto;
+}
+@media only screen and (max-width:1010px) {
+    .navigation ul {
+        display: flex;
+        flex-direction: column;
+        text-align: right;
+    }
+
+ #ham {
+        width: 27px;
+        height: 30px;
+        cursor: pointer;
+        z-index: 100;
+        margin-right: 22px;
+    }
+
+    .bar {
+        background-color: #ffffff;
+        height: 3px;
+        width: 100%;
+        display: block;
+        border-radius: 5px;
+        margin-bottom: 3px;
+        transition: 0.3s ease;
+    }
+
+    #bar1 {
+        transform: translateY(-4px)
+    }
+
+    #bar3 {
+        transform: translateY(4px);
+    }
+
+    .icon .bar {
+        background: rgb(252, 18, 18);
+    }
+
+    .icon #bar1 {
+        transform: translateY(4px)rotate(-45deg);
+    }
+
+    .icon #bar3 {
+        transform: translateY(-6px)rotate(45deg);
+    }
+
+    .icon #bar2 {
+        opacity: 0;
+    }
+
+    .nav1 {
+        display: none;
+    }
+
+    .change {
+        background-color: rgba(4, 9, 30, 0.7);
+        max-height: max-content;
+        position: absolute;
+        font-size: 15px;
+        z-index: 100;
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navigation {
+        align-items: flex-end;
+        width: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .navigation #nav1 ul a{
+        text-align: center;
+    }
+}
+.box{
+    margin: 100px 100px;
+    position: relative;
+}
+.box .square{
+    position: absolute;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 25px 45px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-right: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    animation: animate 10px linear infinite;
+    animation-delay: calc(-1s * var(--i));
+}
+@keyframes animate{
+    0%,100%{
+        transform: translateY(-40px);
+    }
+    50%{
+        transform: translateY(40px);
+    }
+}
+.box .square:nth-child(1)
+{
+    top: -50px;
+    right: -60px;
+    width: 100px;
+    height: 100px;
+}
+.box .square:nth-child(2)
+{
+    top: 150px;
+    left: -100px;
+    width: 120px;
+    height: 120px;
+    z-index: 2;
+}
+.box .square:nth-child(3)
+{
+    bottom:50px;
+    right: -60px;
+    width: 80px;
+    height: 80px;
+}
+.box .square:nth-child(4)
+{
+    bottom:80px;
+    left: 100px;
+    width: 50px;
+    height: 50px;
+}
+.box .square:nth-child(5)
+{
+    top:-80px;
+    left: 140px;
+    width: 60px;
+    height: 60px;
+}
