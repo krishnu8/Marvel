@@ -8,7 +8,9 @@
   <link rel="stylesheet" href="css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/mystyle.css" />
   <title>Admin Header</title>
+  
 </head>
 
 <body>
@@ -93,73 +95,73 @@
             </a>
           </li>
           <li>
-            <a href="{{ URL::to('/') }}/" class="nav-link px-3">
+            <a href="{{ URL::to('/') }}/users_admin" class="nav-link px-3">
               <span class="me-2"><i class="bi bi-person-check-fill"></i></span>
               <span>Admins</span>
             </a>
           </li>
           <li>
-            <a href="{{ URL::to('/') }}/" class="nav-link px-3">
+            <a href="{{ URL::to('/') }}/users_normal" class="nav-link px-3">
               <span class="me-2"><i class="bi bi-person-circle"></i></span>
               <span>Normal Users</span>
             </a>
           </li>
           <li>
-            <a href="{{ URL::to('/') }}/total_users" class="nav-link px-3">
+            <a href="{{ URL::to('/') }}/users_total" class="nav-link px-3">
               <span class="me-2"><i class="bi bi-person-fill"></i></span>
               <span>Total Users</span>
             </a>
           </li>
           <li>
-            <a href="{{ URL::to('/') }}/" class="nav-link px-3">
-              <span class="me-2"><i class="bi bi-trash"></i></span>
+            <a href="{{ URL::to('/') }}/movies" class="nav-link px-3">
+              <span class="me-2"><i class="bi bi-film"></i></span>
               <span>Movies</span>
             </a>
           </li>
           <li>
-            <a href="{{ URL::to('/') }}/" class="nav-link px-3">
-              <span class="me-2"><i class="bi bi-table"></i></span>
+            <a href="{{ URL::to('/') }}/movies_upcoming" class="nav-link px-3">
+              <span class="me-2"><i class="bi bi-film"></i></span>
               <span>Upcoming Movies</span>
             </a>
           </li>
           <li>
-            <a href="{{ URL::to('/') }}/" class="nav-link px-3">
-              <span class="me-2"><i class="bi bi-table"></i></span>
+            <a href="{{ URL::to('/') }}/movies_top" class="nav-link px-3">
+              <span class="me-2"><i class="bi bi-film"></i></span>
               <span>Top Grossing Movies</span>
             </a>
           </li>
           <li>
-            <a href="{{ URL::to('/') }}/" class="nav-link px-3">
+            <a href="{{ URL::to('/') }}/products" class="nav-link px-3">
               <span class="me-2"><i class="bi bi-cart-fill"></i></span>
               <span>Products</span>
             </a>
           </li>
           <li>
-            <a href="{{ URL::to('/') }}/" class="nav-link px-3">
+            <a href="{{ URL::to('/') }}/orders" class="nav-link px-3">
               <span class="me-2"><i class="bi bi-cart-check-fill"></i></span>
               <span>Orders</span>
             </a>
           </li>
           <li>
-            <a href="{{ URL::to('/') }}/" class="nav-link px-3">
+            <a href="{{ URL::to('/') }}/review_rating" class="nav-link px-3">
               <span class="me-2"><i class="bi bi-star-fill"></i></span>
               <span>Review & Rating</span>
             </a>
           </li>
           <li>
-            <a href="{{ URL::to('/') }}/" class="nav-link px-3">
+            <a href="{{ URL::to('/') }}/products_deleted" class="nav-link px-3">
               <span class="me-2"><i class="bi bi-trash"></i></span>
               <span>Deleted Products</span>
             </a>
           </li>
           <li>
-            <a href="{{ URL::to('/') }}/" class="nav-link px-3">
+            <a href="{{ URL::to('/') }}/users_deleted" class="nav-link px-3">
               <span class="me-2"><i class="bi bi-trash"></i></span>
               <span>Deleted Users</span>
             </a>
           </li>
           <li>
-            <a href="{{ URL::to('/') }}/" class="nav-link px-3">
+            <a href="{{ URL::to('/') }}/messages" class="nav-link px-3">
               <span class="me-2"><i class="bi bi-chat-dots-fill"></i></span>
               <span>Messages</span>
             </a>

@@ -40,7 +40,7 @@
 
         .card1 {
             width: 350px;
-            height: 500px;
+            height: 550px;
             border-radius: 20px;
             transition: all .3s;
             z-index: 1;
@@ -50,7 +50,7 @@
 
         .card2 {
             width: 350px;
-            height: 500px;
+            height: 550px;
             background-color: black;
             border-radius: 20px 300px;
             transition: all .2s;
@@ -65,7 +65,7 @@
             border-radius: 300px 20px;
         }
 
-        form div{
+        form div {
             margin-bottom: 8px;
             color: white;
         }
@@ -176,7 +176,7 @@
                 <br>
                 <form method="get" action="#">
 
-                <div class="row">
+                    <div class="row">
                         <div class="col">
                             <input type="text" name="un" placeholder="Username" id="un1" class="form-control">
                         </div>
@@ -184,6 +184,11 @@
                     <div class="row">
                         <div class="col">
                             <input type="text" name="em" placeholder="Email" id="em1" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" name="mob" placeholder="Mobile" id="mob1" class="form-control">
                         </div>
                     </div>
                     <div class="row">
@@ -204,7 +209,7 @@
                     </div>
                     <div class="row" style="text-align:center;">
                         <div class="col">
-                            <input type="submit" value="Submit" name="btn-submit" class="submit">
+                            <input type="submit" value="Register" name="btn-submit" class="submit">
 
                             <input type="reset" value="Reset" name="btn-message" class="reset">
                         </div>

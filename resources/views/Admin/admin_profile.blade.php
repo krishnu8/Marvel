@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-@extends('master_view')
+@extends('Admin/master_view')
 @section('content')
 <main class="mt-5 pt-3">
     <h1>Profile</h1>

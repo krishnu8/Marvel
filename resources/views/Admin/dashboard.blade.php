@@ -30,7 +30,7 @@
 </head>
 <body>
   
-@extends('master_view')
+@extends('Admin/master_view')
 @section('content')
 <main class="mt-5 pt-3">
   <div class="container-fluid">
@@ -88,7 +88,7 @@
             <span class="m-auto">
 
             </span>
-            <a class="pro_link" href="{{ URL::to('/') }}/total_admins">See Admins</a>
+            <a class="pro_link" href="{{ URL::to('/') }}/users_admin">See Admins</a>
             <span class="m-auto">
             </span>
           </div>
@@ -112,7 +112,7 @@
             <span class="m-auto">
 
             </span>
-            <a class="pro_link" href="{{ URL::to('/') }}/normal_users">See Normal Users</a>
+            <a class="pro_link" href="{{ URL::to('/') }}/users_normal">See Normal Users</a>
             <span class="m-auto">
             </span>
           </div>
@@ -136,7 +136,7 @@
             <span class="m-auto">
 
             </span>
-            <a class="pro_link" href="{{ URL::to('/') }}/total_users">See Users</a>
+            <a class="pro_link" href="{{ URL::to('/') }}/users_total">See Users</a>
             <span class="m-auto">
             </span>
           </div>

@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\After_login_controller;
 use App\Http\Controllers\Before_login_Controller;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\My_Controller;
+use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -22,12 +23,59 @@ use App\Http\Controllers\My_Controller;
 //     return view('welcome');
 // });
 
+
+
+// Admin Start
+
 // Route::view('admin_header','master_view');
-Route::view('register_form','Admin/register_form');
-Route::view('login_form','Admin/login_form');
-Route::view('admin_dashboard','Admin/dashboard');
-Route::view('total_users','Admin/total_users');
+Route::view('register_form','register_form');
+Route::view('login_form','login_form');
+Route::view('admin_dashboard','Admin/dashboard');   //Dashboard
+Route::view('user_add','Admin/user_add');
+Route::get('users_total',[My_Controller::class,'fetch_total']);
+Route::get('users_normal',[My_Controller::class,'fetch_normal']);
+Route::get('users_admin',[My_Controller::class,'fetch_admin']);
 Route::view('admin_profile','Admin/admin_profile');
+
+
+Route::view('movies','Admin/movies');
+Route::view('movie_add','Admin/movie_add');
+
+Route::view('movies_upcoming','Admin/movies_upcoming');
+Route::view('movies_add_upcom','Admin/movies_add_upcom');
+
+Route::view('movies_top','Admin/movies_top');
+Route::view('movies_add_top','Admin/movies_add_top');
+
+Route::view('products','Admin/products');
+Route::view('products_add','Admin/products_add');
+
+Route::view('orders','Admin/orders');
+Route::view('order_add','Admin/order_add');
+
+Route::view('review_rating','Admin/review_rating');
+Route::view('products_deleted','Admin/products_deleted');
+Route::view('users_deleted','Admin/users_deleted');
+Route::view('messages','Admin/messages');
+
+
+Route::post('form_controller',[My_controller::class,'validate_form']);
+Route::post('movie_controller',[My_controller::class,'validate_movie']);
+Route::post('upcom_movie_controller',[My_controller::class,'validate_upcom_movie']);
+Route::post('top_movie_controller',[My_controller::class,'validate_top_movie']);
+Route::post('product_controller',[My_controller::class,'validate_product']);
+Route::post('order_controller',[My_controller::class,'validate_order']);
+
+// Admin End
+
+
+
+
+
+
+
+
+
 
 //Before login---------------------------------------------------------------------------------------------
 Route::get('home',[Before_login_Controller::class,'home_data']);

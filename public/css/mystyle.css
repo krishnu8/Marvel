@@ -1,0 +1,189 @@
+textarea{
+    resize: none;
+}
+
+/* Total Users Page Start */
+
+    table{
+        width: 99.5%;
+        margin: 2px;
+    } 
+    th{
+        text-align: center;
+    }
+
+    table thead tr th{
+        font-size: 2rem;
+    }
+
+     table, tr, th, td{
+        border: 2px solid black;
+        border-collapse: collapse;
+     }
+     
+
+/* Total Users Page End */
+
+
+/* Add User Page Start */
+/* @media only screen and (max-width: 768px) {
+    .des{
+        visibility: hidden;
+    }
+    .mob{
+        visibility: visible;
+    }
+} */
+
+
+form div {
+    margin-bottom: 8px;
+    color: white;
+}
+
+input[type=text], input[type=password] {
+    background-color: transparent;
+    border: black solid 0.5px;
+    color: black;
+}
+
+input[type=submit] {
+    margin-right: 10px;
+}
+
+input[type=reset] {
+    margin-left: 10px;
+}
+
+input[type=submit], input[type=reset], input[type=button] {
+    background-color: #ffffff00;
+    color: black;
+    box-shadow: 3px 3px 3px #CCCCCC;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+}
+
+.cont_add{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.user_add{
+    width: 350px;
+    height: 500px;
+}
+
+.gen{
+    color: black;
+}
+
+/* Add User Page End */
+    
+
+
+:root {
+    --menu-color: #780ac1a5;
+    --text-color: #f0dc06;
+    --col-color: #fff;
+    --icon-color: rgba(255, 0, 0, 0.584);
+    --main-color: #780ac1a5;
+    --red: #eb4d4b;
+    --orange: #f39c12;
+    --black: #130f40;
+    --sky: #38bbe0;
+    --light-color: #999;
+    --light-bg: #eee;
+    --white: #ffffffe0;
+    --border: .1rem solid var(--light-color);
+    --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+}
+
+.checkout-orders form {
+    padding: 2rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: var(--border);
+    background-color: var(--white);
+    box-shadow: var(--box-shadow);
+    border-radius: 1rem;
+    width: 94%;
+    margin-left: 2rem;
+}
+
+.checkout-orders form h3 {
+    border-radius: .5rem;
+    padding: 0.7rem 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+
+.checkout-orders form .flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: space-between;
+}
+
+.checkout-orders form .flex .inputBox {
+    width: 47%;
+}
+
+.checkout-orders form .flex .inputBox span {
+    font-size: 1.5rem;
+    /* background-color: #38bbe0; */
+}
+
+.checkout-orders form .flex .inputBox .box {
+    width: 100%;
+    border: var(--border);
+    border-radius: .5rem;
+    font-size: 1.3rem;
+    color: var(--black);
+    padding: 0.7rem 1rem;
+    margin: 0.3rem 0;
+    background-color: var(--light-bg);
+}
+
+.checkout-orders form .flex .inputBox span {
+    font-size: 1.4rem;
+    color: var(--light-color);
+}
+
+.orders .box-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.orders .box-container .box {
+    padding: 1rem 2rem;
+    flex: 1 1 40rem;
+    border: var(--border);
+    background-color: var(--white);
+    box-shadow: var(--box-shadow);
+    border-radius: .5rem;
+}
+
+.orders .box-container .box p {
+    margin: .5rem 0;
+    line-height: 1.8;
+    font-size: 2rem;
+    color: var(--light-color);
+}
+
+.orders .box-container .box p span {
+    color: var(--main-color);
+}
+
+.custom-select{
+    height: 37px;
+    border-radius: 6px;
+}
