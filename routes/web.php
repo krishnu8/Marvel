@@ -28,8 +28,8 @@ Route::get('/', function () {
 // Admin Start
 
 // Route::view('admin_header','master_view');
-Route::view('register_form','register_form');
-Route::view('login_form','login_form'); 
+// Route::view('register_form','register_form');
+// Route::view('login_form','login_form');
 Route::view('admin_dashboard','Admin/dashboard');   //Dashboard
 Route::view('user_add','Admin/user_add');
 Route::get('users_total',[My_Controller::class,'fetch_total']);
@@ -113,7 +113,7 @@ Route::view('Edit','After_login/Edit_profile');
 Route::get('Update_profile',[After_login_controller::class,'profile_update']);
 
 
-Route::view('login_form','login_form'); 
+Route::view('login_form','login_form');
 Route::get('login',[Before_login_Controller::class,'validate_login']);
 Route::view('register_form','register_form');
 Route::get('register',[Before_login_Controller::class,'validate_form']);
