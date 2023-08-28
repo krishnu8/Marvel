@@ -251,7 +251,7 @@
                 <a href="About_Us">
                     <li>About Us</li>
                 </a>
-                <a href="Login">
+                <a href="login_form">
                     <li id="log">Log in</li>
                 </a>
             </ul>

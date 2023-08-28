@@ -47,4 +47,22 @@ class After_login_controller extends Controller
         $upcoming = movies_model::select()->where('Status','Upcoming')->get();
         return view('After_login/Movies', compact('current','upcoming','top'));
     }
+
+    public function profile_update(Request $req){
+        $req->validate([
+                'Name'=>'required|min:3|max:15',
+                'Number'=>'required|numeric|digits:10',
+                'Email'=>'required|email',
+                'Gender'=>'required'
+            ]);
+            return view('After_login/Profile');
+    }
+
+    public function change_password(Request $req){
+        $req->validate([
+            'cpwd' => 'required|min:10|max:16|confirmed',
+            'ccpwd_confirmation' => 'required'
+    ]);
+    }
+   
 }

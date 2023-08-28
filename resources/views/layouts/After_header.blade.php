@@ -285,33 +285,7 @@
     </div>
 </nav>
 @yield('body')
-{{-- --------------------------------------------footer------------------------------------------------ --}}
-<div style="background-color: rgb(116, 113, 113); color:white;bottom:0;"><br>
-    <div class="last">
-        <center>
-            <h4>Thank you for visiting our website.</h4>
-            <h5>Have fun and don't forget to checkout us on
-                Facebook, Twitter and Instagram</h5>
-        </center>
-    </div>
-    <div
-        style="background-color: rgb(116, 113, 113);display: flex;flex-direction: row;justify-content: center;align-items: center;">
-        <a href="https://www.facebook.com/groups/MCU.Official/" target="_blank"><img src="pictures/fb.png"
-                style="height: 50px;width:75px;margin: 0px 30px;"> </a>
-        <a href="https://business.twitter.com/" target="_blank"><img src="pictures/tw.webp"
-                style="height: 50px;width:50px;margin: 0px 30px;"></a>
-        <a href="https://www.instagram.com/amarjitbhujofficial/" target="_blank"><img src="pictures/insta.png"
-                style="height: 40px;width:40px;margin: 0px 30px;"></a>
-        <a href="https://www.linkedin.com/" target="_blank"><img src="pictures/in.png"
-                style="height: 60px;width:60px;margin: 0px 4%;"></a>
 
-    </div>
-    <div>
-        <center>
-            <h4>Created By Team-15</h4>
-        </center>
-    </div><br>
-</div>
 </body>
 
 </html>

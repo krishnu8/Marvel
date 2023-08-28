@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return redirect('home');
+});
 
 
 
@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::view('admin_header','master_view');
 Route::view('register_form','register_form');
-Route::view('login_form','login_form');
+Route::view('login_form','login_form'); 
 Route::view('admin_dashboard','Admin/dashboard');   //Dashboard
 Route::view('user_add','Admin/user_add');
 Route::get('users_total',[My_Controller::class,'fetch_total']);
@@ -89,6 +89,15 @@ Route::get('Movies',[Before_login_Controller::class,'movies_data']);
 Route::view('Login','Before_login/login_form');
 
 
+
+
+
+
+
+
+
+
+
 //After login---------------------------------------------------------------------------------------------
 Route::get('After_home',[After_login_controller::class,'After_home_data']);
 Route::get('After_About_Us',[After_login_controller::class,'After_about_data']);
@@ -96,7 +105,19 @@ Route::get('After_Contact_Us',[After_login_controller::class,'After_contact_data
 Route::get('After_Gallery',[After_login_controller::class,'After_gallery_data']);
 Route::get('After_Franchise',[After_login_controller::class,'After_franchise_data']);
 Route::get('After_Movies',[After_login_controller::class,'After_movies_data']);
-// Route::view('Login','Before_login/login_form');
 
 Route::view('After_profile','After_login/Profile');
 Route::view('Edit','After_login/Edit_profile');
+
+Route::get('Update_profile',[After_login_controller::class,'profile_update']);
+
+
+Route::view('login_form','login_form'); 
+Route::get('login',[Before_login_Controller::class,'validate_login']);
+Route::view('register_form','register_form');
+Route::get('register',[Before_login_Controller::class,'validate_form']);
+
+Route::get('pass_validate',[Before_login_Controller::class,'pass_validate']);
+Route::view('change_password','After_login/Change_password');
+
+Route::post('update_profile_pic',[Before_login_Controller::class,'update_profile_pic']);

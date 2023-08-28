@@ -62,78 +62,52 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body p-4">
-                            <form action="Update_profile" method="get">
+                            <form action="pass_validate" method="get">
 
-                                <h3>Information</h3>
+                                <h3>Chnage Password</h3>
                                 <hr class="mt-0 mb-4">
                                 <div class="row pt-1">
-                                    <div class="col-6 mb-3">
+                                    <div class="col-12 mb-3">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Name</label>
+                                            <label for="exampleInputEmail1">Enter Your Password</label>
                                             <input type="text" class="form-control" id="exampleInputEmail1"
-                                                aria-describedby="emailHelp" placeholder="Enter Name" value="Krishnu" name="Name">
+                                                aria-describedby="emailHelp" placeholder="Enter Password"  name="pwd">
                                             <small id="emailHelp" class="form-text text-muted" style="color: red !important;">
-                                                @error('Name')
+                                                @error('pwd')
                                                     {{$message}}
                                                 @enderror
                                             </small>
                                         </div>
                                     </div>
-                                    <div class="col-6 mb-3">
+                                    <div class="col-12 mb-3">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Email address</label>
+                                            <label for="exampleInputEmail1">New Password</label>
                                             <input type="text" class="form-control" id="exampleInputEmail1"
-                                                aria-describedby="emailHelp" placeholder="Enter email" value="Krishnu@gmail.com" name="Email">
+                                                aria-describedby="emailHelp" placeholder="Enter New password"  name="cpwd">
                                                 <small id="emailHelp" class="form-text text-muted" style="color: red !important;">
-                                                    @error('Email')
+                                                    @error('cpwd')
                                                         {{$message}}
                                                     @enderror
                                                 </small>
                                         </div>
                                     </div>
-                                    <div class="col-6 mb-3">
+                                    <div class="col-12 mb-3">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Number</label>
+                                            <label for="exampleInputEmail1">Confirm Password</label>
                                             <input type="text" class="form-control" id="exampleInputEmail1"
-                                                aria-describedby="emailHelp" placeholder="Enter Number" value="9821412079" name="Number">
+                                                aria-describedby="emailHelp" placeholder="Enter Same as above"  name="ccpwd">
                                                 <small id="emailHelp" class="form-text text-muted" style="color: red !important;">
-                                                    @error('Number')
+                                                    @error('ccpwd')
                                                         {{$message}}
                                                     @enderror
                                                 </small>
                                         </div>
                                     </div>
-                                    <div class="col-6 mb-3">
-                                        <div class="form-check">
-                                            Gender: <br>
-                                            <input class="form-check-input" type="radio" name="Gender"
-                                                id="flexRadioDefault1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                Male
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="Gender"
-                                                id="flexRadioDefault2" checked>
-                                            <label class="form-check-label" for="flexRadioDefault2">
-                                                Female
-                                            </label>
-                                        </div>
-                                        <small id="emailHelp" class="form-text text-muted" style="color: red !important;">
-                                            @error('Gender')
-                                                {{$message}}
-                                            @enderror
-                                        </small>
-                                    </div>
+                                   
                                 </div>
-                                <hr class="mt-0 mb-4">
-                                <h6>Description</h6>
-                                <div style="margin-top: 30px;">
-                                    <textarea name="" id="" cols="110" rows="5"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi molestias excepturi labore ratione suscipit dolorum animi voluptatem ut, placeat numquam necessitatibus liberoofficiis delectus vel! Quidem facere cumque fugit voluptas! lorem200</textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary" style="margin-top: 20px">Update</button>
-                                <button type="reset" class="btn btn-secondary" style="margin-top: 20px; margin-left: 10px;">Reset</button>                                                                
-                                <a href="After_profile" class="btn btn-danger" style="margin-top: 20px; margin-left: 10px;">Cancle</a>
+                                        <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Change Password</button>
+                                        <button type="reset" class="btn btn-secondary" style="margin-top: 20px; margin-left: 10px;">Reset</button>
+                                        <a href="After_profile" class="btn btn-danger" style="margin-top: 20px; margin-left: 10px;">Cancle</a>
                             </form>
 
                         </div>

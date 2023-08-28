@@ -1,0 +1,51 @@
+body {
+    background-image: url(pic/loginBG.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(255, 255, 255);
+    font-size: 17px;
+    height: fit-content;
+    font-family: sans-serif;
+}
+
+.form {
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+}
+
+.form input {
+    display: flex;
+    height: 30px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.form center {
+    padding: 10px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+form {
+    background-color: rgba(0, 0, 0, 0.638);
+    border-radius: 10px;
+    width:350px;
+    padding: 30px;
+}
+.btn {
+    background-color: red;
+    align-self: center;
+    width: 120px;
+    height: 40px;
+    font-size: 20px;
+    margin: 0px 35%;
+    border: 0;
+    color: white;
+    border-radius: 10px;
+}
+
+a:hover{
+    text-decoration: none;
+    color: black;
+}

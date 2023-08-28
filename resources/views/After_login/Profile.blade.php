@@ -1,4 +1,4 @@
-@extends('layouts.after_login_master')
+@extends('layouts.After_header')
 <style>
     .gradient-custom {
         /* fallback for old browsers */
@@ -35,7 +35,8 @@
     .editt:hover {
         opacity: 1;
     }
-    #update_btn{
+
+    #update_btn {
         display: none;
     }
 </style>
@@ -46,12 +47,12 @@
         <section class="vh-100" style="background-color: #f4f5f7; z-index:-1;">
             <div class="card mb-3" style="border-radius: .5rem;height:80%;width:95%;margin:2%;">
                 <div class="row g-0 " style="height:100%;">
-                    <div
-                        class="col-md-4 gradient-custom text-center text-white"style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                    <div class="col-md-4 gradient-custom text-center text-white"
+                        style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; background-image: url('pictures/background/wall1.jpg'); background-size: cover;">
 
                         <img src="pictures/doctor strange.jpg" alt="Avatar" class="img-fluid my-5"
                             style="width: 170px; height:170px; border-radius:50%" />
-                            
+
                         <label for="image1"><img src="pictures/Edit_icon.png" alt="" class="editt"></label>
                         <h2>Krishnu Gupta</h2>
                         <center>
@@ -59,13 +60,26 @@
                         </center>
                         <p>User</p>
                         <i class="far fa-edit mb-5"></i>
-                        <form action="" method="get">
-                            <input type="file" name="" oninput="update()" id="image1" style="display: none">
-                            <center><button type="submit" class="btn btn-info" id="update_btn">Update picture</button></center> <br>
+                        <form action="update_profile_pic" method="post">
+                            @csrf
+                            <input type="file" name="" oninput="update()" id="image1" style="display: none" name="pic">
+                            <span style="color: red">
+                                @error('pic')
+                                    {{$message}}
+                                @enderror
+                            </span>
+                            <center><button type="submit" class="btn btn-info" id="update_btn">Update picture</button>
+                            </center> <br>
                         </form>
                         <a href="Edit" class="btn btn-secondary">Edit Profile</a><br> <br>
-                        <button type="button" class="btn btn-secondary" role="button" aria-pressed="true" data-toggle="modal" data-target="#cppp">Chnage password</button> <br> <br>
-                        <a href="" class="btn btn-Danger" onclick="return confirm('Are you Sure! You Want To Delete Your Account')">Delete Account</a>
+                        <a href="change_password" class="btn btn-secondary">Change Password</a><br> <br>
+
+                        {{-- <button type="button" class="btn btn-secondary" role="button" aria-pressed="true"
+                            data-toggle="modal" data-target="#cppp">Change password</button> <br> <br> --}}
+
+                        {{-- <a href="" class="btn btn-Danger" onclick="return confirm('Are you Sure! You Want To Delete Your Account')">Delete Account</a> --}}
+                        <button type="button" class="btn btn-danger" role="button" aria-pressed="true" data-toggle="modal"
+                            data-target="#delete_acc">Delete Account</button>
                     </div>
                     <div class="col-md-8">
                         <div class="card-body p-4">
@@ -123,47 +137,31 @@
             document.getElementById("update_btn").style.display = "block";
         }
     </script>
+ 
 
 
-
-{{-- change password model  --}}
-<div class="modal fade" id="cppp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <form action="user_change_password_action.php" method="post">
+    {{-- delete account modle  --}}
+    <div class="modal fade" id="delete_acc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold">Chnage Password</h4>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Conform its You</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body mx-3">
-                    <div class="md-form mb-5">
-                        <i class="fas fa-lock prefix grey-text"></i>
-                         <label data-error="wrong" data-success="right" for="orangeForm-name">Current Password</label>
-                        <input type="password" id="orangeForm-name" class="form-control" required name="cp1">
-                        <p id="checkpasserr" style="color:red;"></p>
-
+                <form action="" method="post">
+                    <div class="modal-body">
+                        <label for="inputPasswordOld">Enter Password</label>
+                        <input type="password" class="form-control" id="inputPasswordOld" required=""
+                            name="ppass">
                     </div>
-                    <div class="md-form mb-5">
-                        <i class="fas fa-lock prefix grey-text"></i>
-                        <label data-error="wrong" data-success="right" for="orangeForm-email">New Pasword</label>
-                        <input type="password" id="pass" class="form-control ">
-                        <p id="passerr" style="color:red;"></p>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" value="Delete" class="btn btn-primary" name="delete">
                     </div>
-
-                    <div class="md-form mb-4">
-                        <i class="fas fa-lock prefix grey-text"></i>
-                        <label data-error="wrong" data-success="right" for="orangeForm-pass">verify</label>
-                        <input type="password" name="pass1" id="cpass" required class="form-control" onblur="check2()">
-                        <p id="cpasserr" style="color:red;"></p>
-                    </div>
-
-                </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <input type="submit" value="Change" name="change" style="width:100px;" class="btn-custom">
-                </div>
+                </form>
             </div>
-        </form> 
-   </div>
-</div>
+        </div>
+    </div>
