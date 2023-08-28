@@ -15,7 +15,7 @@
 
 <body>
   <!-- top navigation bar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #000000;">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar"
         aria-controls="offcanvasExample">
@@ -54,12 +54,12 @@
   </nav>
   <!-- top navigation bar -->
   <!-- offcanvas -->
-  <div class="offcanvas offcanvas-start sidebar-nav bg-dark" tabindex="-1" id="sidebar">
+  <div class="offcanvas offcanvas-start sidebar-nav" tabindex="-1" id="sidebar">
     <div class="offcanvas-body p-0">
       <nav class="navbar-dark">
         <ul class="navbar-nav">
           <li>
-            <a href="#" class="nav-link px-3 active">
+            <a href="#" class="nav-link px-3 active" style="color: rgb(255, 255, 255)">
               <span class="me-2"><i class="bi bi-speedometer2"></i></span>
               <span>Dashboard</span>
             </a>

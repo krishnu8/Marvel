@@ -15,7 +15,7 @@
 
         <table>
             <thead>
-                <th colspan="8">Review & Rating</th>
+                <th colspan="9">Review & Rating</th>
                 </tr>
             </thead>
             <tr>
@@ -26,8 +26,9 @@
                     Product Image
                 </th>
                 <th>
-                    Product Name
+                    Product Id
                 </th>
+                <th>User Id</th>
                 <th>
                     Rating
                 </th>
@@ -57,8 +58,12 @@
                 </td>
                 <td>
                 </td>
+                <td>
+                </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/delete_registration/"><input type="button" value="Delete"></a>
+                    <a href="{{ URL::to('/') }}/delete_registration/">
+                        <button id="action" class="delete">Delete</button>
+                    </a>
                 </td>
             </tr>
         </table>

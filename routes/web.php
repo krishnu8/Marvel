@@ -36,9 +36,10 @@ Route::get('users_total',[My_Controller::class,'fetch_total']);
 Route::get('users_normal',[My_Controller::class,'fetch_normal']);
 Route::get('users_admin',[My_Controller::class,'fetch_admin']);
 Route::view('admin_profile','Admin/admin_profile');
+Route::view('admin_profile_edit','Admin/admin_profile_edit');
 
 
-Route::view('movies','Admin/movies');
+Route::get('movies',[My_Controller::class,'fetch_movies']);
 Route::view('movie_add','Admin/movie_add');
 
 Route::view('movies_upcoming','Admin/movies_upcoming');
