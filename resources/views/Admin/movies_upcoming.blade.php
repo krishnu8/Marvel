@@ -16,7 +16,11 @@
         <table>
             <thead>
                 <tr>
-                    <th colspan="2"><a href="movies_add_upcom">Add Movie</a></th>
+                    <th colspan="2">
+                        <a href="movies_add_upcom">
+                            <button class="button-70">Add Movie</button>
+                        </a>
+                    </th>
                     <th colspan="7">Upcoming Movies</th>
                 </tr>
             </thead>
@@ -52,7 +56,7 @@
                 <td>
                 </td>
                 <td style="text-align: center;">
-                    <img src="{{ URL::to('/') }}/pictures/wall.jpg" alt="" height="80px" width="80px" style="border-radius: 50%;">
+                    <img src="{{ URL::to('/') }}/pictures/wall.jpg">
                 </td>
                 <td>
                 </td>
@@ -61,13 +65,13 @@
                 <td>
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/edit_registration/"><input type="button" value="Edit"></a>
+                    <a href="{{ URL::to('/') }}/edit_registration/"><button id="action" class="edit">Edit</button></a>
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/delete_registration/"><input type="button" value="Delete"></a>
+                    <a href="{{ URL::to('/') }}/delete_registration/"><button id="action" class="delete">Delete</button></a>
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/deactivate_user/"><input type="button" value="Deactivate"></a>
+                    <a href="{{ URL::to('/') }}/deactivate_user/"><button id="action" class="deactivate">Deactivate</button></a>
 
                     <!-- <a href="{{ URL::to('/') }}/activate_user/"><input type="button" value="Activate"></a>
                 

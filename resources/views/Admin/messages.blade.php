@@ -52,7 +52,9 @@
                 <td>
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/delete_registration/"><input type="button" value="Delete"></a>
+                    <a href="{{ URL::to('/') }}/delete_registration/">
+                        <button id="action" class="delete">Delete</button>
+                    </a>
                 </td>
             </tr>
         </table>

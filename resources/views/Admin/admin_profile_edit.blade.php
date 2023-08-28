@@ -25,43 +25,41 @@
                         <div class="row">
                             <div class="col">
                                 <b>Name:</b>
-                                <p><b>Raghunath Yadav</b></p>
+                                <input type="text" name="fn" value="" id="fn1" class="form-control">
+                                @error('fn')
+                                <span style="color: red;">{{$message}}</span> <br>
+                                @enderror
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <b>Mobile:</b>
-                                <p>
-                                    <b>9812919285</b>
-                                </p>
+                                <input type="text" name="mob" value="" id="mob1" class="form-control">
+                                @error('mob')
+                                <span style="color: red;">{{$message}}</span> <br>
+                                @enderror
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <b>E-mail:</b>
-                                <p>
-                                    <b>ryadav564@rku.ac.in</b>
-                                </p>
+                                <input type="text" name="em" value="" id="em1" class="form-control">
+                                @error('em1')
+                                <span style="color: red;">{{$message}}</span> <br>
+                                @enderror
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
-                                <b>Password:</b>
-                                <p>
-                                    <b>********</b>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row" style="text-align:center;">
-                            <div class="col">
-                                <a href="{{ URL::to('/') }}/admin_profile_edit"><input type="button" value="Edit" class="submit"></a>
-
-                                <input type="button" value="Delete" class="reset" data-toggle="modal" data-target="#msgDelete" style="font-family: JetBrains Mono;">
-
-                            </div>
+                            <input type="submit" value="Update" style="width: 95%">
                         </div>
                         <div class="row">
-                            <input type="button" value="Change Password" class="reset">
+                            
+                            <div class="col">
+                                <a href="{{ URL::to('/') }}/admin_profile" style="width: 100%"><input type="button" value="Cancel"></a>
+
+                                <input type="reset" value="Reset">
+
+                            </div>
                         </div>
                     </form>
                 </div>

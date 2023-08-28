@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies</title>
-
+    
 </head>
 
 <body>
@@ -16,7 +16,11 @@
         <table>
             <thead>
                 <tr>
-                    <th colspan="2"><a href="movie_add">Add Movie</a></th>
+                    <th colspan="2">
+                        <a href="movie_add">
+                            <button class="button-70">Add Movie</button>
+                        </a>
+                    </th>
                     <th colspan="7">Movies</th>
                 </tr>
             </thead>
@@ -37,44 +41,45 @@
                     Release Date
                 </th>
                 <th>
+                    Status
+                </th>
+                <th>
                     Edit
                 </th>
                 <th>
                     Delete
                 </th>
-                <th>
-                    Status
-                </th>
             </tr>
 
-
+            @foreach ($movies1 as $movie)
+             
             <tr>
                 <td>
+                    {{$movie['Movie_ID']}}
                 </td>
                 <td style="text-align: center;">
-                    <img src="{{ URL::to('/') }}/pictures/wall.jpg" alt="" height="80px" width="80px" style="border-radius: 50%;">
+                    <img src="{{ URL::to('/') }}/pictures/wall.jpg">
                 </td>
                 <td>
+                    {{$movie['Movie_Name']}}
                 </td>
                 <td>
+                    
                 </td>
                 <td>
+                    {{$movie['Release_Date']}}
+                </td>
+                <td>
+                    {{$movie['Status']}}
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/edit_registration/"><input type="button" value="Edit"></a>
+                    <a href="{{ URL::to('/') }}/edit_registration/"><button id="action" class="edit">Edit</button></a>
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/delete_registration/"><input type="button" value="Delete"></a>
+                    <a href="{{ URL::to('/') }}/delete_registration/"><button id="action" class="delete">Delete</button></a>
                 </td>
-                <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/deactivate_user/"><input type="button" value="Deactivate"></a>
-
-                    <!-- <a href="{{ URL::to('/') }}/activate_user/"><input type="button" value="Activate"></a>
-                
-                <a href="{{ URL::to('/') }}/reactivate_user/"><input type="button" value="Reactivate"></a> -->
-
-                </td>
-            </tr>
+            </tr>   
+            @endforeach
         </table>
 
 

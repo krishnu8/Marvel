@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\File;
 use App\Models\Admin\admin_data;
 use App\Models\Admin\normal_user_data;
 use App\Models\Admin\total_user_data;
+use App\Models\Admin\movies;
 
 class My_Controller extends Controller
 {
@@ -134,6 +135,11 @@ class My_Controller extends Controller
     public function fetch_total(){
         $total_user_data = total_user_data::select()->get();
         return view('Admin/users_total', compact('total_user_data'));
+    }
+
+    public function fetch_movies(){
+        $movies1 = movies::select()->get();
+        return view('Admin/movies', compact('movies1'));
     }
 
     // Fetching Data End

@@ -16,7 +16,11 @@
         <table>
             <thead>
                 <tr>
-                    <th colspan="2"><a href="order_add">Add Order</a></th>
+                    <th colspan="2">
+                        <a href="order_add">
+                            <button class="button-70">Add Order</button>
+                        </a>
+                    </th>
                     <th colspan="12">Orders</th>
                 </tr>
             </thead>
@@ -70,7 +74,7 @@
                 <td>
                 </td>
                 <td style="text-align: center;">
-                    <img src="{{ URL::to('/') }}/pictures/wall.jpg" alt="" height="80px" width="80px" style="border-radius: 50%;">
+                    <img src="{{ URL::to('/') }}/pictures/wall.jpg">
                 </td>
                 <td>
                 </td>
@@ -93,10 +97,10 @@
                 <td>
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/delete_registration/"><input type="button" value="Accept"></a>
+                    <a href="{{ URL::to('/') }}/delete_registration/"><button id="action" class="edit">Accept</button></a>
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/deactivate_user/"><input type="button" value="Cancel"></a>
+                    <a href="{{ URL::to('/') }}/deactivate_user/"><button id="action" class="delete">Cancel</button></a>
 
                     <!-- <a href="{{ URL::to('/') }}/activate_user/"><input type="button" value="Activate"></a>
                 

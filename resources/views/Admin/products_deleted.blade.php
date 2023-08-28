@@ -47,7 +47,7 @@
                 <td>
                 </td>
                 <td style="text-align: center;">
-                    <img src="{{ URL::to('/') }}/pictures/wall.jpg" alt="" height="80px" width="80px" style="border-radius: 50%;">
+                    <img src="{{ URL::to('/') }}/pictures/wall.jpg">
                 </td>
                 <td>
                 </td>
@@ -58,7 +58,7 @@
                 <td>
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/deactivate_user/"><input type="button" value="Deactivate"></a>
+                    <a href="{{ URL::to('/') }}/deactivate_user/"><button id="action" class="edit">Reactivate</button></a>
 
                     <!-- <a href="{{ URL::to('/') }}/activate_user/"><input type="button" value="Activate"></a>
                 
