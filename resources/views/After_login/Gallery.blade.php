@@ -49,7 +49,7 @@
       <div class="row r">
           @foreach ($data as $d)
           <div class="col-sm-8 col-md-6 col-lg-4 jr" >
-            <img src="pictures/{{$d['Image']}}" class="img-fluid img1" />
+            <img src="pictures/gallery/{{$d['Image']}}" class="img-fluid img1" />
           </div>
           @endforeach
       </div>
