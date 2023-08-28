@@ -17,7 +17,7 @@ class My_Controller extends Controller
             [
                 'un' => 'required',
                 'em' => 'required',
-                'mob' => 'required|numeric|length:10',
+                'mob' => 'required|numeric|Digits:10',
                 'pwd' => 'required|min:10|max:16|confirmed',
                 'pwd_confirmation' => 'required',
             ],
@@ -25,10 +25,10 @@ class My_Controller extends Controller
                 'un.required' => 'Username is required.',
                 'em.required' => 'Email is required.',
                 'mob.required' => 'Mobile number is required.',
-                'mob.length' => 'Mobile number must be of 10 digits only.',
+                'mob.Digits' => 'Mobile number must be of 10 digits only.',
                 'pwd.required' => 'Password is required.',
-                'pwd.min' => 'Minimum length must be of 8 characters.',
-                'pwd.max' => 'Maximum length must be of 16 characters.',
+                'pwd.min' => 'Minimum Digits must be of 8 characters.',
+                'pwd.max' => 'Maximum Digits must be of 16 characters.',
                 'pwd_confirmation.required' => 'Confirm Password is required.',
             ],
         );
@@ -44,8 +44,8 @@ class My_Controller extends Controller
             [
                 'em.required' => 'Username is required.',
                 'pwd.required' => 'Password is required.',
-                'pwd.min' => 'Minimum length must be of 8 characters.',
-                'pwd.max' => 'Maximum length must be of 16 characters.',
+                'pwd.min' => 'Minimum Digits must be of 8 characters.',
+                'pwd.max' => 'Maximum Digits must be of 16 characters.',
             ],
         );
     }
@@ -130,7 +130,7 @@ class My_Controller extends Controller
         $ob->validate(
             [
                 'name' => 'required',
-                'number' => 'required|numeric|length:10',
+                'number' => 'required|numeric|Digits:10',
                 'qty' => 'required|numeric',
                 'cat' => 'required',
                 'pro_pic' => 'required|size:5120|mimes:jpg,png,gif,bmp',

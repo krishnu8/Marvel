@@ -40,7 +40,7 @@
 
         .card1 {
             width: 350px;
-            height: 550px;
+            height: fit-content;
             border-radius: 20px;
             transition: all .3s;
             z-index: 1;
@@ -50,7 +50,7 @@
 
         .card2 {
             width: 350px;
-            height: 550px;
+            height: fit-content;
             background-color: black;
             border-radius: 20px 300px;
             transition: all .2s;
@@ -83,13 +83,7 @@
             width: fit-content;
         }
 
-        input[type=text] {
-            background-color: transparent;
-            border: white solid 0.5px;
-            color: white;
-        }
-
-        input[type=password] {
+        input[type=text], input[type=tel], input[type=password] {
             background-color: transparent;
             border: white solid 0.5px;
             color: white;
@@ -198,7 +192,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="text" name="mob" placeholder="Mobile" id="mob1" class="form-control" value="{{old('mob')}}">
+                            <input type="tel" name="mob" maxlength="10" placeholder="Mobile" id="mob1" class="form-control" value="{{old('mob')}}">
                         </div>
                         <small>
                             @error('mob')

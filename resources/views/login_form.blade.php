@@ -40,7 +40,7 @@
 
         .card1 {
             width: 350px;
-            height: 500px;
+            height: fit-content;
             border-radius: 20px;
             transition: all .3s;
             z-index: 1;
@@ -50,7 +50,7 @@
 
         .card2 {
             width: 350px;
-            height: 500px;
+            height: fit-content;
             background-color: black;
             border-radius: 20px 300px;
             transition: all .2s;
