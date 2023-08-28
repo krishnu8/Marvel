@@ -59,18 +59,17 @@ class Before_login_Controller extends Controller
     {
         $ob->validate([
             'un' => 'required',
-            'em' => 'required',            
-            'mob' => 'required|numeric|length:10',
-            'pwd' => 'required|min:10|max:16|confirmed',
+            'em' => 'required|regex:/^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/',
+            'mob' => 'required|numeric|Digits:10',
+            'pwd' => 'required|regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
             'pwd_confirmation' => 'required'
         ],[
             'un.required' => 'Username is required.',
             'em.required' => 'Email is required.',
+            'em.regex'=>'Enter valid Email',
             'mob.required' => 'Mobile number is required.',
             'mob.length' => 'Mobile number must be of 10 digits only.',
-            'pwd.required' => 'Password is required.',
-            'pwd.min' => 'Minimum length must be of 8 characters.',
-            'pwd.max' => 'Maximum length must be of 16 characters.',
+            'pwd.regex'=>'Please choose strong password with atleast 1 Uppercase 1 Lowercase minimum length 8 and a symbol.',
             'pwd_confirmation.required' => 'Confirm Password is required.'
         ]);
         return redirect('login_form');
@@ -79,13 +78,13 @@ class Before_login_Controller extends Controller
 
     public function validate_login(Request $req){
         $req->validate([
-            'em' => 'required',
+            'em' => 'required|regex:/^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/',
             'pwd' => 'required|regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/'
         ],[
             'em.required' => 'Username is required.',
             'pwd.required' =>'Password is required.',
-            'pwd.min' => 'Minimum length must be of 8 characters.',
-            'pwd.max' => 'Maximum length must be of 16 characters.'
+            'em.regex'=>'Enter valid Email',
+            'pwd.regex'=>'Please choose strong password with atleast 1 Uppercase 1 Lowercase minimum length 8 and a symbol.'
         ]);
         return redirect('After_home');
 
@@ -114,7 +113,7 @@ class Before_login_Controller extends Controller
             'pic.mimes'=>'Picture types must be jpg,png',
             'pic.max' =>'Picture size must be less than 2MB'
         ]);
-        
+
     return view('After_login/Profile');
     }
 }
