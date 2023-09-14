@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>Login</title>
+<title>Forget Password</title>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.147.0/three.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
         * {
@@ -185,10 +186,6 @@
             border: none;
         }
 
-        small{
-            color: red;
-        }
-
         /* Main End */
     </style>
 </head>
@@ -199,92 +196,57 @@
 
     <main>
 
-        @if (session('reg'))
-            <div class="alert alert-warning alert-dismissible fade show" role="alert" style="min-width: 500px; right: 20px; top: 50px; z-index:1; position: absolute;">
-                {{ session('reg') }}
+        @if (session('forget'))
+            <div class="alert forget alert-warning alert-dismissible fade show" role="alert"
+                style="min-width: 350px; right: 20px; top: 50px; z-index:1; position: absolute;">
+                {{ session('forget') }}
             </div>
 
             <script>
                 // Automatically close the alert after 5 seconds
                 setTimeout(function() {
-                    $('.alert').alert('close');
-                },3000);
+                    $('.forget').alert('close');
+                }, 3000);
             </script>
         @endif
-
-        @if (session('login'))
-            <div class="alert lo alert-danger alert-dismissible fade show" role="alert" style="min-width: 350px; right: 20px; top: 50px; z-index:1; position: absolute;">
-                {{ session('login') }}
-            </div>
-
-            <script>
-                // Automatically close the alert after 5 seconds
-                setTimeout(function() {
-                    $('.lo').alert('close');
-                },3000);
-            </script>
-        @endif
-
-        @if (session('Active'))
-        <div class="alert Active alert-info alert-dismissible fade show" role="alert" style="min-width: 350px; right: 20px; top: 50px; z-index:1; position: absolute;">
-            {{ session('Active') }}
-        </div>
-
-        <script>
-            // Automatically close the alert after 5 seconds
-            setTimeout(function() {
-                $('.Active').alert('close');
-            },3000);
-        </script>
-    @endif
-
         <div class="row card1">
             <div class="col-12 card2">
                 <center>
-                    <h1>Login</h1>
+                    <h1>Change Password</h1>
                 </center>
                 <br>
-                <form method="get" action="login">
+                <form method="get" action="change_forget_password">
 
                     <div class="row">
                         <div class="col">
-                            <input type="text" name="em" placeholder="Email" id="em1" class="form-control"
-                                value="{{ old('em') }}">
+                            <input type="text" name="pwd" placeholder="New Password" id="em1"
+                                class="form-control">
                         </div>
-                        <small>
-                            @error('em')
+                        @error('pwd')
+                            <small style="color: red">
                                 {{ $message }}
-                            @enderror
-                        </small>
+                            </small>
+                        @enderror
                     </div>
+
                     <div class="row">
                         <div class="col">
-                            <input type="password" name="pwd" placeholder="Password" id="pwd1"
-                                class="form-control" value="{{ old('pwd') }}">
+                            <input type="text" name="cpwd" placeholder="Enter Same password as above" id="em1"
+                                class="form-control">
                         </div>
-                        <small>
-                            @error('pwd')
+                        @error('cpwd')
+                            <small style="color: red">
                                 {{ $message }}
-                            @enderror
-                        </small>
+                            </small>
+                        @enderror
                     </div>
+
+
                     <div class="row" style="text-align:center;">
                         <div class="col">
-                            <input type="submit" value="Login" name="btn-login" class="login">
+                            <input type="submit" value="Submit" name="btn-login" class="login">
 
                             <input type="reset" value="Reset" name="btn-message" class="reset">
-                        </div>
-                    </div>
-                    <div class="row" style="text-align:center;">
-                        <div class="col">
-                            <p> Don't have an Account? &nbsp;&nbsp;<a class="new" href="register_form"><br><input
-                                        type="button" value="Create Account" name="btn-message" class=""></a></p>
-                        </div>
-                    </div>
-                    <div class="row" style="text-align:center;">
-                        <div class="col">
-                            <p> Don't Remeber you Password?<a class="forgt" href="#"> <input type="button"
-                                        value="Forgot Password" name="btn-message" class=""></a></p>
                         </div>
                     </div>
                     <br>

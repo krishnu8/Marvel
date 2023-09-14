@@ -158,6 +158,10 @@
             color: white;
             border: none;
         }
+        small{
+            color: rgba(236, 40, 40, 0.893);
+            font-weight: 100;
+        }
 
         /* Main End */
     </style>
@@ -228,19 +232,20 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="radio" name="gen" value="M" @if (old('gen')=='M')
-                            checked
-                        @endif> Male
-                            <input type="radio" name="gen" value="F" @if (old('gen')=='F')
-                            checked
-                        @endif> Female
+                            <label>
+                                <input type="radio" name="gen" value="Male" @if(old('gen') == 'M') checked @endif> Male
+                            </label>
+                            <label>
+                                <input type="radio" name="gen" value="Female" @if(old('gen') == 'F') checked @endif> Female
+                            </label>
                         </div>
-                        <small>
+                        <div class="text-danger"> <!-- Use a class to style the error message -->
                             @error('gen')
                                 {{$message}}
                             @enderror
-                        </small>
+                        </div>
                     </div>
+
                     <div class="row" style="text-align:center;">
                         <div class="col">
                             <input type="submit" value="Register" name="btn-submit" class="submit">

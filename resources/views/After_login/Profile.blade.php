@@ -62,7 +62,7 @@
                         <i class="far fa-edit mb-5"></i>
                         <form action="update_profile_pic" method="post">
                             @csrf
-                            <input type="file" name="" oninput="update()" id="image1" style="display: none" name="pic">
+                            <input type="file" oninput="update()" id="image1" style="display: none" name="pic">
                             <span style="color: red">
                                 @error('pic')
                                     {{$message}}
@@ -83,43 +83,29 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body p-4">
-                            <h6>Information</h6>
+                            <h3>Information</h3>
                             <hr class="mt-0 mb-4">
                             <div class="row pt-1">
                                 <div class="col-6 mb-3">
+                                    <h6>Name</h6>
+                                    <p class="text-muted" style="margin-bottom: 30px;">{{ $data['Full_Name'] }}</p>
+                                </div>
+                                <div class="col-6 mb-3">
                                     <h6>Email</h6>
-                                    <p class="text-muted">lilludon@neoda.com</p>
+                                    <p class="text-muted"  style="margin-bottom: 30px;">{{ $data['Email'] }}</p>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <h6>Phone</h6>
-                                    <p class="text-muted">123 456 789</p>
+                                    <p class="text-muted" >{{ $data['Mobile_No'] }}</p>
                                 </div>
+
                                 <div class="col-6 mb-3">
-                                    <h6>Hobbies</h6>
-                                    <div class="text-muted">Dancing</div>
-                                    <div class="text-muted">Singing</div>
-                                    <div class="text-muted">Watching Reels</div>
-                                    <div class="text-muted">Pooping</div>
+                                    <h6>Gender</h6>
+                                    <p class="text-muted">Male</p>
                                 </div>
                             </div>
-                            <h6>Projects</h6>
-                            <hr class="mt-0 mb-4">
-                            <div class="row pt-1">
-                                <div class="col-6 mb-3">
-                                    <h6>Recent</h6>
-                                    <p class="text-muted">Nothing to show</p>
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <h6>Most Viewed</h6>
-                                    <p class="text-muted">Berojgaar</p>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-start">
-                                <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
-                                <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
-                                <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
-                            </div>
-                            <h6>Description</h6>
+
+                            <h6 style="margin-top: 50px">Description</h6>
                             <div>
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi molestias excepturi labore
                                 ratione suscipit dolorum animi voluptatem ut, placeat numquam necessitatibus libero officiis
@@ -137,7 +123,7 @@
             document.getElementById("update_btn").style.display = "block";
         }
     </script>
- 
+
 
 
     {{-- delete account modle  --}}

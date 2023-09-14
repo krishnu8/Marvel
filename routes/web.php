@@ -89,6 +89,17 @@ Route::get('Franchise',[Before_login_Controller::class,'franchise_data']);
 Route::get('Movies',[Before_login_Controller::class,'movies_data']);
 Route::view('Login','Before_login/login_form');
 
+// activate register account
+
+Route::get('account_activation/{email}',[Before_login_Controller::class,'Activate']);
+
+Route::view('forget','forget_password');
+Route::get('forget_pass',[Before_login_Controller::class,'forget']);
+Route::view('forget_change_pass','change_pass');
+Route::get('change_forget_password',[Before_login_Controller::class,'change_password']);
+
+
+
 
 
 
@@ -107,7 +118,7 @@ Route::get('After_Gallery',[After_login_controller::class,'After_gallery_data'])
 Route::get('After_Franchise',[After_login_controller::class,'After_franchise_data']);
 Route::get('After_Movies',[After_login_controller::class,'After_movies_data']);
 
-Route::view('After_profile','After_login/Profile');
+Route::get('After_profile',[After_login_controller::class,'profile_data']);
 Route::view('Edit','After_login/Edit_profile');
 
 Route::get('Update_profile',[After_login_controller::class,'profile_update']);
@@ -118,7 +129,7 @@ Route::get('login',[Before_login_Controller::class,'validate_login']);
 Route::view('register_form','register_form');
 Route::get('register',[Before_login_Controller::class,'validate_form']);
 
-Route::get('pass_validate',[Before_login_Controller::class,'pass_validate']);
+Route::get('pass_validate',[After_login_controller::class,'pass_validate']);
 Route::view('change_password','After_login/Change_password');
 
-Route::post('update_profile_pic',[Before_login_Controller::class,'update_profile_pic']);
+Route::post('update_profile_pic',[After_login_controller::class,'update_profile_pic']);
