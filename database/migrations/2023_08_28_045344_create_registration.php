@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('Username');
             $table->string('Email')->unique();
-            $table->number('Number');
+            $table->integer('Number');
             $table->string('Address')->nullable(true);
             $table->string('Password');
-            $table->string('Profile_pic');
-            $table->string('Role');
-            $table->string('Status');
+            $table->string('Gender');
+            $table->string('Profile_pic')->default('default.png');
+            $table->string('Role')->default('User');
+            $table->string('Status')->default('Inactive');
             $table->timestamps();
         });
     }

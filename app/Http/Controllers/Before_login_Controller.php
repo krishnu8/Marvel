@@ -11,6 +11,9 @@ use App\Models\top_movies_model;
 use App\Models\franchise_model;
 use App\Models\about_char;
 use App\Models\about_us;
+use App\Models\registration;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -55,14 +58,15 @@ class Before_login_Controller extends Controller
 
     // -------------------------------------------------------------------------------------------
 
-    public function validate_form(request $ob)
+    public function validate_form(request $req)
     {
-        $ob->validate([
+        $req->validate([
             'un' => 'required',
             'em' => 'required|regex:/^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/',
             'mob' => 'required|numeric|Digits:10',
             'pwd' => 'required|regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
-            'pwd_confirmation' => 'required'
+            'pwd_confirmation' => 'required',
+            'gen' => 'required'
         ],[
             'un.required' => 'Username is required.',
             'em.required' => 'Email is required.',
@@ -70,8 +74,22 @@ class Before_login_Controller extends Controller
             'mob.required' => 'Mobile number is required.',
             'mob.length' => 'Mobile number must be of 10 digits only.',
             'pwd.regex'=>'Please choose strong password with atleast 1 Uppercase 1 Lowercase minimum length 8 and a symbol.',
-            'pwd_confirmation.required' => 'Confirm Password is required.'
+            'pwd_confirmation.required' => 'Confirm Password is required.',
+            'gen.required'=>'Please select Gender or We will suppose u r gay'
         ]);
+
+        DB::table('registration')->insert([
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'Username' => $req->un,
+            'Email' => $req->em,
+            'Number' => $req->mob,
+            'Password' => $req->pwd,
+            'Gender' => $req->gen
+        ]);
+
+        
+
         return redirect('login_form');
 
     }
