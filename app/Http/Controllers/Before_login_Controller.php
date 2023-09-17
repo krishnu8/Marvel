@@ -12,7 +12,9 @@ use App\Models\top_movies_model;
 use App\Models\franchise_model;
 use App\Models\about_char;
 use App\Models\about_us;
-
+use App\Models\register;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Activate_link;
@@ -75,39 +77,78 @@ class Before_login_Controller extends Controller
 
     // -------------------------------------------------------------------------------------------
 
-
-
     public function validate_form(request $req)
     {
-        $req->validate([
-            'un' => 'required',
-            'em' => 'required|regex:/^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/',
-            'mob' => 'required|numeric|Digits:10',
-            'pwd' => 'required|regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
-            'pwd_confirmation' => 'required',
-            'gen' => 'required'
-        ],[
-            'un.required' => 'Username is required.',
-            'em.required' => 'Email is required.',
-            'em.regex'=>'Enter valid Email',
-            'mob.required' => 'Mobile number is required.',
-            'mob.length' => 'Mobile number must be of 10 digits only.',
-            'pwd.regex'=>'Please choose strong password with atleast 1 Uppercase 1 Lowercase minimum length 8 and a symbol.',
-            'pwd_confirmation.required' => 'Confirm Password is required.',
-            'gen.required'=>'Please select Gender or We will suppose u r gay'
-        ]);
+        // $req->validate([
+        //     'un' => 'required',
+        //     'em' => 'required|regex:/^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/',
+        //     'mob' => 'required|numeric|Digits:10',
+        //     'pwd' => 'required|regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
+        //     'pwd_confirmation' => 'required',
+        //     'gen' => 'required'
+        // ],[
+        //     'un.required' => 'Username is required.',
+        //     'em.required' => 'Email is required.',
+        //     'em.regex'=>'Enter valid Email',
+        //     'mob.required' => 'Mobile number is required.',
+        //     'mob.length' => 'Mobile number must be of 10 digits only.',
+        //     'pwd.regex'=>'Please choose strong password with atleast 1 Uppercase 1 Lowercase minimum length 8 and a symbol.',
+        //     'pwd_confirmation.required' => 'Confirm Password is required.',
+        //     'gen.required'=>'Please select Gender or We will suppose u r gay'
+        // ]);
 
-        DB::table('registration')->insert([
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-            'Username' => $req->un,
-            'Email' => $req->em,
-            'Number' => $req->mob,
-            'Password' => $req->pwd,
-            'Gender' => $req->gen
-        ]);
+        // DB::table('registration')->insert([
+        //     'created_at' => Carbon::now(),
+        //     'updated_at' => Carbon::now(),
+        //     'Username' => $req->un,
+        //     'Email' => $req->em,
+        //     'Number' => $req->mob,
+        //     'Password' => $req->pwd,
+        //     'Gender' => $req->gen
+        // ]);
+        $ob->validate(
+            [
+                'un' => 'required',
+                'em' => 'required|unique:register,email',
+                'mob' => 'required|numeric|Digits:10',
+                'pwd' => 'required|regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
+                'pwd_confirmation' => 'required',
+                'gen' => 'required',
+            ],
+            [
+                'un.required' => 'Username is required.',
+                'gen.required' => 'Gender Field is required.',
+                'em.required' => 'Email is required.',
+                'em.unique' => 'Entered Email already Registered',
+                'mob.required' => 'Mobile number is required.',
+                'mob.length' => 'Mobile number must be of 10 digits only.',
+                'pwd.regex' => 'Please choose strong password with atleast 1 Uppercase 1 Lowercase minimum length 8 and a symbol.',
+                'pwd_confirmation.required' => 'Confirm Password is required.',
+            ],
+        );
 
+        $user = new register();
+        $user->Username = $ob->un;
+        $user->Email = $ob->em;
+        $user->Password = $ob->pwd;
+        $user->Mobile_No = $ob->mob;
+        $user->Gender = $ob->gen;
+        $user->Profile_Pic = 'Default.jpg';
+        $user->Status = 'Inactive';
+        $user->Role = 'User';
 
+        if ($user->save()) {
+            $data = ['fn' => $ob->un, 'em' => $ob->em];
+            Mail::send(['text' => 'account_created_mail'], ['data' => $data], function ($message) use ($data) {
+                $message->to($data['em'], $data['fn']);
+                $message->from('abhuj145@rku.ac.in', 'Marvel');
+                $message->subject('Activation Link');
+            });
+
+            session()->flash('reg', 'Registration Completed Pleace check Your mail for Activation Link');
+        } else {
+            session()->flash('reg', 'Something went Wrong Please try latter');
+        }
 
         return redirect('login_form');
     }
@@ -184,7 +225,7 @@ class Before_login_Controller extends Controller
         $user = register::where('Email', $email)->first();
 
         if ($count == 1) {
-            Session::put('Forget_password_email',$user->Email);
+            Session::put('Forget_password_email', $user->Email);
             $data = ['fn' => $user->un, 'em' => $req->em];
             Mail::send(['text' => 'forget_password_mail'], ['data' => $data], function ($message) use ($data) {
                 $message->to($data['em'], $data['fn']);
