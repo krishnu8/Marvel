@@ -39,6 +39,7 @@ Route::get('users_normal',[My_Controller::class,'fetch_normal']);
 Route::get('users_admin',[My_Controller::class,'fetch_admin']);
 Route::view('admin_profile','Admin/admin_profile');
 Route::view('admin_profile_edit','Admin/admin_profile_edit');
+Route::view('update_account','Admin/update_account');
 
 
 Route::get('movies',[My_Controller::class,'fetch_movies']);
