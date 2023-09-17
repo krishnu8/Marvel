@@ -60,7 +60,7 @@
                     {{$ad_data['id']}}
                 </td>
                 <td>
-                    {{$ad_data['Full_Name']}}
+                    {{$ad_data['Username']}}
                 </td>
                 <td>
                     {{$ad_data['Mobile_No']}}
@@ -72,7 +72,7 @@
                     {{$ad_data['Password']}}
                 </td>
                 <td>
-                    {{$ad_data['User_Type']}}
+                    {{$ad_data['Role']}}
                 </td>
                 <td>
                     {{$ad_data['Status']}}
@@ -81,13 +81,13 @@
                     <img src="{{ URL::to('/') }}/pictures/wall.jpg">
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/edit_registration/"><button id="action" class="edit">Edit</button></a>
+                    <a href="{{ URL::to('/') }}/update_account"><button id="action" class="edit">Edit</button></a>
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/delete_registration/"><button id="action" class="delete">Delete</button></a>
+                    <a href="{{ URL::to('/') }}/delete_registration"><button id="action" class="delete">Delete</button></a>
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/deactivate_user/"><button id="action" class="deactivate">Deactivate</button></a>
+                    <a href="{{ URL::to('/') }}/deactivate_user"><button id="action" class="deactivate">Deactivate</button></a>
 
                     <!-- <a href="{{ URL::to('/') }}/activate_user/"><input type="button" value="Activate"></a>
                 

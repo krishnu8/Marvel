@@ -151,7 +151,7 @@ class My_Controller extends Controller
     public function fetch_admin()
     {
         $admin_data = admin_data::select()
-            ->where('user_type', 'admin')
+            ->where('Role', 'Admin')
             ->get();
         return view('Admin/users_admin', compact('admin_data'));
     }
@@ -159,7 +159,7 @@ class My_Controller extends Controller
     public function fetch_normal()
     {
         $norm_user_data = normal_user_data::select()
-            ->where('user_type', 'normal')
+            ->where('Role', 'User')
             ->get();
         return view('Admin/users_normal', compact('norm_user_data'));
     }
