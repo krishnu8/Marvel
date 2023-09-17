@@ -27,8 +27,10 @@ Route::get('/', function () {
 
 // Admin Start
 
-// Route::view('admin_header','master_view');
+// // Route::view('admin_header','master_view');
 // Route::view('register_form','register_form');
+// Route::view('login_form','login_form'); 
+
 // Route::view('login_form','login_form');
 Route::view('admin_dashboard','Admin/dashboard');   //Dashboard
 Route::view('user_add','Admin/user_add');
