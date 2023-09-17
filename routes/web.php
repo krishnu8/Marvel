@@ -29,7 +29,7 @@ Route::get('/', function () {
 
 // // Route::view('admin_header','master_view');
 // Route::view('register_form','register_form');
-// Route::view('login_form','login_form'); 
+// Route::view('login_form','login_form');
 
 // Route::view('login_form','login_form');
 Route::view('admin_dashboard','Admin/dashboard');   //Dashboard
@@ -39,7 +39,13 @@ Route::get('users_normal',[My_Controller::class,'fetch_normal']);
 Route::get('users_admin',[My_Controller::class,'fetch_admin']);
 Route::view('admin_profile','Admin/admin_profile');
 Route::view('admin_profile_edit','Admin/admin_profile_edit');
-Route::view('update_account','Admin/update_account');
+Route::get('update_account1/{email}',[My_Controller::class,'fetch_detail']); //'Admin/update_account'
+Route::get('delete_account/{email}',[My_Controller::class,'delete_acc']);
+Route::get('deactivate_user/{email}',[My_Controller::class,'deactivate_user']);
+
+Route::get('reactivate_user/{email}',[My_Controller::class,'reactivate_user']);
+Route::get('activate_user/{email}',[My_Controller::class,'Activate']);
+
 
 
 Route::get('movies',[My_Controller::class,'fetch_movies']);
@@ -69,6 +75,9 @@ Route::post('upcom_movie_controller',[My_controller::class,'validate_upcom_movie
 Route::post('top_movie_controller',[My_controller::class,'validate_top_movie']);
 Route::post('product_controller',[My_controller::class,'validate_product']);
 Route::post('order_controller',[My_controller::class,'validate_order']);
+Route::post('update_acc',[My_controller::class,'update_acc']);
+
+
 
 // Admin End
 

@@ -8,6 +8,7 @@ use App\Models\Admin\admin_data;
 use App\Models\Admin\normal_user_data;
 use App\Models\Admin\total_user_data;
 use App\Models\Admin\movies;
+use App\Models\register;
 
 class My_Controller extends Controller
 {
@@ -32,6 +33,31 @@ class My_Controller extends Controller
                 'pwd_confirmation.required' => 'Confirm Password is required.',
             ],
         );
+        if ($ob->hasFile('pic')) {
+            $file = $ob->file('pic');
+
+            $filename = uniqid() . '_' . $file->getClientOriginalName();
+            $ob->pic->move('pictures/users/', $filename);
+            // $pic_data = register::where('email', $ob->em)->first();
+
+            // if ($pic_data['Picture'] != 'Deafult.png') {
+            //     $previousFilePath = 'pictures/' . $pic_data['Picture']; // Example path
+
+            //     if (File::exists($previousFilePath)) {
+            //         File::delete($previousFilePath);
+            //     }
+            // }
+        }
+
+        register::where('email', $ob->em)->update([
+            'Username'=>$ob->un,
+            'Password'=>$ob->pwd,
+            'Mobile_No'=>$ob->mob,
+            'Gender'=>$ob->gender,
+            'Profile_Pic'=>$ob->pic,
+            'Role'=>$ob->role,
+        ]);
+        
     }
 
     public function validate_login(Request $req)
@@ -144,6 +170,7 @@ class My_Controller extends Controller
                 'pro_pic.required' => 'Please select picture.',
             ],
         );
+
     }
 
     // Fetching Data Start
@@ -176,4 +203,54 @@ class My_Controller extends Controller
     }
 
     // Fetching Data End
+
+    public function fetch_detail($email){
+        $data = register::where('email', $email)->first();
+        return view('Admin/update_account',compact('data'));
+    }
+    public function delete_acc($email){
+        register::where('email', $email)->update(['status' => 'Deleted']);
+        return redirect()->action([My_Controller::class, 'fetch_admin']);
+
+    }
+
+    public function deactivate_user($email){
+        register::where('email', $email)->update(['status' => 'Inactive']);
+        return redirect()->action([My_Controller::class, 'fetch_admin']);
+    }
+
+    public function Activate($email){
+        register::where('email', $email)->update(['status' => 'Active']);
+        return redirect()->action([My_Controller::class, 'fetch_admin']);
+    }
+
+    public function reactivate_user($email){
+        register::where('email', $email)->update(['status' => 'Active']);
+        return redirect()->action([My_Controller::class, 'fetch_admin']);
+    }
+
+    public function update_acc(Request $ob){
+        $ob->validate(
+            [
+                'un' => 'required',
+                'mob' => 'required|numeric|Digits:10',
+                'pwd' => 'required|regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
+                'pwd_confirmation' => 'required',
+                'gender' => 'required',
+                'pic' => 'required|mimes:jpg,png|max:2048',
+
+            ],
+            [
+                'un.required' => 'Username is required.',
+                'gender.required' => 'Gender Field is required.',
+                'mob.required' => 'Mobile number is required.',
+                'mob.length' => 'Mobile number must be of 10 digits only.',
+                'pwd.regex' => 'Please choose strong password with atleast 1 Uppercase 1 Lowercase minimum length 8 and a symbol.',
+                'pwd_confirmation.required' => 'Confirm Password is required.',
+                'pic.required' => 'picture is required.',
+                'pic.mimes' => 'Picture types must be jpg,png',
+                'pic.max' => 'Picture size must be less than 2MB',
+            ],
+        );
+    }
 }
