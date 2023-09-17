@@ -191,8 +191,9 @@ class Before_login_Controller extends Controller
             if ($check_login['Password'] == $req->pwd) {
                 if ($check_login['Status'] == 'Active') {
                     session(['user_id' => $check_login['id']]);
-                    if ($check_login['User_Type'] == 'Admin') {
+                    if ($check_login['Role'] == 'Admin') {
                         // navigate to admin dashboard
+                        return view('Admin/dashboard');
                     } else {
                         return redirect('After_home');
                     }
