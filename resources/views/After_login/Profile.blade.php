@@ -77,7 +77,7 @@
                     <div class="col-md-4 gradient-custom text-center text-white"
                         style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; background-image: url('pictures/background/wall1.jpg'); background-size: cover;">
 
-                        <img src="pictures/doctor strange.jpg" alt="Avatar" class="img-fluid my-5"
+                        <img src="pictures/{{ $data['Profile_Pic'] }}" alt="Avatar" class="img-fluid my-5"
                             style="width: 170px; height:170px; border-radius:50%" />
 
                         <label for="image1"><img src="pictures/Edit_icon.png" alt="" class="editt"></label>
@@ -87,7 +87,7 @@
                         </center>
                         <p>User</p>
                         <i class="far fa-edit mb-5"></i>
-                        <form action="update_profile_pic" method="post">
+                        <form action="update_profile_pic" method="post" enctype="multipart/form-data">
                             @csrf
                             <input type="file" oninput="update()" id="image1" style="display: none" name="pic">
                             <span style="color: red">
@@ -134,7 +134,7 @@
 
                             <h6 style="margin-top: 50px">Description</h6>
                             <div>
-                               {{ $data['Bio'] }}
+                                {{ $data['Bio'] }}
                             </div>
                         </div>
                     </div>
@@ -162,29 +162,29 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="" method="get">
+                <form action="delete" method="get">
                     <div class="modal-body">
                         <label for="inputPasswordOld">Enter Password</label>
-                        <input type="password" class="form-control" id="pwd"  name="ppass">
+                        <input type="password" class="form-control" id="pwd" name="pwd">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" value="Delete" class="btn btn-primary" onclick="checkpass()" name="delete">
+                        <input type="submit" value="Delete" class="btn btn-primary" name="delete">
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <script>
+    {{-- <script>
         function checkpass(){
             var newpassword = document.getElementById('pwd').value;
             var password={{ $data['Password'] }};
             if(password == newpassword){
                 alert(''+newpassword);
             }else{
-                // session()->flash('error', 'Enter Correct Password');
-                // return redirect('After_profile');
+                session()->flash('error', 'Enter Correct Password');
+                return redirect('After_profile');
             }
         }
-    </script>
+    </script> --}}

@@ -111,7 +111,7 @@ Route::get('Contact_Us',[Before_login_Controller::class,'contact_data']);
 Route::get('Gallery',[Before_login_Controller::class,'gallery_data']);
 Route::get('Franchise',[Before_login_Controller::class,'franchise_data']);
 Route::get('Movies',[Before_login_Controller::class,'movies_data']);
-Route::view('Login','Before_login/login_form');
+// Route::view('Login','Before_login/login_form');
 
 // activate register account
 
@@ -157,5 +157,6 @@ Route::get('pass_validate',[After_login_controller::class,'pass_validate']);
 Route::get('change_password',[After_login_controller::class,'change_pass']);
 
 // Route::view('change_password','After_login/Change_password');
+Route::get('delete',[After_login_controller::class,'delete_acc']);
 
 Route::post('update_profile_pic',[After_login_controller::class,'update_profile_pic']);

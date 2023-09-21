@@ -77,35 +77,8 @@ class Before_login_Controller extends Controller
 
     // -------------------------------------------------------------------------------------------
 
-    public function validate_form(request $req)
+    public function validate_form(request $ob)
     {
-        // $req->validate([
-        //     'un' => 'required',
-        //     'em' => 'required|regex:/^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/',
-        //     'mob' => 'required|numeric|Digits:10',
-        //     'pwd' => 'required|regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
-        //     'pwd_confirmation' => 'required',
-        //     'gen' => 'required'
-        // ],[
-        //     'un.required' => 'Username is required.',
-        //     'em.required' => 'Email is required.',
-        //     'em.regex'=>'Enter valid Email',
-        //     'mob.required' => 'Mobile number is required.',
-        //     'mob.length' => 'Mobile number must be of 10 digits only.',
-        //     'pwd.regex'=>'Please choose strong password with atleast 1 Uppercase 1 Lowercase minimum length 8 and a symbol.',
-        //     'pwd_confirmation.required' => 'Confirm Password is required.',
-        //     'gen.required'=>'Please select Gender or We will suppose u r gay'
-        // ]);
-
-        // DB::table('registration')->insert([
-        //     'created_at' => Carbon::now(),
-        //     'updated_at' => Carbon::now(),
-        //     'Username' => $req->un,
-        //     'Email' => $req->em,
-        //     'Number' => $req->mob,
-        //     'Password' => $req->pwd,
-        //     'Gender' => $req->gen
-        // ]);
         $ob->validate(
             [
                 'un' => 'required',
@@ -198,7 +171,7 @@ class Before_login_Controller extends Controller
                         return redirect('After_home');
                     }
                 } else {
-                    session()->flash('login', 'please Activate your Account');
+                    session()->flash('login', 'Curently your Account is Deactive contact us to Activate your Account!');
                 }
             } else {
                 session()->flash('login', 'Enter valid password');
@@ -226,7 +199,8 @@ class Before_login_Controller extends Controller
         $user = register::where('Email', $email)->first();
 
         if ($count == 1) {
-            Session::put('Forget_password_email', $user->Email);
+            // Session::put('Forget_password_email', $email);
+            session(['Forget_password_email' =>$email]);
             $data = ['fn' => $user->un, 'em' => $req->em];
             Mail::send(['text' => 'forget_password_mail'], ['data' => $data], function ($message) use ($data) {
                 $message->to($data['em'], $data['fn']);
@@ -245,7 +219,7 @@ class Before_login_Controller extends Controller
     public function change_password()
     {
         $email = session('Forget_password_email');
-        // echo "hello";
+        echo 'hello';
         echo $email;
     }
 }

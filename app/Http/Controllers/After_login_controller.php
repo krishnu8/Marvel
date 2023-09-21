@@ -12,6 +12,7 @@ use App\Models\franchise_model;
 use App\Models\about_char;
 use App\Models\about_us;
 use App\Models\register;
+use Illuminate\Support\Facades\File;
 
 class After_login_controller extends Controller
 {
@@ -72,7 +73,7 @@ class After_login_controller extends Controller
     public function pass_validate(Request $req)
     {
         $User_id = session('user_id');
-        $data = register::where('id',$User_id)->first();
+        $data = register::where('id', $User_id)->first();
         if ($data['Password'] == $req->pwd) {
             $req->validate(
                 [
@@ -124,18 +125,41 @@ class After_login_controller extends Controller
     // update profile picture validation
     public function update_profile_pic(Request $req)
     {
+        $user_id = session('user_id');
         $req->validate(
             [
-                'pic' => 'required|mimes:jpg,png|max:2048',
+                'pic' => 'required|mimes:jpg,png,jpeg,webp|max:5120',
             ],
             [
-                'pic.required' => 'picture is required.',
-                'pic.mimes' => 'Picture types must be jpg,png',
-                'pic.max' => 'Picture size must be less than 2MB',
+                'pic.required' => 'Picture is required.',
+                'pic.mimes' => 'Picture types must be jpg, png, jpeg, or webp',
+                'pic.max' => 'Picture size must be less than 5MB',
             ],
         );
 
-        return view('After_login/Profile');
+        if ($req->hasFile('pic')) {
+            $file = $req->file('pic');
+
+            $filename = uniqid() . '_' . $file->getClientOriginalName();
+            $req->pic->move('pictures/users/', $filename);
+
+            $pic_data = register::where('id', $user_id)->first();
+
+            if ($pic_data['Profile_Pic'] != 'Deafult.png') {
+                $previousFilePath = 'pictures/' . $pic_data['Profile_Pic']; // Example path
+
+                if (File::exists($previousFilePath)) {
+                    File::delete($previousFilePath);
+                }
+            }
+
+            register::where('id', $pic_data['id'])->update([
+                'Profile_Pic' => 'users/' . $filename,
+            ]);
+            session()->flash('succ', 'Profile picture updated successfully.');
+        }
+
+        return redirect()->action([After_login_controller::class, 'profile_data']);
     }
 
     // profile update
@@ -171,5 +195,25 @@ class After_login_controller extends Controller
         $data = register::where('id', $user_id)->first();
 
         return view('After_login/Change_password', compact('data'));
+    }
+
+    public function delete_acc(Request $req)
+    {
+        $user_id = session('user_id');
+        $data = register::where('id', $user_id)->first();
+
+        if ($data['Password'] == $req->pwd) {
+            $check = register::where('id', $user_id)->update([
+                'Status' => 'Deleted',
+            ]);
+            if ($check) {
+                session()->flash('Active', 'Your Account deleted successfully!');
+                return view('login_form');
+            }
+        } else {
+            session()->flash('error', 'Entered Password is incorrect Enter correc password');
+            return redirect()->action([After_login_controller::class, 'profile_data']);
+        }
+        return redirect()->action([After_login_controller::class, 'profile_data']);
     }
 }
