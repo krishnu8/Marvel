@@ -212,6 +212,7 @@
             </script>
         @endif
 
+
         @if (session('login'))
             <div class="alert lo alert-danger alert-dismissible fade show" role="alert" style="min-width: 350px; right: 20px; top: 50px; z-index:1; position: absolute;">
                 {{ session('login') }}
@@ -283,7 +284,7 @@
                     </div>
                     <div class="row" style="text-align:center;">
                         <div class="col">
-                            <p> Don't Remeber you Password?<a class="forgt" href="#"> <input type="button"
+                            <p> Don't Remeber you Password?<a class="forgt" href="forget"> <input type="button"
                                         value="Forgot Password" name="btn-message" class=""></a></p>
                         </div>
                     </div>

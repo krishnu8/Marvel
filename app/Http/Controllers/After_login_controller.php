@@ -13,7 +13,6 @@ use App\Models\about_char;
 use App\Models\about_us;
 use App\Models\register;
 
-
 class After_login_controller extends Controller
 {
     public function After_home_data()
@@ -69,34 +68,59 @@ class After_login_controller extends Controller
             ->get();
         return view('After_login/Movies', compact('current', 'upcoming', 'top'));
     }
-// change password validation
+    // change password validation
     public function pass_validate(Request $req)
     {
-        $req->validate(
-            [
-                'pwd' => 'required|regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
-                'cpwd' => 'required|regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
-                'ccpwd' => 'same:cpwd',
-            ],
-            [
-                'pwd.required' => 'Password is required.',
-                'pwd.regex' => 'Incorrect password',
-                'cpwd.required' => 'New Password is required.',
-                'cpwd.regex' => 'Password must contain atleast 1:Uppercase,1:lowercase,min:8,symbol:1',
-                'ccpwd.same' => 'confirm password must be same as new password',
-            ],
-        );
-        return view('After_login/Change_password');
+        $User_id = session('user_id');
+        $data = register::where('id',$User_id)->first();
+        if ($data['Password'] == $req->pwd) {
+            $req->validate(
+                [
+                    'cpwd' => 'required|regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
+                    'ccpwd' => 'same:cpwd',
+                ],
+                [
+                    'cpwd.required' => 'New Password is required.',
+                    'cpwd.regex' => 'Password must contain atleast 1:Uppercase,1:lowercase,min:8,symbol:1',
+                    'ccpwd.same' => 'confirm password must be same as new password',
+                ],
+            );
+
+            $check = register::where('id', $User_id)->update([
+                'Password' => $req->cpwd,
+            ]);
+
+            if ($check) {
+                session()->flash('succ', 'password changed successfully');
+            } else {
+                session()->flash('error', 'Something Went Wrong');
+            }
+        } else {
+            session()->flash('error', 'Enter Correct Curent Password');
+            return redirect()->action([After_login_controller::class, 'change_pass']);
+        }
+        return redirect()->action([After_login_controller::class, 'profile_data']);
     }
+
     // profile data
-    public function profile_data(){
-        $user_id=session('user_id');
+    public function profile_data()
+    {
+        $user_id = session('user_id');
 
         $data = register::where('id', $user_id)->first();
 
-        return view('After_login/Profile',compact('data'));
+        return view('After_login/Profile', compact('data'));
     }
-    
+
+    public function Edit_data()
+    {
+        $user_id = session('user_id');
+
+        $data = register::where('id', $user_id)->first();
+
+        return view('After_login/Edit_profile', compact('data'));
+    }
+
     // update profile picture validation
     public function update_profile_pic(Request $req)
     {
@@ -114,22 +138,38 @@ class After_login_controller extends Controller
         return view('After_login/Profile');
     }
 
+    // profile update
     public function profile_update(Request $req)
     {
+        $User_id = session('user_id');
         $req->validate([
             'Name' => 'required|min:3|max:15',
             'Number' => 'required|numeric|digits:10',
             'Email' => 'required|email',
             'Gender' => 'required',
         ]);
-        return view('After_login/Profile');
+
+        $check = register::where('id', $User_id)->update([
+            'Username' => $req->Name,
+            'Email' => $req->Email,
+            'Mobile_No' => $req->Number,
+            'Gender' => $req->Gender,
+            'Bio' => $req->bio,
+        ]);
+        if ($check) {
+            session()->flash('succ', 'Profile Updated Successfuly');
+        } else {
+            session()->flash('error', 'Something Went Wrong');
+        }
+        return redirect()->action([After_login_controller::class, 'profile_data']);
     }
 
-    public function change_password(Request $req)
+    public function change_pass()
     {
-        $req->validate([
-            'cpwd' => 'required|min:10|max:16|confirmed',
-            'ccpwd_confirmation' => 'required',
-        ]);
+        $user_id = session('user_id');
+
+        $data = register::where('id', $user_id)->first();
+
+        return view('After_login/Change_password', compact('data'));
     }
 }

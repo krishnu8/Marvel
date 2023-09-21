@@ -39,6 +39,10 @@
                     Date
                 </th>
                 <th>
+                    Deleted
+                </th>
+
+                <th>
                     Delete
                 </th>
             </tr>
@@ -66,8 +70,11 @@
                 <td>
                     {{$rating['Description']}}
                 </td>
+                <td>
+                    {{$rating['deleted']}}
+                </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/delete_registration/">
+                    <a href="{{ URL::to('/') }}/delete_rating1/{{$rating['Rating_id']}}">
                         <button id="action" class="delete"><i class="bi bi-trash"></i></button>
                     </a>
                 </td>

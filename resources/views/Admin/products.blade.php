@@ -16,12 +16,12 @@
         <table>
             <thead>
                 <tr>
-                    <th colspan="2">
+                    <th colspan="3">
                         <a href="products_add">
                             <button class="button-70">Add Product</button>
                         </a>
                     </th>
-                    <th colspan="9">Products</th>
+                    <th colspan="7">Products</th>
                 </tr>
             </thead>
             <tr>
@@ -44,6 +44,9 @@
                     price
                 </th>
                 <th>
+                    Deleted
+                </th>
+                <th>
                     Category
                 </th>
                 <th>
@@ -51,9 +54,6 @@
                 </th>
                 <th>
                     Delete
-                </th>
-                <th>
-                    Status
                 </th>
             </tr>
 
@@ -78,21 +78,16 @@
                     {{$product['price']}}
                 </td>
                 <td>
+                    {{$product['deleted']}}
+                </td>
+                <td>
                     {{$product['category_id']}}
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/edit_registration/"><button id="action" class="edit"><i class="bi bi-pencil-square"></i></button></a>
+                    <a href="{{ URL::to('/') }}/update_product1/{{ $product['product_id'] }}"><button id="action" class="edit"><i class="bi bi-pencil-square"></i></button></a>
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/delete_registration/"><button id="action" class="delete"><i class="bi bi-trash"></i></button></a>
-                </td>
-                <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/deactivate_user/"><button id="action" class="deactivate">Deactivate</button></a>
-
-                    <!-- <a href="{{ URL::to('/') }}/activate_user/"><input type="button" value="Activate"></a>
-
-                <a href="{{ URL::to('/') }}/reactivate_user/"><input type="button" value="Reactivate"></a> -->
-
+                    <a href="{{ URL::to('/') }}/delete_product1/{{ $product['product_id'] }}"><button id="action" class="delete"><i class="bi bi-trash"></i></button></a>
                 </td>
             </tr>
             @endforeach

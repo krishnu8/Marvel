@@ -53,14 +53,13 @@ class My_Controller extends Controller
         }
 
         register::where('email', $ob->em)->update([
-            'Username'=>$ob->un,
-            'Password'=>$ob->pwd,
-            'Mobile_No'=>$ob->mob,
-            'Gender'=>$ob->gender,
-            'Profile_Pic'=>$ob->pic,
-            'Role'=>$ob->role,
+            'Username' => $ob->un,
+            'Password' => $ob->pwd,
+            'Mobile_No' => $ob->mob,
+            'Gender' => $ob->gender,
+            'Profile_Pic' => $ob->pic,
+            'Role' => $ob->role,
         ]);
-
     }
 
     public function validate_login(Request $req)
@@ -173,7 +172,6 @@ class My_Controller extends Controller
                 'pro_pic.required' => 'Please select picture.',
             ],
         );
-
     }
 
     // Fetching Data Start
@@ -200,50 +198,58 @@ class My_Controller extends Controller
         return view('Admin/users_total', compact('total_user_data'));
     }
 
-    public function fetch_movies(){
+    public function fetch_movies()
+    {
         $movies1 = movies::select()->get();
         return view('Admin/movies', compact('movies1'));
     }
 
-    public function fetch_movies_upcom(){
+    public function fetch_movies_upcom()
+    {
         // $movies1 = movies::select()->get();
         $upcomingMovies = movies::where('status', 'Upcoming')->get();
         return view('Admin/movies_upcoming', compact('upcomingMovies'));
     }
 
-    public function fetch_top_movies(){
+    public function fetch_top_movies()
+    {
         $movies1 = top_movies_model::select()->get();
         return view('Admin/movies_top', compact('movies1'));
     }
 
     // Fetching Data End
 
-    public function fetch_detail($email){
+    public function fetch_detail($email)
+    {
         $data = register::where('email', $email)->first();
-        return view('Admin/update_account',compact('data'));
+        return view('Admin/update_account', compact('data'));
     }
-    public function delete_acc($email){
+    public function delete_acc($email)
+    {
         register::where('email', $email)->update(['status' => 'Deleted']);
         return redirect()->action([My_Controller::class, 'fetch_total']);
-
     }
 
-    public function deactivate_user($email){
+    public function deactivate_user($email)
+    {
         register::where('email', $email)->update(['status' => 'Inactive']);
         return redirect()->action([My_Controller::class, 'fetch_total']);
     }
 
-    public function Activate($email){
+    public function Activate($email)
+    {
         register::where('email', $email)->update(['status' => 'Active']);
         return redirect()->action([My_Controller::class, 'fetch_total']);
     }
 
-    public function reactivate_user($email){
+    public function reactivate_user($email)
+    {
         register::where('email', $email)->update(['status' => 'Active']);
         return redirect()->action([My_Controller::class, 'fetch_total']);
     }
 
-    public function update_acc(Request $ob){
+    public function update_acc(Request $ob)
+    {
         $ob->validate(
             [
                 'un' => 'required',
@@ -252,7 +258,6 @@ class My_Controller extends Controller
                 'pwd_confirmation' => 'required',
                 'gender' => 'required',
                 'pic' => 'mimes:jpg,png|max:2048',
-
             ],
             [
                 'un.required' => 'Username is required.',
@@ -275,30 +280,32 @@ class My_Controller extends Controller
         }
 
         register::where('email', $ob->em)->update([
-            'Username'=>$ob->un,
-            'Password'=>$ob->pwd,
-            'Mobile_No'=>$ob->mob,
-            'Gender'=>$ob->gender,
-            'Profile_Pic'=>$ob->pic,
-            'Role'=>$ob->role,
+            'Username' => $ob->un,
+            'Password' => $ob->pwd,
+            'Mobile_No' => $ob->mob,
+            'Gender' => $ob->gender,
+            'Profile_Pic' => $ob->pic,
+            'Role' => $ob->role,
         ]);
 
         return redirect()->action([My_Controller::class, 'fetch_total']);
     }
 
     // Movies Edit
-    public function fetch_movie_detail($m_id){
+    public function fetch_movie_detail($m_id)
+    {
         $movies = movies::where('movie_id', $m_id)->first();
-        return view('Admin/update_movie',compact('movies'));
+        return view('Admin/update_movie', compact('movies'));
     }
 
-    public function delete_movies($m_id){
+    public function delete_movies($m_id)
+    {
         movies::where('movie_id', $m_id)->update(['status' => 'Deleted']);
         return redirect()->action([My_Controller::class, 'fetch_movies']);
-
     }
 
-    public function update_movie(Request $ob){
+    public function update_movie(Request $ob)
+    {
         $ob->validate(
             [
                 'mn' => 'required',
@@ -306,7 +313,6 @@ class My_Controller extends Controller
                 'rd' => 'required|',
                 'status' => 'required',
                 'pic' => 'mimes:jpg,png|max:2048',
-
             ],
             [
                 'mn.required' => 'Movie name is required.',
@@ -326,12 +332,12 @@ class My_Controller extends Controller
             $ob->pic->move('pictures/users/', $filename);
         }
 
-        register::where('email', $ob->em)->update([
-            'Movie_Name	'=>$ob->mn,
-            'Run_Time'=>$ob->rt,
-            'Release_Date'=>$ob->rd,
-            'Status'=>$ob->status,
-            'pic'=>$ob->pic,
+        movies::where('email', $ob->em)->update([
+            'Movie_Name	' => $ob->mn,
+            'Run_Time' => $ob->rt,
+            'Release_Date' => $ob->rd,
+            'Status' => $ob->status,
+            'pic' => $ob->pic,
         ]);
 
         return redirect()->action([My_Controller::class, 'fetch_total']);
@@ -339,13 +345,68 @@ class My_Controller extends Controller
 
     // Products
 
-    public function fetch_products(){
+    public function fetch_products()
+    {
         $products = products::select()->get();
         return view('Admin/products', compact('products'));
     }
 
-    public function fetch_review_rating(){
+    public function fetch_product_detail($pro_id)
+    {
+        $pro = products::where('product_id', $pro_id)->first();
+        return view('Admin/update_product', compact('pro'));
+    }
+
+    public function update_pro(Request $ob)
+    {
+        $ob->validate(
+            [
+                'pn' => 'required',
+                'pd' => 'required',
+                'p' => 'required',
+                'pic' => 'mimes:jpg,png|max:2048',
+            ],
+            [
+                'pn.required' => 'Product name is required.',
+                'pd.required' => 'Description is required.',
+                'p.required' => 'Price is required.',
+                'pic.required' => 'Picture is required.',
+                'pic.mimes' => 'Picture types must be jpg,png',
+                'pic.max' => 'Picture size must be less than 2MB',
+            ],
+        );
+
+        if ($ob->hasFile('pic')) {
+            $file = $ob->file('pic');
+
+            $filename = uniqid() . '_' . $file->getClientOriginalName();
+            $ob->pic->move('pictures/users/', $filename);
+        }
+
+        products::where('email', $ob->em)->update([
+            'product_name' => $ob->pn,
+            'product_desc' => $ob->pd,
+            'price' => $ob->p,
+            'product_image' => $ob->pic,
+        ]);
+
+        return redirect()->action([My_Controller::class, 'fetch_products']);
+    }
+    public function delete_product($pro_id)
+    {
+        products::where('product_id', $pro_id)->update(['deleted' => 'Yes']);
+        return redirect()->action([My_Controller::class, 'fetch_products']);
+    }
+
+    //Review Rating
+    public function fetch_review_rating()
+    {
         $review = review_rating::select()->get();
         return view('Admin/review_rating', compact('review'));
+    }
+    public function delete_rating($review_id)
+    {
+        review_rating::where('Rating_id', $review_id)->update(['deleted' => 'Yes']);
+        return redirect()->action([My_Controller::class, 'fetch_review_rating']);
     }
 }

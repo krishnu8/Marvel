@@ -41,6 +41,7 @@ Route::view('admin_profile','Admin/admin_profile');
 Route::view('admin_profile_edit','Admin/admin_profile_edit');
 
 Route::get('update_account1/{email}',[My_Controller::class,'fetch_detail']); //'Admin/update_account'
+Route::post('update_acc',[My_controller::class,'update_acc']);
 Route::get('delete_account/{email}',[My_Controller::class,'delete_acc']);
 Route::get('deactivate_user/{email}',[My_Controller::class,'deactivate_user']);
 
@@ -51,7 +52,10 @@ Route::get('activate_user/{email}',[My_Controller::class,'Activate']);
 
 Route::get('movies',[My_Controller::class,'fetch_movies']);
 Route::view('movie_add','Admin/movie_add');
+
+
 Route::get('update_movie1/{m_id}',[My_Controller::class,'fetch_movie_detail']); //delete_movies
+Route::post('update_movie',[My_controller::class,'update_movie']);
 Route::get('delete_movies1/{m_id}',[My_Controller::class,'delete_movies']);
 
 Route::get('movies_upcoming',[My_Controller::class,'fetch_movies_upcom']);
@@ -63,10 +67,15 @@ Route::view('movies_add_top','Admin/movies_add_top');
 Route::get('products',[My_Controller::class,'fetch_products']);
 Route::view('products_add','Admin/products_add');
 
+Route::get('update_product1/{pro_id}',[My_Controller::class,'fetch_product_detail']);
+Route::post('update_pro',[My_controller::class,'update_pro']);
+Route::get('delete_product1/{pro_id}',[My_Controller::class,'delete_product']);
+
 Route::view('orders','Admin/orders');
 Route::view('order_add','Admin/order_add');
 
 Route::get('review_rating',[My_Controller::class,'fetch_review_rating']);
+Route::get('delete_rating1/{review_id}',[My_Controller::class,'delete_rating']);
 
 Route::view('products_deleted','Admin/products_deleted');
 Route::view('users_deleted','Admin/users_deleted');
@@ -79,7 +88,6 @@ Route::post('upcom_movie_controller',[My_controller::class,'validate_upcom_movie
 Route::post('top_movie_controller',[My_controller::class,'validate_top_movie']);
 Route::post('product_controller',[My_controller::class,'validate_product']);
 Route::post('order_controller',[My_controller::class,'validate_order']);
-Route::post('update_acc',[My_controller::class,'update_acc']);
 
 
 
@@ -135,7 +143,7 @@ Route::get('After_Franchise',[After_login_controller::class,'After_franchise_dat
 Route::get('After_Movies',[After_login_controller::class,'After_movies_data']);
 
 Route::get('After_profile',[After_login_controller::class,'profile_data']);
-Route::view('Edit','After_login/Edit_profile');
+Route::get('Edit',[After_login_controller::class,'Edit_data']);
 
 Route::get('Update_profile',[After_login_controller::class,'profile_update']);
 
@@ -146,6 +154,8 @@ Route::view('register_form','register_form');
 Route::get('register',[Before_login_Controller::class,'validate_form']);
 
 Route::get('pass_validate',[After_login_controller::class,'pass_validate']);
-Route::view('change_password','After_login/Change_password');
+Route::get('change_password',[After_login_controller::class,'change_pass']);
+
+// Route::view('change_password','After_login/Change_password');
 
 Route::post('update_profile_pic',[After_login_controller::class,'update_profile_pic']);

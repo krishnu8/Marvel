@@ -16,12 +16,7 @@
         <table>
             <thead>
                 <tr>
-                    <th colspan="2">
-                        <a href="movie_add">
-                            <button class="button-70">Add Movie</button>
-                        </a>
-                    </th>
-                    <th colspan="7">Movies</th>
+                    <th colspan="6">Movies</th>
                 </tr>
             </thead>
             <tr>
@@ -42,12 +37,6 @@
                 </th>
                 <th>
                     Status
-                </th>
-                <th>
-                    Edit
-                </th>
-                <th>
-                    Delete
                 </th>
             </tr>
 
@@ -71,12 +60,6 @@
                 </td>
                 <td>
                     {{$movie['Status']}}
-                </td>
-                <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/update_movie1/{{ $movie['Movie_ID'] }}"><button id="action" class="edit"><i class="bi bi-pencil-square"></i></button></a>
-                </td>
-                <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/delete_movies1/{{ $movie['Movie_ID'] }}"><button id="action" class="delete"><i class="bi bi-trash"></i></button></a>
                 </td>
             </tr>
             @endforeach

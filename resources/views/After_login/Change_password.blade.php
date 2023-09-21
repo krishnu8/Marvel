@@ -44,6 +44,20 @@
 
 <body>
     @section('body')
+
+    @if (session('error'))
+            <div class="alert alert-Danger alert-dismissible fade show" role="alert"
+                style="min-width: 500px; right: 20px; top: 100px; z-index:1; position: absolute;">
+                {{ session('error') }}
+            </div>
+            <script>
+                // Automatically close the alert after 5 seconds
+                setTimeout(function() {
+                    $('.alert').alert('close');
+                }, 3000);
+            </script>
+        @endif
+
         <section class="vh-100" style="background-color: #f4f5f7; z-index:-1;">
             <div class="card mb-3" style="border-radius: .5rem;height:80%;width:95%;margin:2%;">
                 <div class="row g-0 " style="height:100%;">
@@ -54,7 +68,7 @@
                             style="width: 170px; height:170px; border-radius:50%" />
 
                         <label for="image1"><img src="pictures/Edit_icon.png" alt="" class="editt"></label>
-                        <h2>Krishnu Gupta</h2>
+                        <h2>{{ $data['Username'] }}</h2>
                         <center>
                             <hr class="hh">
                         </center>
@@ -64,7 +78,7 @@
                         <div class="card-body p-4">
                             <form action="pass_validate" method="get">
 
-                                <h3>Chnage Password</h3>
+                                <h3>Change Password</h3>
                                 <hr class="mt-0 mb-4">
                                 <div class="row pt-1">
                                     <div class="col-12 mb-3">
@@ -103,7 +117,7 @@
                                                 </small>
                                         </div>
                                     </div>
-                                   
+
                                 </div>
                                         <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Change Password</button>
                                         <button type="reset" class="btn btn-secondary" style="margin-top: 20px; margin-left: 10px;">Reset</button>

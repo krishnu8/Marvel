@@ -54,7 +54,7 @@
                             style="width: 170px; height:170px; border-radius:50%" />
 
                         <label for="image1"><img src="pictures/Edit_icon.png" alt="" class="editt"></label>
-                        <h2>Krishnu Gupta</h2>
+                        <h2>{{ $data['Username'] }}</h2>
                         <center>
                             <hr class="hh">
                         </center>
@@ -71,10 +71,12 @@
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Name</label>
                                             <input type="text" class="form-control" id="exampleInputEmail1"
-                                                aria-describedby="emailHelp" placeholder="Enter Name" value="Krishnu" name="Name">
-                                            <small id="emailHelp" class="form-text text-muted" style="color: red !important;">
+                                                aria-describedby="emailHelp" placeholder="Enter Name"
+                                                value="{{ $data['Username'] }}" name="Name">
+                                            <small id="emailHelp" class="form-text text-muted"
+                                                style="color: red !important;">
                                                 @error('Name')
-                                                    {{$message}}
+                                                    {{ $message }}
                                                 @enderror
                                             </small>
                                         </div>
@@ -83,57 +85,66 @@
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Email address</label>
                                             <input type="text" class="form-control" id="exampleInputEmail1"
-                                                aria-describedby="emailHelp" placeholder="Enter email" value="Krishnu@gmail.com" name="Email">
-                                                <small id="emailHelp" class="form-text text-muted" style="color: red !important;">
-                                                    @error('Email')
-                                                        {{$message}}
-                                                    @enderror
-                                                </small>
+                                                aria-describedby="emailHelp" placeholder="Enter email"
+                                                value="{{ $data['Email'] }}" name="Email">
+                                            <small id="emailHelp" class="form-text text-muted"
+                                                style="color: red !important;">
+                                                @error('Email')
+                                                    {{ $message }}
+                                                @enderror
+                                            </small>
                                         </div>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Number</label>
                                             <input type="text" class="form-control" id="exampleInputEmail1"
-                                                aria-describedby="emailHelp" placeholder="Enter Number" value="9821412079" name="Number">
-                                                <small id="emailHelp" class="form-text text-muted" style="color: red !important;">
-                                                    @error('Number')
-                                                        {{$message}}
-                                                    @enderror
-                                                </small>
+                                                aria-describedby="emailHelp" placeholder="Enter Number"
+                                                value="{{ $data['Mobile_No'] }}" name="Number">
+                                            <small id="emailHelp" class="form-text text-muted"
+                                                style="color: red !important;">
+                                                @error('Number')
+                                                    {{ $message }}
+                                                @enderror
+                                            </small>
                                         </div>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <div class="form-check">
                                             Gender: <br>
                                             <input class="form-check-input" type="radio" name="Gender"
-                                                id="flexRadioDefault1">
+                                                id="flexRadioDefault1" value="Male"
+                                                {{ $data['Gender']== 'Male' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Male
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="Gender"
-                                                id="flexRadioDefault2" checked>
+                                                id="flexRadioDefault2" value="Female"
+                                                {{ $data['Gender'] == 'Female' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 Female
                                             </label>
                                         </div>
                                         <small id="emailHelp" class="form-text text-muted" style="color: red !important;">
                                             @error('Gender')
-                                                {{$message}}
+                                                {{ $message }}
                                             @enderror
                                         </small>
+
                                     </div>
                                 </div>
                                 <hr class="mt-0 mb-4">
                                 <h6>Description</h6>
                                 <div style="margin-top: 30px;">
-                                    <textarea name="" id="" cols="110" rows="5"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi molestias excepturi labore ratione suscipit dolorum animi voluptatem ut, placeat numquam necessitatibus liberoofficiis delectus vel! Quidem facere cumque fugit voluptas! lorem200</textarea>
+                                    <textarea name="bio" id="" cols="110" rows="5">{{ $data['Bio'] }}</textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary" style="margin-top: 20px">Update</button>
-                                <button type="reset" class="btn btn-secondary" style="margin-top: 20px; margin-left: 10px;">Reset</button>                                                                
-                                <a href="After_profile" class="btn btn-danger" style="margin-top: 20px; margin-left: 10px;">Cancle</a>
+                                <button type="reset" class="btn btn-secondary"
+                                    style="margin-top: 20px; margin-left: 10px;">Reset</button>
+                                <a href="After_profile" class="btn btn-danger"
+                                    style="margin-top: 20px; margin-left: 10px;">Cancle</a>
                             </form>
 
                         </div>

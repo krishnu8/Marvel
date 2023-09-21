@@ -44,6 +44,33 @@
 
 <body>
     @section('body')
+        @if (session('succ'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                style="min-width: 500px; right: 20px; top: 100px; z-index:1; position: absolute;">
+                {{ session('succ') }}
+            </div>
+
+            <script>
+                // Automatically close the alert after 5 seconds
+                setTimeout(function() {
+                    $('.alert').alert('close');
+                }, 3000);
+            </script>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                style="min-width: 500px; right: 20px; top: 100px; z-index:1; position: absolute;">
+                {{ session('error') }}
+            </div>
+            <script>
+                // Automatically close the alert after 5 seconds
+                setTimeout(function() {
+                    $('.alert').alert('close');
+                }, 3000);
+            </script>
+        @endif
+
         <section class="vh-100" style="background-color: #f4f5f7; z-index:-1;">
             <div class="card mb-3" style="border-radius: .5rem;height:80%;width:95%;margin:2%;">
                 <div class="row g-0 " style="height:100%;">
@@ -54,7 +81,7 @@
                             style="width: 170px; height:170px; border-radius:50%" />
 
                         <label for="image1"><img src="pictures/Edit_icon.png" alt="" class="editt"></label>
-                        <h2>Krishnu Gupta</h2>
+                        <h2>{{ $data['Username'] }}</h2>
                         <center>
                             <hr class="hh">
                         </center>
@@ -65,7 +92,7 @@
                             <input type="file" oninput="update()" id="image1" style="display: none" name="pic">
                             <span style="color: red">
                                 @error('pic')
-                                    {{$message}}
+                                    {{ $message }}
                                 @enderror
                             </span>
                             <center><button type="submit" class="btn btn-info" id="update_btn">Update picture</button>
@@ -88,28 +115,26 @@
                             <div class="row pt-1">
                                 <div class="col-6 mb-3">
                                     <h6>Name</h6>
-                                    <p class="text-muted" style="margin-bottom: 30px;">{{ $data['Full_Name'] }}</p>
+                                    <p class="text-muted" style="margin-bottom: 30px;">{{ $data['Username'] }}</p>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <h6>Email</h6>
-                                    <p class="text-muted"  style="margin-bottom: 30px;">{{ $data['Email'] }}</p>
+                                    <p class="text-muted" style="margin-bottom: 30px;">{{ $data['Email'] }}</p>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <h6>Phone</h6>
-                                    <p class="text-muted" >{{ $data['Mobile_No'] }}</p>
+                                    <p class="text-muted">{{ $data['Mobile_No'] }}</p>
                                 </div>
 
                                 <div class="col-6 mb-3">
                                     <h6>Gender</h6>
-                                    <p class="text-muted">Male</p>
+                                    <p class="text-muted">{{ $data['Gender'] }}</p>
                                 </div>
                             </div>
 
                             <h6 style="margin-top: 50px">Description</h6>
                             <div>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi molestias excepturi labore
-                                ratione suscipit dolorum animi voluptatem ut, placeat numquam necessitatibus libero officiis
-                                delectus vel! Quidem facere cumque fugit voluptas!
+                               {{ $data['Bio'] }}
                             </div>
                         </div>
                     </div>
@@ -137,17 +162,29 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="" method="post">
+                <form action="" method="get">
                     <div class="modal-body">
                         <label for="inputPasswordOld">Enter Password</label>
-                        <input type="password" class="form-control" id="inputPasswordOld" required=""
-                            name="ppass">
+                        <input type="password" class="form-control" id="pwd"  name="ppass">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" value="Delete" class="btn btn-primary" name="delete">
+                        <input type="submit" value="Delete" class="btn btn-primary" onclick="checkpass()" name="delete">
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+        function checkpass(){
+            var newpassword = document.getElementById('pwd').value;
+            var password={{ $data['Password'] }};
+            if(password == newpassword){
+                alert(''+newpassword);
+            }else{
+                // session()->flash('error', 'Enter Correct Password');
+                // return redirect('After_profile');
+            }
+        }
+    </script>
