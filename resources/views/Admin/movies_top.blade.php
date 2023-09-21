@@ -21,7 +21,7 @@
                             <button class="button-70">Add Movie</button>
                         </a>
                     </th>
-                    <th colspan="8">Top Grossing Movies</th>
+                    <th colspan="6">Top Grossing Movies</th>
                 </tr>
             </thead>
             <tr>
@@ -49,41 +49,37 @@
                 <th>
                     Delete
                 </th>
-                <th>
-                    Status
-                </th>
             </tr>
 
+            @foreach ($movies1 as $movie)
 
             <tr>
                 <td>
+                    {{$movie['Movie_ID']}}
                 </td>
                 <td style="text-align: center;">
                     <img src="{{ URL::to('/') }}/pictures/wall.jpg">
                 </td>
                 <td>
+                    {{$movie['Movie_Name']}}
                 </td>
                 <td>
+                    {{$movie['Total_Gross']}}
                 </td>
                 <td>
+                    {{$movie['Movie_Name']}}
                 </td>
                 <td>
+                    {{$movie['Release_Date']}}
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/edit_registration/"><button id="action" class="edit">Edit</button></a>
+                    <a href="{{ URL::to('/') }}/edit_registration/"><button id="action" class="edit"><i class="bi bi-pencil-square"></i></button></a>
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/delete_registration/"><button id="action" class="delete">Delete</button></a>
-                </td>
-                <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/deactivate_user/"><button id="action" class="deactivate">Deactivate</button></a>
-
-                    <!-- <a href="{{ URL::to('/') }}/activate_user/"><input type="button" value="Activate"></a>
-                
-                <a href="{{ URL::to('/') }}/reactivate_user/"><input type="button" value="Reactivate"></a> -->
-
+                    <a href="{{ URL::to('/') }}/delete_registration/"><button id="action" class="delete"><i class="bi bi-trash"></i></button></a>
                 </td>
             </tr>
+            @endforeach
         </table>
 
 

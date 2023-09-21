@@ -53,7 +53,7 @@
                 </td>
                 <td style="text-align: center;">
                     <a href="{{ URL::to('/') }}/delete_registration/">
-                        <button id="action" class="delete">Delete</button>
+                        <button id="action" class="delete"><i class="bi bi-trash"></i></button>
                     </a>
                 </td>
             </tr>

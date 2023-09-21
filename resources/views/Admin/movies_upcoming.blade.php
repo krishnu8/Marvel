@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upcoming Movies</title>
+    <title>Movies</title>
 
 </head>
 
@@ -17,11 +17,11 @@
             <thead>
                 <tr>
                     <th colspan="2">
-                        <a href="movies_add_upcom">
+                        <a href="movie_add">
                             <button class="button-70">Add Movie</button>
                         </a>
                     </th>
-                    <th colspan="7">Upcoming Movies</th>
+                    <th colspan="7">Movies</th>
                 </tr>
             </thead>
             <tr>
@@ -38,7 +38,10 @@
                     Run-time
                 </th>
                 <th>
-                    Date
+                    Release Date
+                </th>
+                <th>
+                    Status
                 </th>
                 <th>
                     Edit
@@ -46,39 +49,37 @@
                 <th>
                     Delete
                 </th>
-                <th>
-                    Status
-                </th>
             </tr>
 
+            @foreach ($upcomingMovies as $movie)
 
             <tr>
                 <td>
+                    {{$movie['Movie_ID']}}
                 </td>
                 <td style="text-align: center;">
                     <img src="{{ URL::to('/') }}/pictures/wall.jpg">
                 </td>
                 <td>
+                    {{$movie['Movie_Name']}}
                 </td>
                 <td>
+
                 </td>
                 <td>
+                    {{$movie['Release_Date']}}
+                </td>
+                <td>
+                    {{$movie['Status']}}
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/edit_registration/"><button id="action" class="edit">Edit</button></a>
+                    <a href="{{ URL::to('/') }}/update_movie1/{{ $movie['Movie_ID'] }}"><button id="action" class="edit"><i class="bi bi-pencil-square"></i></button></a>
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/delete_registration/"><button id="action" class="delete">Delete</button></a>
-                </td>
-                <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/deactivate_user/"><button id="action" class="deactivate">Deactivate</button></a>
-
-                    <!-- <a href="{{ URL::to('/') }}/activate_user/"><input type="button" value="Activate"></a>
-                
-                <a href="{{ URL::to('/') }}/reactivate_user/"><input type="button" value="Reactivate"></a> -->
-
+                    <a href="{{ URL::to('/') }}/delete_movies1/{{ $movie['Movie_ID'] }}"><button id="action" class="delete"><i class="bi bi-trash"></i></button></a>
                 </td>
             </tr>
+            @endforeach
         </table>
 
 

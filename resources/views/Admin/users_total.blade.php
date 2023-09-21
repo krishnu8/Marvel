@@ -20,7 +20,7 @@
                             <button class="button-70" role="button">Add User</button>
                         </a>
                     </th>
-                    <th colspan="12">Total Users</th>
+                    <th colspan="13">Total Users</th>
                 </tr>
             </thead>
             <tr>
@@ -38,6 +38,9 @@
                 </th>
                 <th>
                     Password
+                </th>
+                <th>
+                    Gender
                 </th>
                 <th>
                     Role
@@ -65,7 +68,7 @@
                     {{$data['id']}}
                 </td>
                 <td>
-                    {{$data['Full_Name']}}
+                    {{$data['Username']}}
                 </td>
                 <td>
                     {{$data['Mobile_No']}}
@@ -77,7 +80,10 @@
                     {{$data['Password']}}
                 </td>
                 <td>
-                    {{$data['User_Type']}}
+                    {{$data['Gender']}}
+                </td>
+                <td>
+                    {{$data['Role']}}
                 </td>
                 <td>
                     {{$data['Status']}}
@@ -86,17 +92,31 @@
                     <img src="{{ URL::to('/') }}/pictures/wall.jpg">
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/edit_registration/"><button id="action" class="edit">Edit</button></a>
+                    <a href="{{ URL::to('/') }}/update_account1/{{ $data['Email'] }}"><button id="action"
+                            class="edit"><i class="bi bi-pencil-square"></i></button></a>
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/delete_registration/"><button id="action" class="delete">Delete</button></a>
+                    <a href="{{ URL::to('/') }}/delete_account/{{ $data['Email'] }}"><button id="action"
+                            class="delete"><i class="bi bi-trash"></i></button></a>
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/deactivate_user/"><button id="action" class="deactivate">Deactivate</button></a>
 
-                    <!-- <a href="{{ URL::to('/') }}/activate_user/"><input type="button" value="Activate"></a>
-                
-                <a href="{{ URL::to('/') }}/reactivate_user/"><input type="button" value="Reactivate"></a> -->
+                    @if ($data['Status'] == 'Active')
+                        <a href="{{ URL::to('/') }}/deactivate_user/{{ $data['Email'] }}"><button id="action"
+                                class="deactivate">Deactivate</button></a>
+                    @endif
+
+                    @if ($data['Status'] == 'Inactive')
+                        <a href="{{ URL::to('/') }}/activate_user/{{ $data['Email'] }}"><button id="action"
+                                class="deactivate">Activate</button></a>
+                    @endif
+
+                    @if ($data['Status'] == 'Deleted')
+                        <a href="{{ URL::to('/') }}/reactivate_user/{{ $data['Email'] }}"><button id="action"
+                                class="deactivate">Reactivate</button></a>
+                    @endif
+
+
 
                 </td>
             </tr>

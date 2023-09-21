@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Normal Users</title>
-    
+
 </head>
 <body>
 @extends('Admin/master_view')
@@ -13,7 +13,7 @@
 <table>
         <thead>
             <tr>
-                <th colspan="12">Normal Users</th>
+                <th colspan="9">Normal Users</th>
             </tr>
         </thead>
         <tr>
@@ -41,7 +41,7 @@
             <th>
                 Pic
             </th>
-            <th>
+            {{-- <th>
                 Edit
             </th>
             <th>
@@ -49,7 +49,7 @@
             </th>
             <th>
                 Status
-            </th>
+            </th> --}}
         </tr>
 
         @foreach ($norm_user_data as $data)
@@ -58,7 +58,7 @@
                 {{$data['id']}}
             </td>
             <td>
-                {{$data['Full_Name']}}
+                {{$data['Username']}}
             </td>
             <td>
                 {{$data['Mobile_No']}}
@@ -70,7 +70,7 @@
                 {{$data['Password']}}
             </td>
             <td>
-                {{$data['User_Type']}}
+                {{$data['Role']}}
             </td>
             <td>
                 {{$data['Status']}}
@@ -78,20 +78,31 @@
             <td style="text-align: center;">
                 <img src="{{ URL::to('/') }}/pictures/wall.jpg">
             </td>
-            <td style="text-align: center;">
-                <a href="{{ URL::to('/') }}/edit_registration/"><button id="action" class="edit">Edit</button></a>
+            {{-- <td style="text-align: center;">
+                <a href="{{ URL::to('/') }}/update_account1/{{ $data['Email'] }}"><button id="action"
+                        class="edit"><i class="bi bi-pencil-square"></i></button></a>
             </td>
             <td style="text-align: center;">
-                <a href="{{ URL::to('/') }}/delete_registration/"><button id="action" class="delete">Delete</button></a>
+                <a href="{{ URL::to('/') }}/delete_account/{{ $data['Email'] }}"><button id="action"
+                        class="delete"><i class="bi bi-trash"></i></button></a>
             </td>
             <td style="text-align: center;">
-                <a href="{{ URL::to('/') }}/deactivate_user/"><button id="action" class="deactivate">Deactivate</button></a>
-                
-                <!-- <a href="{{ URL::to('/') }}/activate_user/"><input type="button" value="Activate"></a>
-                
-                <a href="{{ URL::to('/') }}/reactivate_user/"><input type="button" value="Reactivate"></a> -->
-                
-            </td>
+
+                @if ($data['Status'] == 'Active')
+                    <a href="{{ URL::to('/') }}/deactivate_user/{{ $data['Email'] }}"><button id="action"
+                            class="deactivate">Deactivate</button></a>
+                @endif
+
+                @if ($data['Status'] == 'Inactive')
+                    <a href="{{ URL::to('/') }}/activate_user/{{ $data['Email'] }}"><button id="action"
+                            class="deactivate">Activate</button></a>
+                @endif
+
+                @if ($data['Status'] == 'Deleted')
+                    <a href="{{ URL::to('/') }}/reactivate_user/{{ $data['Email'] }}"><button id="action"
+                            class="deactivate">Reactivate</button></a>
+                @endif
+            </td> --}}
         </tr>
         @endforeach
     </table>

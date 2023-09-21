@@ -43,29 +43,36 @@
                 </th>
             </tr>
 
-
+            @foreach ($review as $rating)
             <tr>
                 <td>
+                    {{$rating['Rating_id']}}
                 </td>
                 <td style="text-align: center;">
                     <img src="{{ URL::to('/') }}/pictures/wall.jpg" alt="" height="80px" width="80px" style="border-radius: 50%;">
                 </td>
                 <td>
+                    {{$rating['Product_id']}}
                 </td>
                 <td>
+                    {{$rating['User_id']}}
                 </td>
                 <td>
+                    {{$rating['Rating']}}
                 </td>
                 <td>
+                    {{$rating['Description']}}
                 </td>
                 <td>
+                    {{$rating['Description']}}
                 </td>
                 <td style="text-align: center;">
                     <a href="{{ URL::to('/') }}/delete_registration/">
-                        <button id="action" class="delete">Delete</button>
+                        <button id="action" class="delete"><i class="bi bi-trash"></i></button>
                     </a>
                 </td>
             </tr>
+            @endforeach
         </table>
 
 

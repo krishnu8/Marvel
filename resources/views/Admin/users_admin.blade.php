@@ -15,7 +15,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th colspan="12">Admin Users</th>
+                        <th colspan="9">Admin Users</th>
                     </tr>
                 </thead>
                 <tr>
@@ -43,7 +43,7 @@
                     <th>
                         Pic
                     </th>
-                    <th>
+                    {{-- <th>
                         Edit
                     </th>
                     <th>
@@ -51,7 +51,7 @@
                     </th>
                     <th>
                         Status
-                    </th>
+                    </th> --}}
                 </tr>
 
                 @foreach ($admin_data as $ad_data)
@@ -80,13 +80,13 @@
                         <td style="text-align: center;">
                             <img src="{{ URL::to('/') }}/pictures/wall.jpg">
                         </td>
-                        <td style="text-align: center;">
+                        {{-- <td style="text-align: center;">
                             <a href="{{ URL::to('/') }}/update_account1/{{ $ad_data['Email'] }}"><button id="action"
-                                    class="edit">Edit</button></a>
+                                    class="edit"><i class="bi bi-pencil-square"></i></button></a>
                         </td>
                         <td style="text-align: center;">
                             <a href="{{ URL::to('/') }}/delete_account/{{ $ad_data['Email'] }}"><button id="action"
-                                    class="delete">Delete</button></a>
+                                    class="delete"><i class="bi bi-trash"></i></button></a>
                         </td>
                         <td style="text-align: center;">
 
@@ -107,7 +107,7 @@
 
 
 
-                        </td>
+                        </td> --}}
                     </tr>
                 @endforeach
             </table>

@@ -12,6 +12,7 @@
     @extends('Admin/master_view')
     @section('content')
         <main class="mt-5 pt-3">
+            <div class="container col-4">
             <form method="POST" enctype="multipart/form-data" action="{{ URL::to('/') }}/update_acc">
                 @csrf
                 <div class="form-group">
@@ -61,12 +62,12 @@
                     @if ($data['Gender'] == 'Male')
                         <div class="form-check">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="gender" checked>Male
+                                <input type="radio" class="form-check-input" name="gender" value="Male" checked>Male
                             </label>
                         </div>
                         <div class="form-check">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="gender">Female
+                                <input type="radio" class="form-check-input" name="gender" value="Female">Female
                             </label>
                         </div>
                     @endif
@@ -74,12 +75,12 @@
                     @if ($data['Gender'] == 'Female')
                         <div class="form-check">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="gender">Male
+                                <input type="radio" class="form-check-input" name="gender" value="Male">Male
                             </label>
                         </div>
                         <div class="form-check">
                             <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="gender" checked>Female
+                                <input type="radio" class="form-check-input" name="gender" value="Female" checked>Female
                             </label>
                         </div>
                     @endif
@@ -88,13 +89,13 @@
                     <label>Role</label>
                     @if ($data['Role'] == 'Admin')
                         <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="role">
-                            <option value="1" selected>Admin</option>
-                            <option value="2">User</option>
+                            <option value="Admin" selected>Admin</option>
+                            <option value="User">User</option>
                         </select>
                     @else
                         <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="role">
-                            <option value="1">Admin</option>
-                            <option value="2" selected>User</option>
+                            <option value="Admin">Admin</option>
+                            <option value="User" selected>User</option>
                         </select>
                     @endif
 
@@ -112,10 +113,11 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Change Password" class="reset">
+                    <input type="submit" value="Update" class="reset">
                 </div>
 
             </form>
+            </div>
         </main>
     @endsection
 </body>

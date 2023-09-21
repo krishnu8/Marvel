@@ -39,6 +39,7 @@ Route::get('users_normal',[My_Controller::class,'fetch_normal']);
 Route::get('users_admin',[My_Controller::class,'fetch_admin']);
 Route::view('admin_profile','Admin/admin_profile');
 Route::view('admin_profile_edit','Admin/admin_profile_edit');
+
 Route::get('update_account1/{email}',[My_Controller::class,'fetch_detail']); //'Admin/update_account'
 Route::get('delete_account/{email}',[My_Controller::class,'delete_acc']);
 Route::get('deactivate_user/{email}',[My_Controller::class,'deactivate_user']);
@@ -50,20 +51,23 @@ Route::get('activate_user/{email}',[My_Controller::class,'Activate']);
 
 Route::get('movies',[My_Controller::class,'fetch_movies']);
 Route::view('movie_add','Admin/movie_add');
+Route::get('update_movie1/{m_id}',[My_Controller::class,'fetch_movie_detail']); //delete_movies
+Route::get('delete_movies1/{m_id}',[My_Controller::class,'delete_movies']);
 
-Route::view('movies_upcoming','Admin/movies_upcoming');
+Route::get('movies_upcoming',[My_Controller::class,'fetch_movies_upcom']);
 Route::view('movies_add_upcom','Admin/movies_add_upcom');
 
-Route::view('movies_top','Admin/movies_top');
+Route::get('movies_top',[My_Controller::class,'fetch_top_movies']);
 Route::view('movies_add_top','Admin/movies_add_top');
 
-Route::view('products','Admin/products');
+Route::get('products',[My_Controller::class,'fetch_products']);
 Route::view('products_add','Admin/products_add');
 
 Route::view('orders','Admin/orders');
 Route::view('order_add','Admin/order_add');
 
-Route::view('review_rating','Admin/review_rating');
+Route::get('review_rating',[My_Controller::class,'fetch_review_rating']);
+
 Route::view('products_deleted','Admin/products_deleted');
 Route::view('users_deleted','Admin/users_deleted');
 Route::view('messages','Admin/messages');

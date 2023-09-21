@@ -21,7 +21,7 @@
                             <button class="button-70">Add Product</button>
                         </a>
                     </th>
-                    <th colspan="8">Products</th>
+                    <th colspan="9">Products</th>
                 </tr>
             </thead>
             <tr>
@@ -41,6 +41,9 @@
                     Quantity
                 </th>
                 <th>
+                    price
+                </th>
+                <th>
                     Category
                 </th>
                 <th>
@@ -54,36 +57,45 @@
                 </th>
             </tr>
 
-
+            @foreach ($products as $product)
             <tr>
                 <td>
+                    {{$product['product_id']}}
                 </td>
                 <td style="text-align: center;">
                     <img src="{{ URL::to('/') }}/pictures/wall.jpg">
                 </td>
                 <td>
+                    {{$product['product_name']}}
                 </td>
                 <td>
+                    {{$product['product_desc']}}
                 </td>
                 <td>
+                    {{$product['product_id']}}
                 </td>
                 <td>
+                    {{$product['price']}}
+                </td>
+                <td>
+                    {{$product['category_id']}}
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/edit_registration/"><button id="action" class="edit">Edit</button></a>
+                    <a href="{{ URL::to('/') }}/edit_registration/"><button id="action" class="edit"><i class="bi bi-pencil-square"></i></button></a>
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/delete_registration/"><button id="action" class="delete">Delete</button></a>
+                    <a href="{{ URL::to('/') }}/delete_registration/"><button id="action" class="delete"><i class="bi bi-trash"></i></button></a>
                 </td>
                 <td style="text-align: center;">
                     <a href="{{ URL::to('/') }}/deactivate_user/"><button id="action" class="deactivate">Deactivate</button></a>
 
                     <!-- <a href="{{ URL::to('/') }}/activate_user/"><input type="button" value="Activate"></a>
-                
+
                 <a href="{{ URL::to('/') }}/reactivate_user/"><input type="button" value="Reactivate"></a> -->
 
                 </td>
             </tr>
+            @endforeach
         </table>
 
 

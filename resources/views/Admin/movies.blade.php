@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies</title>
-    
+
 </head>
 
 <body>
@@ -52,7 +52,7 @@
             </tr>
 
             @foreach ($movies1 as $movie)
-             
+
             <tr>
                 <td>
                     {{$movie['Movie_ID']}}
@@ -64,7 +64,7 @@
                     {{$movie['Movie_Name']}}
                 </td>
                 <td>
-                    
+
                 </td>
                 <td>
                     {{$movie['Release_Date']}}
@@ -73,12 +73,12 @@
                     {{$movie['Status']}}
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/edit_registration/"><button id="action" class="edit">Edit</button></a>
+                    <a href="{{ URL::to('/') }}/update_movie1/{{ $movie['Movie_ID'] }}"><button id="action" class="edit"><i class="bi bi-pencil-square"></i></button></a>
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/delete_registration/"><button id="action" class="delete">Delete</button></a>
+                    <a href="{{ URL::to('/') }}/delete_movies1/{{ $movie['Movie_ID'] }}"><button id="action" class="delete"><i class="bi bi-trash"></i></button></a>
                 </td>
-            </tr>   
+            </tr>
             @endforeach
         </table>
 

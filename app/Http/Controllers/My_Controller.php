@@ -8,7 +8,10 @@ use App\Models\Admin\admin_data;
 use App\Models\Admin\normal_user_data;
 use App\Models\Admin\total_user_data;
 use App\Models\Admin\movies;
+use App\Models\Admin\products;
+use App\Models\Admin\review_rating;
 use App\Models\register;
+use App\Models\top_movies_model;
 
 class My_Controller extends Controller
 {
@@ -57,7 +60,7 @@ class My_Controller extends Controller
             'Profile_Pic'=>$ob->pic,
             'Role'=>$ob->role,
         ]);
-        
+
     }
 
     public function validate_login(Request $req)
@@ -202,6 +205,17 @@ class My_Controller extends Controller
         return view('Admin/movies', compact('movies1'));
     }
 
+    public function fetch_movies_upcom(){
+        // $movies1 = movies::select()->get();
+        $upcomingMovies = movies::where('status', 'Upcoming')->get();
+        return view('Admin/movies_upcoming', compact('upcomingMovies'));
+    }
+
+    public function fetch_top_movies(){
+        $movies1 = top_movies_model::select()->get();
+        return view('Admin/movies_top', compact('movies1'));
+    }
+
     // Fetching Data End
 
     public function fetch_detail($email){
@@ -210,23 +224,23 @@ class My_Controller extends Controller
     }
     public function delete_acc($email){
         register::where('email', $email)->update(['status' => 'Deleted']);
-        return redirect()->action([My_Controller::class, 'fetch_admin']);
+        return redirect()->action([My_Controller::class, 'fetch_total']);
 
     }
 
     public function deactivate_user($email){
         register::where('email', $email)->update(['status' => 'Inactive']);
-        return redirect()->action([My_Controller::class, 'fetch_admin']);
+        return redirect()->action([My_Controller::class, 'fetch_total']);
     }
 
     public function Activate($email){
         register::where('email', $email)->update(['status' => 'Active']);
-        return redirect()->action([My_Controller::class, 'fetch_admin']);
+        return redirect()->action([My_Controller::class, 'fetch_total']);
     }
 
     public function reactivate_user($email){
         register::where('email', $email)->update(['status' => 'Active']);
-        return redirect()->action([My_Controller::class, 'fetch_admin']);
+        return redirect()->action([My_Controller::class, 'fetch_total']);
     }
 
     public function update_acc(Request $ob){
@@ -237,7 +251,7 @@ class My_Controller extends Controller
                 'pwd' => 'required|regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
                 'pwd_confirmation' => 'required',
                 'gender' => 'required',
-                'pic' => 'required|mimes:jpg,png|max:2048',
+                'pic' => 'mimes:jpg,png|max:2048',
 
             ],
             [
@@ -252,5 +266,86 @@ class My_Controller extends Controller
                 'pic.max' => 'Picture size must be less than 2MB',
             ],
         );
+
+        if ($ob->hasFile('pic')) {
+            $file = $ob->file('pic');
+
+            $filename = uniqid() . '_' . $file->getClientOriginalName();
+            $ob->pic->move('pictures/users/', $filename);
+        }
+
+        register::where('email', $ob->em)->update([
+            'Username'=>$ob->un,
+            'Password'=>$ob->pwd,
+            'Mobile_No'=>$ob->mob,
+            'Gender'=>$ob->gender,
+            'Profile_Pic'=>$ob->pic,
+            'Role'=>$ob->role,
+        ]);
+
+        return redirect()->action([My_Controller::class, 'fetch_total']);
+    }
+
+    // Movies Edit
+    public function fetch_movie_detail($m_id){
+        $movies = movies::where('movie_id', $m_id)->first();
+        return view('Admin/update_movie',compact('movies'));
+    }
+
+    public function delete_movies($m_id){
+        movies::where('movie_id', $m_id)->update(['status' => 'Deleted']);
+        return redirect()->action([My_Controller::class, 'fetch_movies']);
+
+    }
+
+    public function update_movie(Request $ob){
+        $ob->validate(
+            [
+                'mn' => 'required',
+                'rt' => 'required',
+                'rd' => 'required|',
+                'status' => 'required',
+                'pic' => 'mimes:jpg,png|max:2048',
+
+            ],
+            [
+                'mn.required' => 'Movie name is required.',
+                'rt.required' => 'runtime is required.',
+                'rd.required' => 'Release date is required.',
+                'status.required' => 'Status is required.',
+                'pic.required' => 'Picture is required.',
+                'pic.mimes' => 'Picture types must be jpg,png',
+                'pic.max' => 'Picture size must be less than 2MB',
+            ],
+        );
+
+        if ($ob->hasFile('pic')) {
+            $file = $ob->file('pic');
+
+            $filename = uniqid() . '_' . $file->getClientOriginalName();
+            $ob->pic->move('pictures/users/', $filename);
+        }
+
+        register::where('email', $ob->em)->update([
+            'Movie_Name	'=>$ob->mn,
+            'Run_Time'=>$ob->rt,
+            'Release_Date'=>$ob->rd,
+            'Status'=>$ob->status,
+            'pic'=>$ob->pic,
+        ]);
+
+        return redirect()->action([My_Controller::class, 'fetch_total']);
+    }
+
+    // Products
+
+    public function fetch_products(){
+        $products = products::select()->get();
+        return view('Admin/products', compact('products'));
+    }
+
+    public function fetch_review_rating(){
+        $review = review_rating::select()->get();
+        return view('Admin/review_rating', compact('review'));
     }
 }
