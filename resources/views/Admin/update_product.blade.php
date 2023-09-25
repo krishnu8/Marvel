@@ -16,6 +16,7 @@
         <div class="container col-4">
             <form method="POST" enctype="multipart/form-data" action="{{ URL::to('/') }}/update_pro">
                 @csrf
+                <input type="text" name="pro_id" value="{{ $pro['product_id'] }}" hidden>
                 <div class="form-group">
                     <label for="pn1">Movie Name</label>
                     <input type="text" id="pn1" name="pn" class="form-control"
@@ -36,6 +37,15 @@
                     <label for="p">Price</label>
                     <input type="number" id="p1" name="p" class="form-control"
                         style="border: 1px solid black" value="{{ $pro['price'] }}">
+                        @error('p')
+                        <small style="color: red">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="qty1">Quantity</label>
+                    <input type="number" id="qty1" name="qty" class="form-control"
+                        style="border: 1px solid black" value="{{ $pro['Quantity'] }}">
                         @error('p')
                         <small style="color: red">{{ $message }}</small>
                     @enderror

@@ -5,9 +5,6 @@ use App\Http\Controllers\Before_login_Controller;
 use App\Http\Controllers\My_Controller;
 use Illuminate\Support\Facades\Route;
 
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,140 +20,149 @@ Route::get('/', function () {
     return redirect('home');
 });
 
-
-
 // Admin Start
 
 // // Route::view('admin_header','master_view');
 // Route::view('register_form','register_form');
-// Route::view('login_form','login_form');
+Route::view('admin_dashboard', 'Admin/dashboard'); //Dashboard
+Route::view('user_add', 'Admin/user_add');
+Route::get('users_total', [My_Controller::class, 'fetch_total']);
+Route::get('users_normal', [My_Controller::class, 'fetch_normal']);
+Route::get('users_admin', [My_Controller::class, 'fetch_admin']);
 
-// Route::view('login_form','login_form');
-Route::view('admin_dashboard','Admin/dashboard');   //Dashboard
-Route::view('user_add','Admin/user_add');
-Route::get('users_total',[My_Controller::class,'fetch_total']);
-Route::get('users_normal',[My_Controller::class,'fetch_normal']);
-Route::get('users_admin',[My_Controller::class,'fetch_admin']);
-Route::view('admin_profile','Admin/admin_profile');
-Route::view('admin_profile_edit','Admin/admin_profile_edit');
+Route::get('admin_profile', [My_Controller::class, 'profile_data']);
+// Route::view('admin_profile_edit','Admin/admin_profile_edit');
+Route::get('admin_profile_edit', [My_Controller::class, 'profile_update']);
+Route::post('update_profile', [My_Controller::class, 'update_profile1']);
+Route::post('admin_profile_delete', [My_Controller::class, 'admin_profile_delete']);
+Route::post('change_password', [My_Controller::class, 'change_password']);
 
-Route::get('update_account1/{email}',[My_Controller::class,'fetch_detail']); //'Admin/update_account'
-Route::post('update_acc',[My_controller::class,'update_acc']);
-Route::get('delete_account/{email}',[My_Controller::class,'delete_acc']);
-Route::get('deactivate_user/{email}',[My_Controller::class,'deactivate_user']);
+Route::post('update_pro_pic', [My_Controller::class, 'update_profile_pic']);
 
-Route::get('reactivate_user/{email}',[My_Controller::class,'reactivate_user']);
-Route::get('activate_user/{email}',[My_Controller::class,'Activate']);
+Route::get('update_account1/{email}', [My_Controller::class, 'fetch_detail']); //'Admin/update_account'
+Route::post('update_acc', [My_controller::class, 'update_acc']);
+Route::get('delete_account/{email}', [My_Controller::class, 'delete_acc']);
+Route::get('deactivate_user/{email}', [My_Controller::class, 'deactivate_user']);
 
+Route::get('reactivate_user/{email}', [My_Controller::class, 'reactivate_user']);
+Route::get('activate_user/{email}', [My_Controller::class, 'Activate']);
 
+Route::get('movies', [My_Controller::class, 'fetch_movies']);
+Route::view('movie_add', 'Admin/movie_add');
 
-Route::get('movies',[My_Controller::class,'fetch_movies']);
-Route::view('movie_add','Admin/movie_add');
+Route::get('update_movie1/{m_id}', [My_Controller::class, 'fetch_movie_detail']); //delete_movies
+Route::post('update_movie', [My_controller::class, 'update_movie']);
+Route::get('delete_movies1/{m_id}', [My_Controller::class, 'delete_movies']);
 
+Route::get('movies_upcoming', [My_Controller::class, 'fetch_movies_upcom']);
+Route::view('movies_add_upcom', 'Admin/movies_add_upcom');
 
-Route::get('update_movie1/{m_id}',[My_Controller::class,'fetch_movie_detail']); //delete_movies
-Route::post('update_movie',[My_controller::class,'update_movie']);
-Route::get('delete_movies1/{m_id}',[My_Controller::class,'delete_movies']);
+Route::get('movies_top', [My_Controller::class, 'fetch_top_movies']);
+Route::view('movies_add_top', 'Admin/movies_add_top');
 
-Route::get('movies_upcoming',[My_Controller::class,'fetch_movies_upcom']);
-Route::view('movies_add_upcom','Admin/movies_add_upcom');
+Route::get('products', [My_Controller::class, 'fetch_products']);
+Route::view('products_add', 'Admin/products_add');
 
-Route::get('movies_top',[My_Controller::class,'fetch_top_movies']);
-Route::view('movies_add_top','Admin/movies_add_top');
+Route::get('update_product1/{pro_id}', [My_Controller::class, 'fetch_product_detail']);
+Route::post('update_pro', [My_controller::class, 'update_pro']);
+Route::get('delete_product1/{pro_id}', [My_Controller::class, 'delete_product']);
 
-Route::get('products',[My_Controller::class,'fetch_products']);
-Route::view('products_add','Admin/products_add');
+Route::view('orders', 'Admin/orders');
+Route::view('order_add', 'Admin/order_add');
 
-Route::get('update_product1/{pro_id}',[My_Controller::class,'fetch_product_detail']);
-Route::post('update_pro',[My_controller::class,'update_pro']);
-Route::get('delete_product1/{pro_id}',[My_Controller::class,'delete_product']);
+Route::get('review_rating', [My_Controller::class, 'fetch_review_rating']);
+Route::get('delete_rating1/{review_id}', [My_Controller::class, 'delete_rating']);
 
-Route::view('orders','Admin/orders');
-Route::view('order_add','Admin/order_add');
+Route::get('products_deleted', [My_Controller::class, 'fetch_deleted_products']);
 
-Route::get('review_rating',[My_Controller::class,'fetch_review_rating']);
-Route::get('delete_rating1/{review_id}',[My_Controller::class,'delete_rating']);
+Route::get('users_deleted', [My_Controller::class, 'fetch_deleted_users']);
+Route::view('messages', 'Admin/messages');
 
-Route::view('products_deleted','Admin/products_deleted');
-Route::view('users_deleted','Admin/users_deleted');
-Route::view('messages','Admin/messages');
+Route::post('form_controller', [My_controller::class, 'validate_form']);
+Route::post('movie_controller', [My_controller::class, 'validate_movie']);
 
+Route::post('upcom_movie_controller', [My_controller::class, 'validate_upcom_movie']);
+Route::post('top_movie_controller', [My_controller::class, 'validate_top_movie']);
 
-Route::post('form_controller',[My_controller::class,'validate_form']);
-Route::post('movie_controller',[My_controller::class,'validate_movie']);
-Route::post('upcom_movie_controller',[My_controller::class,'validate_upcom_movie']);
-Route::post('top_movie_controller',[My_controller::class,'validate_top_movie']);
-Route::post('product_controller',[My_controller::class,'validate_product']);
-Route::post('order_controller',[My_controller::class,'validate_order']);
+Route::post('product_controller', [My_controller::class, 'validate_product']);
 
-
+Route::post('order_controller', [My_controller::class, 'validate_order']);
 
 // Admin End
 
+// Admin Session
 
+// Route::group(['middleware' => ['adminSession']], function(){
+//     Route::view('admin_dashboard', 'Admin/dashboard'); //Dashboard
+// });
 
-
-
-
-
-
-
+// Admin Session End
 
 //Before login---------------------------------------------------------------------------------------------
-Route::get('home',[Before_login_Controller::class,'home_data']);
+Route::get('home', [Before_login_Controller::class, 'home_data']);
 // Route::get('fetch',[Before_login_Controller::class,'fetch_data']);
-Route::get('About_Us',[Before_login_Controller::class,'about_data']);
+Route::get('About_Us', [Before_login_Controller::class, 'about_data']);
 // Route::get('/delete/{email}',[sample_controller::class,'delete_data']);
-Route::get('Contact_Us',[Before_login_Controller::class,'contact_data']);
-Route::get('Gallery',[Before_login_Controller::class,'gallery_data']);
-Route::get('Franchise',[Before_login_Controller::class,'franchise_data']);
-Route::get('Movies',[Before_login_Controller::class,'movies_data']);
+Route::get('Contact_Us', [Before_login_Controller::class, 'contact_data']);
+Route::get('Gallery', [Before_login_Controller::class, 'gallery_data']);
+Route::get('Franchise', [Before_login_Controller::class, 'franchise_data']);
+Route::get('Movies', [Before_login_Controller::class, 'movies_data']);
+Route::get('charProfile/{char}', [Before_login_Controller::class, 'charData']);
 // Route::view('Login','Before_login/login_form');
 
 // activate register account
 
-Route::get('account_activation/{email}',[Before_login_Controller::class,'Activate']);
+Route::get('account_activation/{email}', [Before_login_Controller::class, 'Activate']);
 
-Route::view('forget','forget_password');
-Route::get('forget_pass',[Before_login_Controller::class,'forget']);
-Route::view('forget_change_pass','change_pass');
-Route::get('change_forget_password',[Before_login_Controller::class,'change_password']);
+Route::view('forget', 'forget_password');
+Route::get('forget_pass', [Before_login_Controller::class, 'forget']);
 
+Route::view('otp_form', 'otp_form');
+Route::get('check_otp', [Before_login_Controller::class, 'check_otp']);
 
-
-
-
-
+// Route::view('forget_change_pass/{email}', 'change_pass');
+Route::view('forget_change_pass/{email}', 'change_pass')->name('change_password');
 
 
-
+Route::get('change_forget_password', [Before_login_Controller::class, 'change_password']);
 
 
 
+
+
+
+
+
+
+
+
+
+
+// buy
+Route::view('product_detail', 'After_login/product_detail');
 
 //After login---------------------------------------------------------------------------------------------
-Route::get('After_home',[After_login_controller::class,'After_home_data']);
-Route::get('After_About_Us',[After_login_controller::class,'After_about_data']);
-Route::get('After_Contact_Us',[After_login_controller::class,'After_contact_data']);
-Route::get('After_Gallery',[After_login_controller::class,'After_gallery_data']);
-Route::get('After_Franchise',[After_login_controller::class,'After_franchise_data']);
-Route::get('After_Movies',[After_login_controller::class,'After_movies_data']);
+Route::get('After_home', [After_login_controller::class, 'After_home_data']);
+Route::get('After_About_Us', [After_login_controller::class, 'After_about_data']);
+Route::get('After_Contact_Us', [After_login_controller::class, 'After_contact_data']);
+Route::get('After_Gallery', [After_login_controller::class, 'After_gallery_data']);
+Route::get('After_Franchise', [After_login_controller::class, 'After_franchise_data']);
+Route::get('After_Movies', [After_login_controller::class, 'After_movies_data']);
 
-Route::get('After_profile',[After_login_controller::class,'profile_data']);
-Route::get('Edit',[After_login_controller::class,'Edit_data']);
+Route::get('After_profile', [After_login_controller::class, 'profile_data']);
+Route::get('Edit', [After_login_controller::class, 'Edit_data']);
 
-Route::get('Update_profile',[After_login_controller::class,'profile_update']);
+Route::get('Update_profile', [After_login_controller::class, 'profile_update']);
 
+Route::view('login_form', 'login_form');
+Route::get('login', [Before_login_Controller::class, 'validate_login']);
+Route::view('register_form', 'register_form');
+Route::get('register', [Before_login_Controller::class, 'validate_form']);
 
-Route::view('login_form','login_form');
-Route::get('login',[Before_login_Controller::class,'validate_login']);
-Route::view('register_form','register_form');
-Route::get('register',[Before_login_Controller::class,'validate_form']);
-
-Route::get('pass_validate',[After_login_controller::class,'pass_validate']);
-Route::get('change_password',[After_login_controller::class,'change_pass']);
+Route::get('pass_validate', [After_login_controller::class, 'pass_validate']);
+Route::get('change_password', [After_login_controller::class, 'change_pass']);
 
 // Route::view('change_password','After_login/Change_password');
-Route::get('delete',[After_login_controller::class,'delete_acc']);
+Route::get('delete', [After_login_controller::class, 'delete_acc']);
 
-Route::post('update_profile_pic',[After_login_controller::class,'update_profile_pic']);
+Route::post('update_profile_pic', [After_login_controller::class, 'update_profile_pic']);

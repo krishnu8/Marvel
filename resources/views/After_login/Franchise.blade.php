@@ -136,16 +136,11 @@
                                     Price:
                                     {{$d['Price']}}<br><br>
                                     <div class="container">
-                                        <button href="#" data-toggle="popover" title="Buy"
-                                            class="btn btn-outline-danger book_tkt" data-content="Login to buy product">Buy
-                                            Now</button>
-                                    </div>                
+                                        {{-- <button href=""  title="Buy" class="btn btn-outline-danger book_tkt">Buy Now</button> --}}
+                                        <a href="product_detail" class="btn btn-outline-danger book_tkt">Buy Now</a>
+                                    </div>
 
-                            <script>
-                                $(document).ready(function () {
-                                    $('[data-toggle="popover"]').popover();
-                                });
-                            </script>
+
                                 </div>
                             </center>
                         </div>
@@ -170,7 +165,7 @@
                                         <button href="#" data-toggle="popover" title="Buy"
                                             class="btn btn-outline-danger book_tkt" data-content="Login to buy product">Buy
                                             Now</button>
-                                    </div>                
+                                    </div>
 
                             <script>
                                 $(document).ready(function () {
@@ -200,7 +195,7 @@
                                         <button href="#" data-toggle="popover" title="Buy"
                                             class="btn btn-outline-danger book_tkt" data-content="Login to buy product">Buy
                                             Now</button>
-                                    </div>                
+                                    </div>
 
                             <script>
                                 $(document).ready(function () {
@@ -230,7 +225,7 @@
                                         <button href="#" data-toggle="popover" title="Buy"
                                             class="btn btn-outline-danger book_tkt" data-content="Login to buy product">Buy
                                             Now</button>
-                                    </div>                
+                                    </div>
 
                             <script>
                                 $(document).ready(function () {
@@ -260,7 +255,7 @@
                                         <button href="#" data-toggle="popover" title="Buy"
                                             class="btn btn-outline-danger book_tkt" data-content="Login to buy product">Buy
                                             Now</button>
-                                    </div>                
+                                    </div>
 
                             <script>
                                 $(document).ready(function () {

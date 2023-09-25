@@ -229,11 +229,11 @@
                             $count++;
                         @endphp
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="pictures/{{$d['Image']}}"> 
+                            <img class="d-block w-100" src="pictures/{{$d['Image']}}">
                         </div>
                         @else
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="pictures/{{$d['Image']}}"> 
+                            <img class="d-block w-100" src="pictures/{{$d['Image']}}">
                         </div>
                         @endif
                         @endforeach
@@ -298,7 +298,7 @@
             </div>
             <br>
             <center>
-                <a href="Char_Profile.php?pk={{$r['Character_Name']}}"><button class="about">Profile</button></a>
+                <a href="charProfile/{{$r['Character_Name']}}"><button class="about">Profile</button></a>
             </center>
         </div>
         @endforeach

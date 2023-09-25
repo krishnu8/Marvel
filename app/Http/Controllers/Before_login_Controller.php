@@ -13,11 +13,13 @@ use App\Models\franchise_model;
 use App\Models\about_char;
 use App\Models\about_us;
 use App\Models\register;
-use Illuminate\Support\Carbon;
+// use Illuminate\Support\Carbon;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\Activate_link;
+// use App\Mail\Activate_link;
+use App\Models\password_reset_tokens;
 
 class Before_login_Controller extends Controller
 {
@@ -28,7 +30,13 @@ class Before_login_Controller extends Controller
         $data2 = about_char::select()->get();
         return view('Before_login/home', compact('data', 'data1', 'data2'));
     }
-
+    public function charData($char)
+    {
+        $data = about_char::select()
+            ->where('Character_Name', $char)
+            ->first();
+        return view('Before_login/charProfile', compact('data'));
+    }
     public function about_data()
     {
         $data = about_us::select()->get();
@@ -197,29 +205,116 @@ class Before_login_Controller extends Controller
         $email = $req->em;
         $count = register::where('Email', $email)->count();
         $user = register::where('Email', $email)->first();
+        $date = Carbon::now('Asia/Kolkata');
+        $otp = rand(100000, 999999);
+        // $check = password_reset_tokens::where('email', $email)->count();
 
-        if ($count == 1) {
-            // Session::put('Forget_password_email', $email);
-            session(['Forget_password_email' =>$email]);
-            $data = ['fn' => $user->un, 'em' => $req->em];
-            Mail::send(['text' => 'forget_password_mail'], ['data' => $data], function ($message) use ($data) {
-                $message->to($data['em'], $data['fn']);
-                $message->from('abhuj145@rku.ac.in', 'Marvel');
-                $message->subject('Forget Password Link');
-            });
+        $token_data = password_reset_tokens::where('email', $email)->first();
 
-            session()->flash('forget', 'Please check your mail for the password change page');
+        if ($token_data) {
+            if ($token_data['Expire_date'] >= $date) {
+                session()->flash('forget', 'We have already sent otp in your mail please wait till your otp expire');
+
+                // return view('otp_form', ['email' => $email]);
+            }
+
+            if ($token_data['Expire_date'] <= $date || $token_data['Expire_date'] == '') {
+                password_reset_tokens::where('email', $email)->delete();
+
+                sendotp:
+
+                if ($count == 1) {
+                    // Session::put('Forget_password_email', $user->Email);
+                    try {
+                        $data = ['fn' => $user->un, 'em' => $req->em, 'otp' => $otp];
+                        Mail::send(['text' => 'forget_password_mail'], ['data' => $data], function ($message) use ($data) {
+                            $message->to($data['em'], $data['fn']);
+                            $message->from('abhuj145@rku.ac.in', 'Marvel');
+                            $message->subject('Forget Password Link');
+                        });
+
+                        DB::table('password_reset_tokens')->insert([
+                            'email' => $email, // Assuming 'email' is the column name for the email address
+                            'OTP' => $otp,
+                            'created_at' => Carbon::now('Asia/Kolkata'),
+                            'Expire_date' => $date->addMinutes(10),
+                        ]);
+                        session()->flash('forget', "A six digits otp is sent in your email to verify it's you with the link for further process.    ");
+
+                        // return view('otp_form', ['email' => $email]);
+                    } catch (Exception $e) {
+                        return 'error';
+                    }
+                } else {
+                    session()->flash('forget', 'Please Enter Registered email');
+                }
+            }
         } else {
-            session()->flash('forget', 'Please Enter Registered email');
+            goto sendotp;
         }
         return view('forget_password');
     }
 
     // change password forget password
-    public function change_password()
+    public function change_password(Request $req)
     {
-        $email = session('Forget_password_email');
-        echo 'hello';
-        echo $email;
+        $email = $req->email;
+        if ($email == '') {
+            session()->flash('reg', 'Please click to forget Password and change your password.');
+            return redirect('login_form');
+        }
+        // echo $email;
+        $req->validate(
+            [
+                'pwd' => 'required|regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
+                'cpwd' => 'required|same:pwd',
+            ],
+            [
+                'pwd.required' => 'Password field Required',
+                'pwd.regex' => 'Please choose strong password with atleast 1 Uppercase 1 Lowercase minimum length 8 and a symbol.',
+                'cpwd.same' => 'Enter Same Password as Above.',
+                'cpwd.required' => 'Confirm Password is required',
+            ],
+        );
+
+        $gg = register::where('Email', $email)->first();
+        if ($gg['password'] == $req->pwd) {
+            session()->flash('login', 'Entered Password is your Password');
+        } else {
+            $result = register::where('Email', $email)->update(['Password' => $req->pwd]);
+
+            if ($result) {
+                session()->flash('Active', 'Password changed Successfully');
+                session()->forget('Forget_password_email');
+            } else {
+                session()->flash('login', 'Something Went Wrong please ');
+            }
+        }
+        return redirect('login_form');
+    }
+
+    public function check_otp(Request $req)
+    {
+        // echo $req->entered_otp;
+        // echo "hello";
+        $token_data = password_reset_tokens::where('OTP', $req->entered_otp)->first();
+        // if($token_data){
+        if ($token_data == null) {
+            session()->flash('Active', 'Please Generate OTP First');
+            return view('login_form');
+        } else {
+            if ($token_data['OTP'] == $req->entered_otp) {
+                password_reset_tokens::where('OTP', $req->entered_otp)->delete();
+                // return view('change_pass');
+                return redirect()->route('change_password', $token_data['email']);
+            } else {
+                session()->flash('Active', 'Enter correct OTP');
+                return view('otp_form');
+            }
+        }
+        // }else{
+        //     session()->flash('Active', 'Please Generate OTP First');
+        //     return view('login_form');
+        // }
     }
 }

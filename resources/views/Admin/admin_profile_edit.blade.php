@@ -11,21 +11,18 @@
     @extends('Admin/master_view')
     @section('content')
     <main class="mt-5 pt-3">
-        <div class="container-fluid">
+        <div class="container-fluid col-4">
 
             <h1>Profile</h1>
 
             <div class="pro">
-                <div class="pro_pic">
-                    <img src="{{ URL::to('/') }}/pictures/wall.jpg" alt="">
-                </div>
                 <div class="info">
-                    <form class="profile" action="#" method="post">
+                    <form class="profile" action="{{ URL::to('/') }}/update_profile" method="post">
                         @csrf
                         <div class="row">
                             <div class="col">
                                 <b>Name:</b>
-                                <input type="text" name="fn" value="" id="fn1" class="form-control">
+                                <input type="text" name="fn" value="{{ $data['Username'] }}" id="fn1" class="form-control">
                                 @error('fn')
                                 <span style="color: red;">{{$message}}</span> <br>
                                 @enderror
@@ -34,26 +31,46 @@
                         <div class="row">
                             <div class="col">
                                 <b>Mobile:</b>
-                                <input type="text" name="mob" value="" id="mob1" class="form-control">
+                                <input type="text" name="mob" value="{{ $data['Mobile_No'] }}" id="mob1" class="form-control">
                                 @error('mob')
                                 <span style="color: red;">{{$message}}</span> <br>
                                 @enderror
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
-                                <b>E-mail:</b>
-                                <input type="text" name="em" value="" id="em1" class="form-control">
-                                @error('em1')
-                                <span style="color: red;">{{$message}}</span> <br>
-                                @enderror
+                            <div class="col-6 mb-3">
+                                <div class="form-check">
+                                    Gender: <br>
+                                    <input class="form-check-input" type="radio" name="Gender"
+                                        id="flexRadioDefault1" value="Male"
+                                        {{ $data['Gender']== 'Male' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Male
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Gender"
+                                        id="flexRadioDefault2" value="Female"
+                                        {{ $data['Gender'] == 'Female' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Female
+                                    </label>
+                                </div>
+                                <small id="emailHelp" class="form-text text-muted" style="color: red !important;">
+                                    @error('Gender')
+                                        {{ $message }}
+                                    @enderror
+                                </small>
+
                             </div>
                         </div>
                         <div class="row">
-                            <input type="submit" value="Update" style="width: 95%">
+                            <div class="col">
+                                <input type="submit" value="Update" style="width: 95%">
+                            </div>
                         </div>
                         <div class="row">
-                            
+
                             <div class="col">
                                 <a href="{{ URL::to('/') }}/admin_profile" style="width: 100%"><input type="button" value="Cancel"></a>
 

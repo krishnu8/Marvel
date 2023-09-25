@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ URL::to('/') }}/css/bootstrap.min.css">
     <style>
         * {
             font-family: JetBrains Mono;
@@ -23,7 +23,7 @@
             margin: 0;
             background: black;
             overflow: hidden;
-            background-image: url(pictures/walll.jpg);
+            background-image: url({{ URL::to('/') }}/pictures/walll.jpg);
             background-size: cover;
             background-position: center;
         }
@@ -215,7 +215,7 @@
                     <h1>Change Password</h1>
                 </center>
                 <br>
-                <form method="get" action="change_forget_password">
+                <form method="get" action="{{ URL::to('/') }}/change_forget_password">
 
                     <div class="row">
                         <div class="col">
@@ -240,7 +240,7 @@
                             </small>
                         @enderror
                     </div>
-
+                    <input type="text" value="{{substr(strrchr(url()->current(),'/'),1)}}" hidden name="email">
 
                     <div class="row" style="text-align:center;">
                         <div class="col">

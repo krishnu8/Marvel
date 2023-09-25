@@ -15,7 +15,7 @@
 
         <table>
             <thead>
-                    <th colspan="8">Deleted Products</th>
+                    <th colspan="7">Deleted Products</th>
                 </tr>
             </thead>
             <tr>
@@ -35,37 +35,39 @@
                     Quantity
                 </th>
                 <th>
-                    Category
+                    Price
                 </th>
-                <th>
+                {{-- <th>
                     Status
-                </th>
+                </th> --}}
             </tr>
 
-
+            @foreach ($del_product as $del_pro)
             <tr>
                 <td>
                 </td>
                 <td style="text-align: center;">
-                    <img src="{{ URL::to('/') }}/pictures/wall.jpg">
+                    <img src="{{ URL::to('/') }}/pictures/products/{{ $del_pro['product_image'] }}">
                 </td>
                 <td>
+                    {{ $del_pro['product_name'] }}
+                </td>
+                <td style="padding: 10px">
+                    <div  style="height:100px; overflow-y: scroll; word-break: break-all" >
+                        {{ $del_pro['product_desc'] }}
+                    </div>
                 </td>
                 <td>
+                    {{ $del_pro['Quantity'] }}
                 </td>
                 <td>
+                    {{ $del_pro['price'] }}
                 </td>
-                <td>
-                </td>
-                <td style="text-align: center;">
+                {{-- <td style="text-align: center;">
                     <a href="{{ URL::to('/') }}/deactivate_user/"><button id="action" class="edit">Reactivate</button></a>
-
-                    <!-- <a href="{{ URL::to('/') }}/activate_user/"><input type="button" value="Activate"></a>
-                
-                <a href="{{ URL::to('/') }}/reactivate_user/"><input type="button" value="Reactivate"></a> -->
-
-                </td>
+                </td> --}}
             </tr>
+            @endforeach
         </table>
 
 

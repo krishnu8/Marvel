@@ -62,22 +62,6 @@ class My_Controller extends Controller
         ]);
     }
 
-    public function validate_login(Request $req)
-    {
-        $req->validate(
-            [
-                'em' => 'required',
-                'pwd' => 'required|min:10|max:16',
-            ],
-            [
-                'em.required' => 'Username is required.',
-                'pwd.required' => 'Password is required.',
-                'pwd.min' => 'Minimum Digits must be of 8 characters.',
-                'pwd.max' => 'Maximum Digits must be of 16 characters.',
-            ],
-        );
-    }
-
     public function validate_movie(request $ob)
     {
         $ob->validate(
@@ -85,7 +69,7 @@ class My_Controller extends Controller
                 'mn' => 'required',
                 'rt' => 'required',
                 'rd' => 'required',
-                'movie_pic' => 'required|size:5120|mimes:jpg,png,gif,bmp',
+                'movie_pic' => 'required|mimes:jpg,png,gif,bmp', //|size:5120
             ],
             [
                 'mn.required' => 'Movie name is required.',
@@ -94,27 +78,30 @@ class My_Controller extends Controller
                 'movie_pic.required' => 'Please select picture.',
             ],
         );
+
+        if ($ob->hasFile('movie_pic')) {
+            $file = $ob->file('movie_pic');
+            $filename = uniqid() . '_' . $file->getClientOriginalName();
+            $file->move('pictures/movies/', $filename);
+            // You may want to save the filename to a database or perform other operations here
+        }
+
+        $check = movies::insert([
+            'Movie_Name' => $ob->mn,
+            'Release_Date' => $ob->rd,
+            'Run_Time' => $ob->rt,
+            'Status' => $ob->status,
+            'pic' => $filename,
+        ]);
+        if ($check) {
+            session()->flash('succ', 'Movie added successfully.');
+        } else {
+            session()->flash('error', 'Failed to add movie');
+        }
+        return redirect()->action([My_Controller::class, 'fetch_movies']);
     }
 
     public function validate_upcom_movie(request $ob)
-    {
-        $ob->validate(
-            [
-                'mn' => 'required',
-                'rt' => 'required',
-                'rd' => 'required',
-                'movie_pic' => 'required|size:5120|mimes:jpg,png,gif,bmp',
-            ],
-            [
-                'mn.required' => 'Movie name is required.',
-                'rt.required' => 'Run time is required.',
-                'rd.required' => 'Release date is required.',
-                'movie_pic.required' => 'Please select picture.',
-            ],
-        );
-    }
-
-    public function validate_top_movie(request $ob)
     {
         $ob->validate(
             [
@@ -139,18 +126,38 @@ class My_Controller extends Controller
                 'pro_name' => 'required',
                 'pro_des' => 'required',
                 'qty' => 'required|numeric',
-                'cat' => 'required',
-                'pro_pic' => 'required|size:5120|mimes:jpg,png,gif,bmp',
+                'price' => 'required',
+                'pro_pic' => 'required|mimes:jpg,png,gif,bmp', //|size:5120
             ],
             [
                 'pro_name.required' => 'Product name is required.',
                 'pro_des.required' => 'Product description is required.',
                 'qty.required' => 'Product quantity is required.',
                 'qty.numeric' => 'Product quantity must be number.',
-                'cat.required' => 'Product category is required.',
+                'price.required' => 'Product price is required.',
                 'pro_pic.required' => 'Please select picture.',
             ],
         );
+        if ($ob->hasFile('pro_pic')) {
+            $file = $ob->file('pro_pic');
+            $filename = uniqid() . '_' . $file->getClientOriginalName();
+            $file->move('pictures/products/', $filename);
+            // You may want to save the filename to a database or perform other operations here
+        }
+
+        $check = products::insert([
+            'product_name' => $ob->pro_name,
+            'product_desc' => $ob->pro_des,
+            'product_image' => $filename,
+            'price' => $ob->price,
+            'Quantity' => $ob->qty,
+        ]);
+        if ($check) {
+            session()->flash('succ', 'Product added successfully.');
+        } else {
+            session()->flash('error', 'Failed to add product.');
+        }
+        return redirect()->action([My_Controller::class, 'fetch_products']);
     }
 
     public function validate_order(request $ob)
@@ -198,12 +205,6 @@ class My_Controller extends Controller
         return view('Admin/users_total', compact('total_user_data'));
     }
 
-    public function fetch_movies()
-    {
-        $movies1 = movies::select()->get();
-        return view('Admin/movies', compact('movies1'));
-    }
-
     public function fetch_movies_upcom()
     {
         // $movies1 = movies::select()->get();
@@ -244,7 +245,12 @@ class My_Controller extends Controller
 
     public function reactivate_user($email)
     {
-        register::where('email', $email)->update(['status' => 'Active']);
+        $check = register::where('email', $email)->update(['status' => 'Active']);
+        if ($check) {
+            session()->flash('succ', 'Reactivated Successfully.');
+        } else {
+            session()->flash('error', 'Failed to reactivate.');
+        }
         return redirect()->action([My_Controller::class, 'fetch_total']);
     }
 
@@ -272,11 +278,31 @@ class My_Controller extends Controller
             ],
         );
 
+        // if ($ob->hasFile('pic')) {
+        //     $file = $ob->file('pic');
+
+        //     $filename = uniqid() . '_' . $file->getClientOriginalName();
+        //     $ob->pic->move('pictures/users/', $filename);
+        // }
         if ($ob->hasFile('pic')) {
             $file = $ob->file('pic');
 
             $filename = uniqid() . '_' . $file->getClientOriginalName();
             $ob->pic->move('pictures/users/', $filename);
+
+            $pic_data = register::where('email', $ob->em)->first();
+
+            if ($pic_data['Profile_Pic'] != 'Deafult.png') {
+                $previousFilePath = 'pictures/' . $pic_data['Profile_Pic']; // Example path
+
+                if (File::exists($previousFilePath)) {
+                    File::delete($previousFilePath);
+                }
+            }
+
+            register::where('Email', $ob->em)->update([
+                'Profile_Pic' => 'users/' . $filename,
+            ]);
         }
 
         register::where('email', $ob->em)->update([
@@ -284,7 +310,6 @@ class My_Controller extends Controller
             'Password' => $ob->pwd,
             'Mobile_No' => $ob->mob,
             'Gender' => $ob->gender,
-            'Profile_Pic' => $ob->pic,
             'Role' => $ob->role,
         ]);
 
@@ -292,6 +317,12 @@ class My_Controller extends Controller
     }
 
     // Movies Edit
+    public function fetch_movies()
+    {
+        $movies1 = movies::select()->get();
+        return view('Admin/movies', compact('movies1'));
+    }
+
     public function fetch_movie_detail($m_id)
     {
         $movies = movies::where('movie_id', $m_id)->first();
@@ -329,18 +360,29 @@ class My_Controller extends Controller
             $file = $ob->file('pic');
 
             $filename = uniqid() . '_' . $file->getClientOriginalName();
-            $ob->pic->move('pictures/users/', $filename);
+            $ob->pic->move('pictures/movies/', $filename);
+
+            $pic_data = movies::where('Movie_ID', $ob->m_id)->first();
+
+            $previousFilePath = 'pictures/movies' . $pic_data['pic']; // Example path
+
+            if (File::exists($previousFilePath)) {
+                File::delete($previousFilePath);
+            }
+
+            movies::where('Movie_ID', $ob->m_id)->update([
+                'pic' => $filename,
+            ]);
         }
 
-        movies::where('email', $ob->em)->update([
-            'Movie_Name	' => $ob->mn,
+        movies::where('Movie_ID', $ob->m_id)->update([
+            'Movie_Name' => $ob->mn,
             'Run_Time' => $ob->rt,
             'Release_Date' => $ob->rd,
             'Status' => $ob->status,
-            'pic' => $ob->pic,
         ]);
 
-        return redirect()->action([My_Controller::class, 'fetch_total']);
+        return redirect()->action([My_Controller::class, 'fetch_movies']);
     }
 
     // Products
@@ -380,14 +422,26 @@ class My_Controller extends Controller
             $file = $ob->file('pic');
 
             $filename = uniqid() . '_' . $file->getClientOriginalName();
-            $ob->pic->move('pictures/users/', $filename);
+            $ob->pic->move('pictures/products/', $filename);
+
+            $pic_data = products::where('product_id', $ob->pro_id)->first();
+
+            $previousFilePath = 'pictures/products' . $pic_data['product_image']; // Example path
+
+            if (File::exists($previousFilePath)) {
+                File::delete($previousFilePath);
+            }
+
+            products::where('product_id', $ob->pro_id)->update([
+                'product_image' => $filename,
+            ]);
         }
 
-        products::where('email', $ob->em)->update([
+        products::where('product_id', $ob->pro_id)->update([
             'product_name' => $ob->pn,
             'product_desc' => $ob->pd,
             'price' => $ob->p,
-            'product_image' => $ob->pic,
+            'quantity' => $ob->qty,
         ]);
 
         return redirect()->action([My_Controller::class, 'fetch_products']);
@@ -409,4 +463,169 @@ class My_Controller extends Controller
         review_rating::where('Rating_id', $review_id)->update(['deleted' => 'Yes']);
         return redirect()->action([My_Controller::class, 'fetch_review_rating']);
     }
+
+    //Deleted products
+    public function fetch_deleted_products()
+    {
+        $del_product = products::where('deleted','Yes')->get();
+        return view('Admin/products_deleted', compact('del_product'));
+    }
+
+    //Deleted Users
+    public function fetch_deleted_users()
+    {
+        $del_user = register::where('status','Deleted')->get();
+        return view('Admin/users_deleted', compact('del_user'));
+    }
+
+    // Logged In Profile
+    public function profile_data()
+    {
+        $user_id = session('user_id');
+
+        $data = register::where('id', $user_id)->first();
+
+        return view('Admin/admin_profile', compact('data'));
+    }
+
+    public function profile_update()
+    {
+        $user_id = session('user_id');
+
+        $data = register::where('id', $user_id)->first();
+
+        return view('Admin/admin_profile_edit', compact('data'));
+    }
+    // profile update
+    public function update_profile1(Request $req)
+    {
+        $User_id = session('user_id');
+        $req->validate([
+            'fn' => 'required|min:3|max:15',
+            'mob' => 'required|numeric|digits:10',
+            'Gender' => 'required',
+        ]);
+
+        $check = register::where('id', $User_id)->update([
+            'Username' => $req->fn,
+            'Mobile_No' => $req->mob,
+            'Gender' => $req->Gender,
+        ]);
+        // if ($check) {
+        //     session()->flash('succ', 'Profile Updated Successfuly');
+        // } else {
+        //     session()->flash('error', 'Something Went Wrong');
+        // }
+        return redirect()->action([My_Controller::class, 'profile_data']);
+    }
+
+    public function admin_profile_delete(Request $req)
+    {
+        $user_id = session('user_id');
+
+        $data = register::where('id', $user_id)->first();
+
+        if ($data['Password'] == $req->pwd) {
+            $check = register::where('id', $user_id)->update([
+                'Status' => 'Deleted',
+            ]);
+            if ($check) {
+                session()->flash('Active', 'Your Account deleted successfully!');
+                return view('login_form');
+            }
+        } else {
+            session()->flash('error', 'Entered Password is incorrect Enter correct password');
+            return redirect()->action([My_Controller::class, 'profile_data']);
+        }
+        return redirect()->action([My_Controller::class, 'profile_data']);
+    }
+
+    // change own password
+    public function change_password(Request $req)
+    {
+        $User_id = session('user_id');
+        $data = register::where('id', $User_id)->first();
+
+        if ($data['Password'] == $req->opwd) {
+            $check = register::where('id', $User_id)->update([
+                'Password' => $req->npwd,
+            ]);
+            if ($check) {
+                session()->flash('succ', 'password changed successfully');
+            } else {
+                session()->flash('error', 'Something Went Wrong');
+            }
+        } else {
+            session()->flash('error', "Old Password Doesn't matched");
+        }
+        return redirect()->action([My_Controller::class, 'profile_data']);
+    }
+    // update profile picture validation
+    public function update_profile_pic(Request $req)
+    {
+        $user_id = session('user_id');
+        $req->validate(
+            [
+                'profile_pic' => 'required|mimes:jpg,png,jpeg,webp|max:5120',
+            ],
+            [
+                'profile_pic.required' => 'Picture is required.',
+                'profile_pic.mimes' => 'Picture types must be jpg, png, jpeg, or webp',
+                'profile_pic.max' => 'Picture size must be less than 5MB',
+            ],
+        );
+
+        if ($req->hasFile('profile_pic')) {
+            $file = $req->file('profile_pic');
+
+            $filename = uniqid() . '_' . $file->getClientOriginalName();
+            $req->profile_pic->move('pictures/users/', $filename);
+
+            $pic_data = register::where('id', $user_id)->first();
+
+            if ($pic_data['Profile_Pic'] != 'Deafult.png') {
+                $previousFilePath = 'pictures/' . $pic_data['Profile_Pic']; // Example path
+
+                if (File::exists($previousFilePath)) {
+                    File::delete($previousFilePath);
+                }
+            }
+
+            register::where('id', $pic_data['id'])->update([
+                'Profile_Pic' => 'users/' . $filename,
+            ]);
+            session()->flash('succ', 'Profile picture updated successfully.');
+        }
+
+        return redirect()->action([My_Controller::class, 'profile_data']);
+    }
+
+    // public function change_pass()
+    // {
+    //     $user_id = session('user_id');
+
+    //     $data = register::where('id', $user_id)->first();
+
+    //     return view('After_login/Change_password', compact('data'));
+    // }
+
+    // public function delete_acc(Request $req)
+    // {
+    //     $user_id = session('user_id');
+    //     $data = register::where('id', $user_id)->first();
+
+    //     if ($data['Password'] == $req->pwd) {
+    //         $check = register::where('id', $user_id)->update([
+    //             'Status' => 'Deleted',
+    //         ]);
+    //         if ($check) {
+    //             session()->flash('Active', 'Your Account deleted successfully!');
+    //             return view('login_form');
+    //         }
+    //     } else {
+    //         session()->flash('error', 'Entered Password is incorrect Enter correc password');
+    //         return redirect()->action([After_login_controller::class, 'profile_data']);
+    //     }
+    //     return redirect()->action([After_login_controller::class, 'profile_data']);
+    // }
 }

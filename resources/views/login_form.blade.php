@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <title>Login</title>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.147.0/three.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
         * {
@@ -185,7 +186,7 @@
             border: none;
         }
 
-        small{
+        small {
             color: red;
         }
 
@@ -200,7 +201,8 @@
     <main>
 
         @if (session('reg'))
-            <div class="alert alert-warning alert-dismissible fade show" role="alert" style="min-width: 500px; right: 20px; top: 50px; z-index:1; position: absolute;">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                style="min-width: 500px; right: 20px; top: 50px; z-index:1; position: absolute;">
                 {{ session('reg') }}
             </div>
 
@@ -208,13 +210,14 @@
                 // Automatically close the alert after 5 seconds
                 setTimeout(function() {
                     $('.alert').alert('close');
-                },3000);
+                }, 3000);
             </script>
         @endif
 
 
         @if (session('login'))
-            <div class="alert lo alert-danger alert-dismissible fade show" role="alert" style="min-width: 350px; right: 20px; top: 50px; z-index:1; position: absolute;">
+            <div class="alert lo alert-danger alert-dismissible fade show" role="alert"
+                style="min-width: 350px; right: 20px; top: 50px; z-index:1; position: absolute;">
                 {{ session('login') }}
             </div>
 
@@ -222,22 +225,23 @@
                 // Automatically close the alert after 5 seconds
                 setTimeout(function() {
                     $('.lo').alert('close');
-                },3000);
+                }, 3000);
             </script>
         @endif
 
         @if (session('Active'))
-        <div class="alert Active alert-info alert-dismissible fade show" role="alert" style="min-width: 350px; right: 20px; top: 50px; z-index:1; position: absolute;">
-            {{ session('Active') }}
-        </div>
+            <div class="alert Active alert-info alert-dismissible fade show" role="alert"
+                style="min-width: 350px; right: 20px; top: 50px; z-index:1; position: absolute;">
+                {{ session('Active') }}
+            </div>
 
-        <script>
-            // Automatically close the alert after 5 seconds
-            setTimeout(function() {
-                $('.Active').alert('close');
-            },3000);
-        </script>
-    @endif
+            <script>
+                // Automatically close the alert after 5 seconds
+                setTimeout(function() {
+                    $('.Active').alert('close');
+                }, 3000);
+            </script>
+        @endif
 
         <div class="row card1">
             <div class="col-12 card2">
@@ -274,6 +278,8 @@
                             <input type="submit" value="Login" name="btn-login" class="login">
 
                             <input type="reset" value="Reset" name="btn-message" class="reset">
+
+                            <a href="{{ URL::to('/') }}/"><input type="button" value="Cancel" style="color: white"></a>
                         </div>
                     </div>
                     <div class="row" style="text-align:center;">

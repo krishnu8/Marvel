@@ -5,12 +5,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
 </head>
 
 <body>
     @extends('Admin/master_view')
     @section('content')
         <main class="mt-5 pt-3">
+            @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                    style="min-width: 500px; right: 20px; top: 100px; z-index:1; position: absolute;">
+                    {{ session('error') }}
+                </div>
+                <script>
+                    // Automatically close the alert after 5 seconds
+                    setTimeout(function() {
+                        $('.alert').alert('close');
+                    }, 3000);
+                </script>
+            @endif
+
+            @if (session('succ'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert"
+                    style="min-width: 500px; right: 20px; top: 100px; z-index:1; position: absolute;">
+                    {{ session('succ') }}
+                </div>
+                <script>
+                    // Automatically close the alert after 5 seconds
+                    setTimeout(function() {
+                        $('.alert').alert('close');
+                    }, 3000);
+                </script>
+            @endif
+
             <div class="container-fluid">
                 <div class="card mb-3" style="border-radius: .5rem;height:80%;width:95%;margin:2%;">
                     <div class="row g-0 " style="height:100%;">
@@ -19,14 +54,15 @@
 
                             <div class="edit_pro_img">
                                 <label for="update_pic">
-                                    <img src="{{ URL::to('/') }}/pictures/wall.jpg" class="pro_img">
+                                    <img src="{{ URL::to('/') }}/pictures/{{ $data['Profile_Pic'] }}" class="pro_img">
                                 </label>
-                                <form action="" method="post">
+                                <form action="update_pro_pic" method="post" enctype="multipart/form-data">
+                                    @csrf
                                     <input type="file" id="update_pic" name="profile_pic" oninput="update()">
                                     @error('profile_pic')
                                         <small style="color: red">{{ $message }}</small>
                                     @enderror
-                                    <button type="submit" class="btn btn-info" id="update_btn">Update picture</button>
+                                    <button type="submit" class="btn btn-primary" id="update_btn">Update picture</button>
 
                                 </form>
 
@@ -39,24 +75,22 @@
                                 <div class="row pt-1">
                                     <div class="col-6 mb-3">
                                         <h6>Name</h6>
-                                        <p class="text-muted" style="margin-bottom: 30px;">ashj</p>
+                                        <p class="text-muted" style="margin-bottom: 30px;">{{ $data['Username'] }}</p>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <h6>Email</h6>
-                                        <p class="text-muted" style="margin-bottom: 30px;">qwertyui</p>
+                                        <p class="text-muted" style="margin-bottom: 30px;">{{ $data['Email'] }}</p>
                                     </div>
                                     <div class="col-6 mb-3">
                                         <h6>Phone</h6>
-                                        <p class="text-muted">12345678</p>
+                                        <p class="text-muted">{{ $data['Mobile_No'] }}</p>
                                     </div>
 
                                     <div class="col-6 mb-3">
                                         <h6>Gender</h6>
-                                        <p class="text-muted">Male</p>
+                                        <p class="text-muted">{{ $data['Gender'] }}</p>
                                     </div>
                                 </div>
-
-                                <h6 style="margin-top: 50px">Description</h6>
                                 <div style="width: 50%">
                                     <div class="row" style="text-align:center;">
                                         <div class="col-4 mb-3">
@@ -65,10 +99,12 @@
                                             </a>
                                         </div>
                                         <div class="col-4 mb-3">
-                                            <input type="button" value="Delete" class="reset" style="font-family: JetBrains Mono;">
+                                            <input type="button" class="btn btn-danger" role="button" aria-pressed="true"
+                                                data-toggle="modal" data-target="#delete_acc" value="Delete"></input>
                                         </div>
                                         <div class="col-4 mb-3">
-                                            <input type="button" value="Change Password" class="reset">
+                                            <input type="button" value="Change Password" data-toggle="modal"
+                                                data-target="#exampleModalCenter" class="reset">
                                         </div>
                                     </div>
                                 </div>
@@ -88,39 +124,93 @@
     }
 </script>
 
-{{-- <div class="info">
-    <form class="profile" action="#" method="post">
-        @csrf
-        <div class="row">
-            <div class="col">
-                <b>Name:</b>
-                <p><b>Raghunath Yadav</b></p>
+{{-- delete account  --}}
+<div class="modal fade" id="delete_acc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Conform its You</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <form action="admin_profile_delete" method="post">
+                @csrf
+                <div class="modal-body">
+                    <label for="inputPasswordOld">Enter Password</label>
+                    <input type="password" class="form-control" id="pwd" name="pwd">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" value="Delete" class="btn btn-primary" name="delete">
+                </div>
+            </form>
         </div>
-        <div class="row">
-            <div class="col">
-                <b>Mobile:</b>
-                <p>
-                    <b>9812919285</b>
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <b>E-mail:</b>
-                <p>
-                    <b>ryadav564@rku.ac.in</b>
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <b>Password:</b>
-                <p>
-                    <b>********</b>
-                </p>
-            </div>
-        </div>
+    </div>
+</div>
 
-    </form>
-</div> --}}
+{{-- change password  --}}
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Change Password</h5>
+            </div>
+            <form action="change_password" method="post" onsubmit="return validate()">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Current Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1"
+                            placeholder="Enter Current Password" name="opwd">
+                    </div>
+                    <div class="form-group">
+                        <label for="npwd1">New password</label>
+                        <input type="password" class="form-control" id="npwd1" placeholder="Enter New Password"
+                            name="npwd">
+                        <small style="color: red" id="errornpwd"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="cpwd1">Confirm Password</label>
+                        <input type="password" class="form-control" id="cpwd1" placeholder="Confirm Password"
+                            name="cnpwd">
+                        <small style="color: red" id="errorcpwd"></small>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function validate() {
+        var npwd = document.getElementById('npwd1').value;
+        var cpwd = document.getElementById('cpwd1').value;
+
+        var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+
+        if (passwordRegex.test(npwd)) {
+            if (npwd === cpwd) {
+                return true;
+            } else {
+                document.getElementById('errorcpwd').innerHTML = 'Confirm password does not matched';
+                return false;
+            }
+            // console.log("true");
+            return true;
+        } else {
+            document.getElementById('errornpwd').innerHTML =
+                'Enter At least one digit (0-9), one lowercase letter (a-z), one uppercase letter (A-Z), Minimum length of 8 characters';
+            // console.log("false");
+            return false;
+        }
+    }
+</script>

@@ -124,12 +124,12 @@
               <span>Upcoming Movies</span>
             </a>
           </li>
-          <li>
+          {{-- <li>
             <a href="{{ URL::to('/') }}/movies_top" class="nav-link px-3">
               <span class="me-2"><i class="bi bi-film"></i></span>
               <span>Top Grossing Movies</span>
             </a>
-          </li>
+          </li> --}}
           <li>
             <a href="{{ URL::to('/') }}/products" class="nav-link px-3">
               <span class="me-2"><i class="bi bi-cart-fill"></i></span>
