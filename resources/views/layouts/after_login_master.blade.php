@@ -372,7 +372,7 @@
                             <a class="dropdown-item drop list1" href="After_profile"><b>My profile</b></a>
                             <a class="dropdown-item drop list1" href=""><b>Orders</b></a>
                             <a class="dropdown-item drop list1" href=""><b>Tickets</b></a>
-                            <a class="dropdown-item drop list1" href="login_form"
+                            <a class="dropdown-item drop list1" href="logout"
                                 onclick="alert('Are you sure want to logout')"><b>Logout</b></a>
 
                         </div>

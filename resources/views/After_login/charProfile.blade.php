@@ -38,9 +38,9 @@
         }
     </style>
 </head>
-<div style="font-size: 20px;margin-left: 50%;"><a href="{{ URL::to('/') }}/" class="he"><button class="home1">Go
+<div style="font-size: 20px;margin-left: 50%;"><a href="{{ URL::to('/') }}/After_home" class="he"><button class="home1">Go
             Back</button></a></div>
-<div style="padding:20px;"><a href="/"><img src="{{ URL::to('/') }}/pictures/hen.png" height="40px" width="100px"></a></div>
+<div style="padding:20px;"><a href="/After_home"><img src="{{ URL::to('/') }}/pictures/hen.png" height="40px" width="100px"></a></div>
 <div style="justify-content: center;display: flex;">
     <div
         style="height:fit-content;width: 35%;background-color: rgb(252, 45, 45);padding: 20px;border-radius: 10px;margin-top: 50px;">
