@@ -317,4 +317,9 @@ class Before_login_Controller extends Controller
         //     return view('login_form');
         // }
     }
+
+    public function logout(){
+        Session::flush();
+        return redirect('/');
+    }
 }

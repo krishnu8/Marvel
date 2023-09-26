@@ -127,7 +127,7 @@ Route::view('forget_change_pass/{email}', 'change_pass')->name('change_password'
 
 
 Route::get('change_forget_password', [Before_login_Controller::class, 'change_password']);
-
+Route::get('logout', [Before_login_Controller::class, 'logout']);
 
 
 
@@ -168,3 +168,4 @@ Route::get('change_password', [After_login_controller::class, 'change_pass']);
 Route::get('delete', [After_login_controller::class, 'delete_acc']);
 
 Route::post('update_profile_pic', [After_login_controller::class, 'update_profile_pic']);
+Route::get('after_charProfile/{char}', [After_login_Controller::class, 'charData']);

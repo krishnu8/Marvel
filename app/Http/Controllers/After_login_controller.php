@@ -53,6 +53,13 @@ class After_login_controller extends Controller
             ->get();
         return view('After_login/Franchise', compact('cosplay', 'clothing', 'toy', 'collection', 'accessories'));
     }
+    public function charData($char)
+    {
+        $data = about_char::select()
+            ->where('Character_Name', $char)
+            ->first();
+        return view('After_login/charProfile', compact('data'));
+    }
     public function After_gallery_data()
     {
         $data = gallery_model::select()->get();
