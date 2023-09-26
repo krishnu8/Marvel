@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
   <link rel="stylesheet" href="{{ URL::to('/') }}/css/style.css" />
   <link rel="stylesheet" href="{{ URL::to('/') }}/css/mystyle.css" />
+  <link rel="stylesheet" href="{{ URL::to('/') }}/js/sweetalert.min.js" />
   <title>Admin Header</title>
 
 </head>
