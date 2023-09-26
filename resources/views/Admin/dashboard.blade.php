@@ -10,22 +10,19 @@
     .texttt{
       color: #000
     }
-    .pro_name{
-      color: black
-    }
+    
     .pro_names {
       font-family: JetBrains;
       font-size: 20px;
-    }
-
-    .pro_names:hover {
       font-weight: bold;
-      color: black;
     }
-
     .pro_link {
       font-family: Fira Code;
-      color: #000000;
+      color: #ffffff;
+      padding: 0px 5px;
+      border-radius: 5px;
+      inset: 10px;
+      box-shadow: 0px 0px 4px 1.5px;
     }
 
     .pro_link:hover {
@@ -52,7 +49,7 @@
         <!-- Profile -->
 
         <div class="col-md-3 mb-3 col-sm-6">
-          <div class="card h-100" style="background-color: #66CCff">
+          <div class="card h-100">
             <div class="card-body py-5 m-auto">
               <font class="texttt">
                 WELCOME!</font>
@@ -67,7 +64,7 @@
               Admin
               <span class="m-auto"></span> -->
             </div>
-            <div class="card-footer d-flex">
+            <div class="card-footer d-flex" style="border-radius: 0px 0px 10px 10px">
               <span class="m-auto">
                 <!-- <i class="bi bi-chevron-left"></i> -->
               </span>
@@ -82,7 +79,7 @@
         <!-- Admins -->
 
         <div class="col-md-3 mb-3 col-sm-6">
-          <div class="card h-100" style="background-color: #E0E0E0">
+          <div class="card h-100">
             <div class="card-body py-5 m-auto">
               <h4 class="m-auto" style="font-size: 20px;">Total Admins</h4>
               <center>1</center>
@@ -92,7 +89,7 @@
               <font class="pro_names">Admin Users</font>
               <span class="m-auto"></span>
             </div>
-            <div class="card-footer d-flex">
+            <div class="card-footer d-flex" style="border-radius: 0px 0px 10px 10px">
               <span class="m-auto">
 
               </span>
@@ -106,7 +103,7 @@
         <!-- Normal Users -->
 
         <div class="col-md-3 mb-3 col-sm-6">
-          <div class="card h-100" style="background-color: #FFCCFF">
+          <div class="card h-100">
             <div class="card-body py-5 m-auto">
               <h4 class="m-auto" style="font-size: 20px;">Total Normal Users</h4>
               <center>1</center>
@@ -116,7 +113,7 @@
               <font class="pro_names">Normal Users</font>
               <span class="m-auto"></span>
             </div>
-            <div class="card-footer d-flex">
+            <div class="card-footer d-flex" style="border-radius: 0px 0px 10px 10px">
               <span class="m-auto">
 
               </span>
@@ -130,7 +127,7 @@
         <!-- Total Users -->
 
         <div class="col-md-3 mb-3 col-sm-6">
-          <div class="card h-100" style="background-color: #99CCFF">
+          <div class="card h-100">
             <div class="card-body py-5 m-auto">
               <h4 class="m-auto" style="font-size: 20px;">Total Users</h4>
               <center>1</center>
@@ -140,7 +137,7 @@
               <font class="pro_names">All Users</font>
               <span class="m-auto"></span>
             </div>
-            <div class="card-footer d-flex">
+            <div class="card-footer d-flex" style="border-radius: 0px 0px 10px 10px">
               <span class="m-auto">
 
               </span>
@@ -154,7 +151,7 @@
         <!-- Movies -->
 
         <div class="col-md-3 mb-3 col-sm-6">
-          <div class="card h-100" style="background-color: #91a791b4">
+          <div class="card h-100">
             <div class="card-body py-5 m-auto">
               <h4 class="m-auto" style="font-size: 20px;">Total Movies</h4>
               <center>1</center>
@@ -164,7 +161,7 @@
               <font class="pro_names">All Movies</font>
               <span class="m-auto"></span>
             </div>
-            <div class="card-footer d-flex">
+            <div class="card-footer d-flex" style="border-radius: 0px 0px 10px 10px">
               <span class="m-auto">
 
               </span>
@@ -176,7 +173,7 @@
         </div>
 
         <div class="col-md-3 mb-3 col-sm-6">
-          <div class="card h-100" style="background-color: #CCCCFF">
+          <div class="card h-100">
             <div class="card-body py-5 m-auto">
               <h4 class="m-auto" style="font-size: 20px;">Total Products</h4>
               <center>1</center>
@@ -186,7 +183,7 @@
               <font class="pro_names">Products Added</font>
               <span class="m-auto"></span>
             </div>
-            <div class="card-footer d-flex">
+            <div class="card-footer d-flex" style="border-radius: 0px 0px 10px 10px">
               <span class="m-auto">
 
               </span>
@@ -198,7 +195,7 @@
         </div>
 
         <div class="col-md-3 mb-3 col-sm-6">
-          <div class="card h-100" style="background-color: #99FF99">
+          <div class="card h-100">
             <div class="card-body py-5 m-auto">
               <h4 class="m-auto" style="font-size: 20px;">Total Orders</h4>
               <center>1</center>
@@ -208,7 +205,7 @@
               <font class="pro_names">Orders</font>
               <span class="m-auto"></span>
             </div>
-            <div class="card-footer d-flex">
+            <div class="card-footer d-flex" style="border-radius: 0px 0px 10px 10px">
               <span class="m-auto">
 
               </span>
@@ -220,7 +217,7 @@
         </div>
 
         <div class="col-md-3 mb-3 col-sm-6">
-          <div class="card h-100" style="background-color: #FFE5CC">
+          <div class="card h-100">
             <div class="card-body py-5 m-auto">
               <h4 class="m-auto" style="font-size: 20px;">Total Messages</h4>
               <center>1</center>
@@ -230,7 +227,7 @@
               <font class="pro_names">Messages</font>
               <span class="m-auto"></span>
             </div>
-            <div class="card-footer d-flex">
+            <div class="card-footer d-flex" style="border-radius: 0px 0px 10px 10px">
               <span class="m-auto">
 
               </span>
@@ -244,7 +241,7 @@
 
 
         <div class="col-md-3 mb-3 col-sm-6">
-          <div class="card h-100" style="background-color: #E5ccff">
+          <div class="card h-100">
             <div class="card-body py-5 m-auto">
               <h4 class="m-auto" style="font-size: 20px;">Total Deleted Users</h4>
               <center>1</center>
@@ -254,7 +251,7 @@
               <font class="pro_names">Deleted Users</font>
               <span class="m-auto"></span>
             </div>
-            <div class="card-footer d-flex">
+            <div class="card-footer d-flex" style="border-radius: 0px 0px 10px 10px">
               <span class="m-auto">
 
               </span>
@@ -264,8 +261,6 @@
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
   </main>
