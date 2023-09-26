@@ -15,7 +15,7 @@
 
         <table>
             <thead>
-                <th colspan="7">Messages</th>
+                <th colspan="6">Messages</th>
                 </tr>
             </thead>
             <tr>
@@ -32,31 +32,38 @@
                     Number
                 </th>
                 <th>
-                    Message
+                    Deleted
                 </th>
                 <th>
                     Delete
                 </th>
             </tr>
 
-
+            @foreach ($msgs as $msg)
             <tr>
                 <td>
+                    {{ $msg['id'] }}
                 </td>
                 <td style="text-align: center;">
+                    {{ $msg['Name'] }}
                 </td>
                 <td>
+                    {{ $msg['Email'] }}
                 </td>
                 <td>
+                    {{ $msg['Message'] }}
                 </td>
                 <td>
+                    {{ $msg['deleted'] }}
                 </td>
                 <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/delete_registration/">
+                    <a href="{{ URL::to('/') }}/delete_msg1/{{$msg['id']}}">
                         <button id="action" class="delete"><i class="bi bi-trash"></i></button>
                     </a>
                 </td>
             </tr>
+
+            @endforeach
         </table>
 
 

@@ -76,7 +76,9 @@ Route::get('delete_rating1/{review_id}', [My_Controller::class, 'delete_rating']
 Route::get('products_deleted', [My_Controller::class, 'fetch_deleted_products']);
 
 Route::get('users_deleted', [My_Controller::class, 'fetch_deleted_users']);
-Route::view('messages', 'Admin/messages');
+
+Route::get('messages', [My_Controller::class, 'fetch_messages']);
+Route::get('delete_msg1/{msg_id}', [My_Controller::class, 'delete_msg']);
 
 Route::post('form_controller', [My_controller::class, 'validate_form']);
 Route::post('movie_controller', [My_controller::class, 'validate_movie']);

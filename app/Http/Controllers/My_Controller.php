@@ -12,6 +12,7 @@ use App\Models\Admin\products;
 use App\Models\Admin\review_rating;
 use App\Models\register;
 use App\Models\top_movies_model;
+use App\Models\contact_msg;
 
 class My_Controller extends Controller
 {
@@ -389,7 +390,7 @@ class My_Controller extends Controller
 
     public function fetch_products()
     {
-        $products = products::select()->get();
+        $products = products::where('deleted','No')->get();
         return view('Admin/products', compact('products'));
     }
 
@@ -455,7 +456,7 @@ class My_Controller extends Controller
     //Review Rating
     public function fetch_review_rating()
     {
-        $review = review_rating::select()->get();
+        $review = review_rating::where('Deleted','No')->get();
         return view('Admin/review_rating', compact('review'));
     }
     public function delete_rating($review_id)
@@ -476,6 +477,18 @@ class My_Controller extends Controller
     {
         $del_user = register::where('status','Deleted')->get();
         return view('Admin/users_deleted', compact('del_user'));
+    }
+
+    //Messages
+    public function fetch_messages()
+    {
+        $msgs = contact_msg::where('deleted','No')->get();
+        return view('Admin/messages', compact('msgs'));
+    }
+    public function delete_msg($msg_id)
+    {
+        contact_msg::where('id', $msg_id)->update(['deleted' => 'Yes']);
+        return redirect()->action([My_Controller::class, 'fetch_messages']);
     }
 
     // Logged In Profile
