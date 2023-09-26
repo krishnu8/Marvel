@@ -24,6 +24,7 @@ Route::get('/', function () {
 
 // // Route::view('admin_header','master_view');
 // Route::view('register_form','register_form');
+Route::middleware('Admin')->group(function(){
 Route::view('admin_dashboard', 'Admin/dashboard'); //Dashboard
 Route::view('user_add', 'Admin/user_add');
 Route::get('users_total', [My_Controller::class, 'fetch_total']);
@@ -89,18 +90,20 @@ Route::post('top_movie_controller', [My_controller::class, 'validate_top_movie']
 Route::post('product_controller', [My_controller::class, 'validate_product']);
 
 Route::post('order_controller', [My_controller::class, 'validate_order']);
-
+});
 // Admin End
 
 // Admin Session
 
-Route::group(['middleware' => ['adminSession']], function(){
-    Route::view('admin_dashboard', 'Admin/dashboard'); //Dashboard
-});
+// Route::group(['middleware' => ['adminSession']], function(){
+//     Route::view('admin_dashboard', 'Admin/dashboard'); //Dashboard
+// });
 
 // Admin Session End
 
 //Before login---------------------------------------------------------------------------------------------
+Route::middleware('non_login')->group(function(){
+
 Route::get('home', [Before_login_Controller::class, 'home_data']);
 // Route::get('fetch',[Before_login_Controller::class,'fetch_data']);
 Route::get('About_Us', [Before_login_Controller::class, 'about_data']);
@@ -127,13 +130,17 @@ Route::view('forget_change_pass/{email}', 'change_pass')->name('change_password'
 
 
 Route::get('change_forget_password', [Before_login_Controller::class, 'change_password']);
+
+
+
+Route::view('login_form', 'login_form');
+Route::get('login', [Before_login_Controller::class, 'validate_login']);
+Route::view('register_form', 'register_form');
+Route::get('register', [Before_login_Controller::class, 'validate_form']);
+
+});
+
 Route::get('logout', [Before_login_Controller::class, 'logout']);
-
-
-
-
-
-
 
 
 
@@ -144,6 +151,9 @@ Route::get('logout', [Before_login_Controller::class, 'logout']);
 Route::view('product_detail', 'After_login/product_detail');
 
 //After login---------------------------------------------------------------------------------------------
+Route::middleware('user')->group(function(){
+
+
 Route::get('After_home', [After_login_controller::class, 'After_home_data']);
 Route::get('After_About_Us', [After_login_controller::class, 'After_about_data']);
 Route::get('After_Contact_Us', [After_login_controller::class, 'After_contact_data']);
@@ -156,10 +166,7 @@ Route::get('Edit', [After_login_controller::class, 'Edit_data']);
 
 Route::get('Update_profile', [After_login_controller::class, 'profile_update']);
 
-Route::view('login_form', 'login_form');
-Route::get('login', [Before_login_Controller::class, 'validate_login']);
-Route::view('register_form', 'register_form');
-Route::get('register', [Before_login_Controller::class, 'validate_form']);
+
 
 Route::get('pass_validate', [After_login_controller::class, 'pass_validate']);
 Route::get('change_password', [After_login_controller::class, 'change_pass']);
@@ -169,3 +176,4 @@ Route::get('delete', [After_login_controller::class, 'delete_acc']);
 
 Route::post('update_profile_pic', [After_login_controller::class, 'update_profile_pic']);
 Route::get('after_charProfile/{char}', [After_login_Controller::class, 'charData']);
+});

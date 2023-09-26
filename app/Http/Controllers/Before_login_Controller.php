@@ -175,9 +175,11 @@ class Before_login_Controller extends Controller
                     session(['user_id' => $check_login['id']]);
                     session(['role' => $check_login['Role']]);
                     if ($check_login['Role'] == 'Admin') {
+                        // session(['Admin' =>'Admin']);
                         // navigate to admin dashboard
                         return view('Admin/dashboard');
                     } else {
+                        // session(['User' =>'User']);
                         return redirect('After_home');
                     }
                 } else {
@@ -320,7 +322,8 @@ class Before_login_Controller extends Controller
         // }
     }
 
-    public function logout(){
+    public function logout()
+    {
         Session::flush();
         return redirect('/');
     }
