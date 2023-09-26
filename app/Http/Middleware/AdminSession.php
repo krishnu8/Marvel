@@ -15,9 +15,7 @@ class AdminSession
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!$request->session()->has('uname') && !$request->session()->has('role')){
-            return redirect('login_form');
-        }
+        
         return $next($request);
     }
 }

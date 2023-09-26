@@ -94,9 +94,9 @@ Route::post('order_controller', [My_controller::class, 'validate_order']);
 
 // Admin Session
 
-// Route::group(['middleware' => ['adminSession']], function(){
-//     Route::view('admin_dashboard', 'Admin/dashboard'); //Dashboard
-// });
+Route::group(['middleware' => ['adminSession']], function(){
+    Route::view('admin_dashboard', 'Admin/dashboard'); //Dashboard
+});
 
 // Admin Session End
 

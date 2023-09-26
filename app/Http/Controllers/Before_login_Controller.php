@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 // use App\Mail\Activate_link;
 use App\Models\password_reset_tokens;
+use Exception;
 
 class Before_login_Controller extends Controller
 {
@@ -172,6 +173,7 @@ class Before_login_Controller extends Controller
             if ($check_login['Password'] == $req->pwd) {
                 if ($check_login['Status'] == 'Active') {
                     session(['user_id' => $check_login['id']]);
+                    session(['role' => $check_login['Role']]);
                     if ($check_login['Role'] == 'Admin') {
                         // navigate to admin dashboard
                         return view('Admin/dashboard');
