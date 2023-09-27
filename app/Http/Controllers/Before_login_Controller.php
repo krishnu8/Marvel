@@ -175,7 +175,8 @@ class Before_login_Controller extends Controller
                     session(['user_id' => $check_login['id']]);
                     session(['role' => $check_login['Role']]);
                     if ($check_login['Role'] == 'Admin') {
-                        // session(['Admin' =>'Admin']);
+                        session()->flash('status', 'success');
+                        session()->flash('succ_msg', 'Logged in Successfully.');
                         // navigate to admin dashboard
                         return view('Admin/dashboard');
                     } else {

@@ -68,16 +68,8 @@
 
 
     </main>
+    
     @endsection
 </body>
 
 </html>
-<script>
-    swal({
-        title: "Hello",
-        text: "You clicked the button!",
-        icon: "success",
-        button: "OK",
-    });
-    setTimeout("", 5000);
-</script>

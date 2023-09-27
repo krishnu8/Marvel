@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{{ URL::to('/') }}/css/style.css" />
   <link rel="stylesheet" href="{{ URL::to('/') }}/css/mystyle.css" />
   <link rel="stylesheet" href="{{ URL::to('/') }}/js/sweetalert.min.js" />
+  <script src="{{ URL::to('/') }}/js/sweetalert.min.js"></script>
   <title>Admin Header</title>
 
 </head>
@@ -44,9 +45,9 @@
               aria-expanded="false">
               <i class="bi bi-person-fill"></i>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end">
+            <ul class="dropdown-menu dropdown-menu-end">    
               <li><a class="dropdown-item" href="{{ URL::to('/') }}/admin_profile">View Profile</a></li>
-              <li><a class="dropdown-item" href="{{ URL::to('/') }}/login_form">Logout</a></li>
+              <li><a class="dropdown-item" href="{{ URL::to('/') }}/logout">Logout</a></li>
             </ul>
           </li>
         </ul>

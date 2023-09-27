@@ -14,6 +14,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+    <style type="text/css">
+
+    </style>
 </head>
 
 <body>
@@ -21,28 +24,24 @@
     @section('content')
         <main class="mt-5 pt-3">
             @if (session('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert"
-                    style="min-width: 500px; right: 20px; top: 100px; z-index:1; position: absolute;">
-                    {{ session('error') }}
-                </div>
                 <script>
-                    // Automatically close the alert after 5 seconds
-                    setTimeout(function() {
-                        $('.alert').alert('close');
-                    }, 3000);
+                    swal({
+                        title: "Sorry!",
+                        text: "{{ session('error') }}",
+                        icon: "warning",
+                        button: "OK",
+                    });
                 </script>
             @endif
 
             @if (session('succ'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert"
-                    style="min-width: 500px; right: 20px; top: 100px; z-index:1; position: absolute;">
-                    {{ session('succ') }}
-                </div>
                 <script>
-                    // Automatically close the alert after 5 seconds
-                    setTimeout(function() {
-                        $('.alert').alert('close');
-                    }, 3000);
+                    swal({
+                        title: "Congratulations!",
+                        text: "{{ session('succ') }}",
+                        icon: "success",
+                        button: "OK",
+                    });
                 </script>
             @endif
 
@@ -92,7 +91,7 @@
                                     </div>
                                 </div>
                                 <div style="width: 50%">
-                                    <div class="row" style="text-align:center;">
+                                    <div class="row" id="pro_button" style="text-align:center;">
                                         <div class="col-4 mb-3">
                                             <a href="{{ URL::to('/') }}/admin_profile_edit">
                                                 <input type="button" value="Edit" class="submit">

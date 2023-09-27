@@ -1,43 +1,45 @@
-textarea{
+textarea {
     resize: none;
 }
 
 /* Total Users Page Start */
 
-    table{
-        width: 99.5%;
-        margin: 2px;
-    }
-    td,th{
-        text-align: center;
-    }
+table {
+    width: 99.5%;
+    margin: 2px;
+}
 
-    td{
+td, th {
+    text-align: center;
+}
 
-        font-size: .9rem;
-    }
-    table thead tr th{
-        font-size: 1.3rem;
-    }
+td {
 
-     table, tr, th, td{
-        border: 0px solid black;
-        border-collapse: collapse;
-     }
+    font-size: .9rem;
+}
 
-     td img{
-        height: 50px;
-        width: 50px;
-        border-radius: 50%;
-     }
+table thead tr th {
+    font-size: 1.3rem;
+}
 
-     table tr:nth-child(odd){
-        background-color: #c0bebe6b;
-     }
+table, tr, th, td {
+    border: 0px solid black;
+    border-collapse: collapse;
+}
 
-     table tr:nth-child(1){
-        background-color: #e7bcbcb5;
-     }
+td img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+table tr:nth-child(odd) {
+    background-color: #c0bebe6b;
+}
+
+table tr:nth-child(1) {
+    background-color: #e7bcbcb5;
+}
 
 
 /* Total Users Page End */
@@ -58,9 +60,11 @@ form div {
     margin-bottom: 8px;
     color: black;
 }
-a{
+
+a {
     text-decoration: none;
 }
+
 input[type=text], input[type=password] {
     background-color: transparent;
     border: black solid 0.5px;
@@ -88,18 +92,19 @@ input[type=submit], input[type=reset], input[type=button] {
     width: max-content;
 }
 
-.cont_add{
+.cont_add {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.user_add{
+
+.user_add {
     width: 350px;
     height: 500px;
 }
 
-.gen{
+.gen {
     color: black;
 }
 
@@ -204,7 +209,7 @@ input[type=submit], input[type=reset], input[type=button] {
     color: var(--main-color);
 }
 
-.custom-select{
+.custom-select {
     height: 37px;
     border-radius: 6px;
 }
@@ -212,12 +217,13 @@ input[type=submit], input[type=reset], input[type=button] {
 /* Order Page End */
 
 /* Admin Profile Start */
-.pro_img{
+.pro_img {
     height: 250px;
     width: 250px;
     border-radius: 50%;
 }
-.edit_pro_img{
+
+.edit_pro_img {
     height: 100%;
     width: 100%;
     display: flex;
@@ -226,29 +232,35 @@ input[type=submit], input[type=reset], input[type=button] {
     justify-content: center;
     justify-content: space-evenly;
 }
-.edit_pro_img label{
+
+.edit_pro_img label {
     z-index: 1;
     cursor: pointer;
     opacity: 1;
 }
-.col-md-4 form input{
+
+.col-md-4 form input {
     display: none;
 }
-.col-md-4 form .btn{
+
+.col-md-4 form .btn {
     display: none;
 }
-.label:hover{
+
+.label:hover {
     opacity: 1;
 }
-.pro_img:hover ~ label{
- opacity: 1;
+
+.pro_img:hover~label {
+    opacity: 1;
 }
+
 /* Admin Profil End */
 
 
 
-  /* CSS */
-  .button-70 {
+/* CSS */
+.button-70 {
     background-image: linear-gradient(#0dccea, #0d70ea);
     border: 0;
     border-radius: 4px;
@@ -264,12 +276,12 @@ input[type=submit], input[type=reset], input[type=button] {
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-  }
+}
 
 
-  /* Table Action Start*/
+/* Table Action Start*/
 
-  #action{
+#action {
     color: black;
     box-shadow: 3px 3px 3px #CCCCCC;
     text-align: center;
@@ -278,22 +290,27 @@ input[type=submit], input[type=reset], input[type=button] {
     border-radius: 0.25rem;
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
-  }
-  .edit{
+}
+
+.edit {
     background-color: rgb(0, 255, 0);
-  }
-  .delete{
+}
+
+.delete {
     background-color: red;
-  }
-  .activate{
-    background-color: blue;
-  }
-  .deactivate{
-    background-color: blue;
-  }
-  .reactivate{
-    background-color: blue;
-  }
+}
 
+.activate {
+    background-color: blue;
+}
 
-    /* Table Action End*/
+.deactivate {
+    background-color: blue;
+}
+
+.reactivate {
+    background-color: blue;
+}
+
+/* Table Action End*/
+

@@ -12,27 +12,25 @@
     @extends('Admin/master_view')
     @section('content')
         <main class="mt-5 pt-3">
+
             @if (session('error'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('error') }}
-                </div>
                 <script>
-                    // Automatically close the alert after 5 seconds
-                    setTimeout(function() {
-                        $('.alert').alert('close');
-                    }, 3000);
+                    swal({
+                        title: "Sorry!",
+                        text: "{{ session('error') }}",
+                        icon: "warning",
+                        button: "OK",
+                    });
                 </script>
             @endif
-
             @if (session('succ'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('succ') }}
-                </div>
                 <script>
-                    // Automatically close the alert after 5 seconds
-                    setTimeout(function() {
-                        $('.alert').alert('close');
-                    }, 3000);
+                    swal({
+                        title: "Congratulations!",
+                        text: "{{ session('succ') }}",
+                        icon: "success",
+                        button: "OK",
+                    });
                 </script>
             @endif
             <table>
