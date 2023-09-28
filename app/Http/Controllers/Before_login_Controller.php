@@ -289,6 +289,7 @@ class Before_login_Controller extends Controller
             $result = register::where('Email', $email)->update(['Password' => $req->pwd]);
 
             if ($result) {
+                password_reset_tokens::where('email', $email)->delete();
                 session()->flash('Active', 'Password changed Successfully');
                 session()->forget('Forget_password_email');
             } else {
@@ -302,25 +303,19 @@ class Before_login_Controller extends Controller
     {
         // echo $req->entered_otp;
         // echo "hello";
-        $token_data = password_reset_tokens::where('OTP', $req->entered_otp)->first();
-        // if($token_data){
-        if ($token_data == null) {
-            session()->flash('Active', 'Please Generate OTP First');
+        $check = password_reset_tokens::all();
+        if ($check == '') {
+            session()->flash('login', 'Please Generate Otp first');
             return view('login_form');
         } else {
-            if ($token_data['OTP'] == $req->entered_otp) {
-                password_reset_tokens::where('OTP', $req->entered_otp)->delete();
-                // return view('change_pass');
+            $token_data = password_reset_tokens::where('OTP', $req->entered_otp)->first();
+            if($token_data){
                 return redirect()->route('change_password', $token_data['email']);
-            } else {
+            }else{
                 session()->flash('Active', 'Enter correct OTP');
                 return view('otp_form');
             }
         }
-        // }else{
-        //     session()->flash('Active', 'Please Generate OTP First');
-        //     return view('login_form');
-        // }
     }
 
     public function logout()

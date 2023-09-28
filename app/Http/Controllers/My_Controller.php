@@ -390,7 +390,7 @@ class My_Controller extends Controller
 
     public function fetch_products()
     {
-        $products = products::where('deleted','No')->get();
+        $products = products::where('deleted', 'No')->get();
         return view('Admin/products', compact('products'));
     }
 
@@ -456,7 +456,7 @@ class My_Controller extends Controller
     //Review Rating
     public function fetch_review_rating()
     {
-        $review = review_rating::where('Deleted','No')->get();
+        $review = review_rating::where('Deleted', 'No')->get();
         return view('Admin/review_rating', compact('review'));
     }
     public function delete_rating($review_id)
@@ -468,21 +468,21 @@ class My_Controller extends Controller
     //Deleted products
     public function fetch_deleted_products()
     {
-        $del_product = products::where('deleted','Yes')->get();
+        $del_product = products::where('deleted', 'Yes')->get();
         return view('Admin/products_deleted', compact('del_product'));
     }
 
     //Deleted Users
     public function fetch_deleted_users()
     {
-        $del_user = register::where('status','Deleted')->get();
+        $del_user = register::where('status', 'Deleted')->get();
         return view('Admin/users_deleted', compact('del_user'));
     }
 
     //Messages
     public function fetch_messages()
     {
-        $msgs = contact_msg::where('deleted','No')->get();
+        $msgs = contact_msg::where('deleted', 'No')->get();
         return view('Admin/messages', compact('msgs'));
     }
     public function delete_msg($msg_id)
@@ -569,7 +569,7 @@ class My_Controller extends Controller
                 session()->flash('error', 'Something Went Wrong');
             }
         } else {
-            session()->flash('error', "Old Password Doesn't matched");
+            session()->flash('error', 'Old Password Does not matched');
         }
         return redirect()->action([My_Controller::class, 'profile_data']);
     }

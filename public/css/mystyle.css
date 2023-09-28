@@ -5,8 +5,9 @@ textarea {
 /* Total Users Page Start */
 
 table {
-    width: 99.5%;
-    margin: 2px;
+    width: 99%;
+    margin: 8px;
+    box-shadow: 0px 0px 3px 3px #CCCCCC;
 }
 
 td, th {
@@ -39,6 +40,10 @@ table tr:nth-child(odd) {
 
 table tr:nth-child(1) {
     background-color: #e7bcbcb5;
+    height: 10px;
+}
+tr:nth-child(1){
+        height: 20px;
 }
 
 
@@ -98,7 +103,18 @@ input[type=submit], input[type=reset], input[type=button] {
     justify-content: center;
     align-items: center;
 }
-
+.cont_add > form{
+    background-color: #b5f6ee;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 350px;
+}
+.user_updt > form{
+    background-color: #b5f6ee;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* width: 350px; */
+}
 .user_add {
     width: 350px;
     height: 500px;
@@ -247,13 +263,13 @@ input[type=submit], input[type=reset], input[type=button] {
     display: none;
 }
 
-.label:hover {
+/* .label:hover {
     opacity: 1;
 }
 
 .pro_img:hover~label {
     opacity: 1;
-}
+} */
 
 /* Admin Profil End */
 
@@ -261,17 +277,18 @@ input[type=submit], input[type=reset], input[type=button] {
 
 /* CSS */
 .button-70 {
-    background-image: linear-gradient(#0dccea, #0d70ea);
+    background-image: linear-gradient(#c8f9f9, #ffffff);
     border: 0;
     border-radius: 4px;
-    box-shadow: rgba(0, 0, 0, .3) 0 5px 15px;
+    /* box-shadow: rgba(0, 0, 0, .3) 0 5px 15px; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     box-sizing: border-box;
-    color: #fff;
+    color: #000000;
     cursor: pointer;
     font-family: Montserrat, sans-serif;
-    font-size: .8em;
+    font-size: 1rem;
     margin: 5px;
-    padding: 5px 10px;
+    padding: 8px 13px;
     text-align: center;
     user-select: none;
     -webkit-user-select: none;
@@ -293,24 +310,35 @@ input[type=submit], input[type=reset], input[type=button] {
 }
 
 .edit {
-    background-color: rgb(0, 255, 0);
+    background-color: #6d90f9;
 }
 
 .delete {
-    background-color: red;
+    background-color: #dd7973;
 }
 
 .activate {
-    background-color: blue;
+    background-color: #22f2da;
 }
 
 .deactivate {
-    background-color: blue;
+    background-color: #00c2aa;
 }
 
 .reactivate {
-    background-color: blue;
+    background-color: #5adbb5;
 }
 
 /* Table Action End*/
 
+.headers{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.header-btn{
+    background-color: #dac4de;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}

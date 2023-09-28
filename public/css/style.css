@@ -35,17 +35,47 @@ button {
 
 .textt {
   color: rgb(255, 255, 255);
+  margin-left: 80px;
 }
 
 .card-footer{
-  background-color: red;
-  color: white;
+  background-color: #ffa8B6;
+  color: rgb(58, 58, 58);
+}
+.card1{
+  border-radius: 10px 10px 0px 0px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
 }
 .card{
-  border-radius: 10px;
-  box-shadow: 3px 3px 6px 1px;
+  border-radius: 10px 10px 0px 0px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-border-radius: 10px 10px 0px 0px;
+  -moz-border-radius: 10px 10px 0px 0px;
+  -ms-border-radius: 10px 10px 0px 0px;
+  -o-border-radius: 10px 10px 0px 0px;
+  /* background-color: #d0bdf4; */
+  background: linear-gradient(90deg, #0700b8 0%, #00ff88 100%);
+  z-index: 1;
 }
 
+.dash_pro::before{
+    left: 0;
+    top: 0;
+    position: absolute;
+    content: '';
+    height: 100%;
+    width: 100%;
+    /* background-color: rgb(9, 186, 20); */
+    background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+    /* background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%); */
+    border-radius: 30% 70% 67% 33% / 30% 30% 70% 70% ;
+    z-index: -1;
+    -webkit-border-radius: 30% 70% 67% 33% / 30% 30% 70% 70% ;
+    -moz-border-radius: 30% 70% 67% 33% / 30% 30% 70% 70% ;
+    -ms-border-radius: 30% 70% 67% 33% / 30% 30% 70% 70% ;
+    -o-border-radius: 30% 70% 67% 33% / 30% 30% 70% 70% ;
+}
 @media (min-width: 992px) {
   body {
     overflow: auto !important;

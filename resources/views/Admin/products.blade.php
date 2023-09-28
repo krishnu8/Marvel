@@ -12,19 +12,22 @@
     @extends('Admin/master_view')
     @section('content')
         <main class="mt-5 pt-3">
-
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col headers">
+                        <h1>Products</h1>
+                    </div>
+                </div>
+                <div class="row bg-info">
+                    <div class="col header-btn">
+                        <a href="products_add">
+                            <button class="button-70">Add Product</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
             <table>
-                <thead>
-                    <tr>
-                        <th colspan="3">
-                            <a href="products_add">
-                                <button class="button-70">Add Product</button>
-                            </a>
-                        </th>
-                        <th colspan="6">Products</th>
-                    </tr>
-                </thead>
-                <tr>
+                <tr style="height: 50px">
                     <th>
                         Id
                     </th>

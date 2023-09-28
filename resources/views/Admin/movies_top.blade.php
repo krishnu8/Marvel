@@ -24,7 +24,7 @@
                     <th colspan="6">Top Grossing Movies</th>
                 </tr>
             </thead>
-            <tr>
+            <tr style="height: 50px">
                 <th>
                     Id
                 </th>

@@ -153,7 +153,7 @@ Route::middleware('user')->group(function () {
 
     // Route::view('change_password','After_login/Change_password');
     Route::get('delete', [After_login_controller::class, 'delete_acc']);
-
+    
     Route::post('update_profile_pic', [After_login_controller::class, 'update_profile_pic']);
     Route::get('after_charProfile/{char}', [After_login_Controller::class, 'charData']);
 });

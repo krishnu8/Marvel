@@ -12,13 +12,15 @@
     @extends('Admin/master_view')
     @section('content')
     <main class="mt-5 pt-3">
-
+        <div class="container-fluid bg-light">
+            <div class="row">
+                <div class="col headers">
+                    <h1>Review & Rating</h1>
+                </div>
+            </div>
+        </div>
         <table>
-            <thead>
-                <th colspan="9">Review & Rating</th>
-                </tr>
-            </thead>
-            <tr>
+            <tr style="height: 50px">
                 <th>
                     Id
                 </th>

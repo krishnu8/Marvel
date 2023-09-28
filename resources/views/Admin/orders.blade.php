@@ -12,19 +12,22 @@
     @extends('Admin/master_view')
     @section('content')
     <main class="mt-5 pt-3">
-
+        <div class="container-fluid bg-light">
+            <div class="row">
+                <div class="col headers">
+                    <h1>Orders</h1>
+                </div>
+            </div>
+            <div class="row bg-info">
+                <div class="col header-btn">
+                    <a href="order_add">
+                        <button class="button-70">Add Order</button>
+                    </a>
+                </div>
+            </div>
+        </div>
         <table>
-            <thead>
-                <tr>
-                    <th colspan="2">
-                        <a href="order_add">
-                            <button class="button-70">Add Order</button>
-                        </a>
-                    </th>
-                    <th colspan="12">Orders</th>
-                </tr>
-            </thead>
-            <tr>
+            <tr style="height: 50px">
                 <th>
                     Pro Id
                 </th>
@@ -103,7 +106,7 @@
                     <a href="{{ URL::to('/') }}/deactivate_user/"><button id="action" class="delete">Cancel</button></a>
 
                     <!-- <a href="{{ URL::to('/') }}/activate_user/"><input type="button" value="Activate"></a>
-                
+
                 <a href="{{ URL::to('/') }}/reactivate_user/"><input type="button" value="Reactivate"></a> -->
 
                 </td>

@@ -46,7 +46,7 @@
             @endif
 
             <div class="container-fluid">
-                <div class="card mb-3" style="border-radius: .5rem;height:80%;width:95%;margin:2%;">
+                <div class="card1 mb-3" style="border-radius: .5rem;height:80%;width:95%;margin:2%;">
                     <div class="row g-0 " style="height:100%;">
                         <div class="col-md-4 gradient-custom text-center text-white"
                             style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; background-image: url('pictures/background/wall1.jpg'); background-size: cover;">
@@ -94,16 +94,16 @@
                                     <div class="row" id="pro_button" style="text-align:center;">
                                         <div class="col-4 mb-3">
                                             <a href="{{ URL::to('/') }}/admin_profile_edit">
-                                                <input type="button" value="Edit" class="submit">
+                                                <input type="button" value="Edit" class="submit" style="background-color: #6d90f9">
                                             </a>
                                         </div>
                                         <div class="col-4 mb-3">
-                                            <input type="button" class="btn btn-danger" role="button" aria-pressed="true"
-                                                data-toggle="modal" data-target="#delete_acc" value="Delete"></input>
+                                            <input type="button" class="btn" role="button" aria-pressed="true"
+                                                data-toggle="modal" data-target="#delete_acc" value="Delete" style="background-color: #dd7973"></input>
                                         </div>
                                         <div class="col-4 mb-3">
                                             <input type="button" value="Change Password" data-toggle="modal"
-                                                data-target="#exampleModalCenter" class="reset">
+                                                data-target="#exampleModalCenter" class="reset" style="background-color: #22f2da">
                                         </div>
                                     </div>
                                 </div>
@@ -182,7 +182,8 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    {{-- <button type="submit" class="btn btn-primary">Save changes</button> --}}
+                    <input type="submit" class="btn btn-primary" value="Save Change">
                 </div>
             </form>
         </div>
@@ -194,7 +195,8 @@
         var npwd = document.getElementById('npwd1').value;
         var cpwd = document.getElementById('cpwd1').value;
 
-        var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+        var passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;
+
 
         if (passwordRegex.test(npwd)) {
             if (npwd === cpwd) {

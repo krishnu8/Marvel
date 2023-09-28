@@ -19,16 +19,21 @@
 
         .pro_link {
             font-family: Fira Code;
-            color: #ffffff;
-            padding: 0px 5px;
-            border-radius: 5px;
+            color: rgb(58, 58, 58);
+            padding: 0px 10px;
+            border-radius: 15px;
             inset: 10px;
-            box-shadow: 0px 0px 4px 1.5px;
+            /* box-shadow: 0px 4px 8px 0px; */
+            /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+            box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+            box-shadow: rgba(242, 245, 248, 0.525) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+            transition: 1s;
         }
 
         .pro_link:hover {
-            font-weight: bold;
+            /* font-weight: bold; */
             color: #000;
+            transform: scale(1.05);
         }
     </style>
 
@@ -41,17 +46,17 @@
         <main class="mt-5 pt-3">
             <div class="container-fluid">
                 <!-- <div class="row">
-                                    <div class="col-md-12">
-                                      <h4>Dashboard</h4>
-                                    </div>
-                                  </div> -->
+                        <div class="col-md-12">
+                          <h4>Dashboard</h4>
+                        </div>
+                      </div> -->
                 <div class="row">
 
                     <!-- Profile -->
 
                     <div class="col-md-3 mb-3 col-sm-6">
                         <div class="card h-100">
-                            <div class="card-body py-5 m-auto">
+                            <div class="card-body py-5 m-auto dash_pro">
                                 <font class="texttt">
                                     WELCOME!</font>
                             </div>
@@ -62,10 +67,10 @@
                                 </font>
                                 <span class="m-auto"></span>
                                 <!-- <span class="m-auto"></span>
-                                          Admin
-                                          <span class="m-auto"></span> -->
+                                                                                                  Admin
+                                                                                                  <span class="m-auto"></span> -->
                             </div>
-                            <div class="card-footer d-flex" style="border-radius: 0px 0px 10px 10px">
+                            <div class="card-footer d-flex">
                                 <span class="m-auto">
                                     <!-- <i class="bi bi-chevron-left"></i> -->
                                 </span>
@@ -80,7 +85,7 @@
                     <!-- Admins -->
 
                     <div class="col-md-3 mb-3 col-sm-6">
-                        <div class="card h-100">
+                        <div class="card h-100 dash_pro">
                             <div class="card-body py-5 m-auto">
                                 <h4 class="m-auto" style="font-size: 20px;">Total Admins</h4>
                                 <center>1</center>
@@ -90,7 +95,7 @@
                                 <font class="pro_names">Admin Users</font>
                                 <span class="m-auto"></span>
                             </div>
-                            <div class="card-footer d-flex" style="border-radius: 0px 0px 10px 10px">
+                            <div class="card-footer d-flex">
                                 <span class="m-auto">
 
                                 </span>
@@ -104,7 +109,7 @@
                     <!-- Normal Users -->
 
                     <div class="col-md-3 mb-3 col-sm-6">
-                        <div class="card h-100">
+                        <div class="card h-100 dash_pro">
                             <div class="card-body py-5 m-auto">
                                 <h4 class="m-auto" style="font-size: 20px;">Total Normal Users</h4>
                                 <center>1</center>
@@ -114,7 +119,7 @@
                                 <font class="pro_names">Normal Users</font>
                                 <span class="m-auto"></span>
                             </div>
-                            <div class="card-footer d-flex" style="border-radius: 0px 0px 10px 10px">
+                            <div class="card-footer d-flex">
                                 <span class="m-auto">
 
                                 </span>
@@ -128,7 +133,7 @@
                     <!-- Total Users -->
 
                     <div class="col-md-3 mb-3 col-sm-6">
-                        <div class="card h-100">
+                        <div class="card h-100 dash_pro">
                             <div class="card-body py-5 m-auto">
                                 <h4 class="m-auto" style="font-size: 20px;">Total Users</h4>
                                 <center>1</center>
@@ -138,7 +143,7 @@
                                 <font class="pro_names">All Users</font>
                                 <span class="m-auto"></span>
                             </div>
-                            <div class="card-footer d-flex" style="border-radius: 0px 0px 10px 10px">
+                            <div class="card-footer d-flex">
                                 <span class="m-auto">
 
                                 </span>
@@ -152,7 +157,7 @@
                     <!-- Movies -->
 
                     <div class="col-md-3 mb-3 col-sm-6">
-                        <div class="card h-100">
+                        <div class="card h-100 dash_pro">
                             <div class="card-body py-5 m-auto">
                                 <h4 class="m-auto" style="font-size: 20px;">Total Movies</h4>
                                 <center>1</center>
@@ -162,7 +167,7 @@
                                 <font class="pro_names">All Movies</font>
                                 <span class="m-auto"></span>
                             </div>
-                            <div class="card-footer d-flex" style="border-radius: 0px 0px 10px 10px">
+                            <div class="card-footer d-flex">
                                 <span class="m-auto">
 
                                 </span>
@@ -174,7 +179,7 @@
                     </div>
 
                     <div class="col-md-3 mb-3 col-sm-6">
-                        <div class="card h-100">
+                        <div class="card h-100 dash_pro">
                             <div class="card-body py-5 m-auto">
                                 <h4 class="m-auto" style="font-size: 20px;">Total Products</h4>
                                 <center>1</center>
@@ -184,7 +189,7 @@
                                 <font class="pro_names">Products Added</font>
                                 <span class="m-auto"></span>
                             </div>
-                            <div class="card-footer d-flex" style="border-radius: 0px 0px 10px 10px">
+                            <div class="card-footer d-flex">
                                 <span class="m-auto">
 
                                 </span>
@@ -196,7 +201,7 @@
                     </div>
 
                     <div class="col-md-3 mb-3 col-sm-6">
-                        <div class="card h-100">
+                        <div class="card h-100 dash_pro">
                             <div class="card-body py-5 m-auto">
                                 <h4 class="m-auto" style="font-size: 20px;">Total Orders</h4>
                                 <center>1</center>
@@ -206,7 +211,7 @@
                                 <font class="pro_names">Orders</font>
                                 <span class="m-auto"></span>
                             </div>
-                            <div class="card-footer d-flex" style="border-radius: 0px 0px 10px 10px">
+                            <div class="card-footer d-flex">
                                 <span class="m-auto">
 
                                 </span>
@@ -218,7 +223,7 @@
                     </div>
 
                     <div class="col-md-3 mb-3 col-sm-6">
-                        <div class="card h-100">
+                        <div class="card h-100 dash_pro">
                             <div class="card-body py-5 m-auto">
                                 <h4 class="m-auto" style="font-size: 20px;">Total Messages</h4>
                                 <center>1</center>
@@ -228,7 +233,7 @@
                                 <font class="pro_names">Messages</font>
                                 <span class="m-auto"></span>
                             </div>
-                            <div class="card-footer d-flex" style="border-radius: 0px 0px 10px 10px">
+                            <div class="card-footer d-flex">
                                 <span class="m-auto">
 
                                 </span>
@@ -242,7 +247,7 @@
 
 
                     <div class="col-md-3 mb-3 col-sm-6">
-                        <div class="card h-100">
+                        <div class="card h-100 dash_pro">
                             <div class="card-body py-5 m-auto">
                                 <h4 class="m-auto" style="font-size: 20px;">Total Deleted Users</h4>
                                 <center>1</center>
@@ -252,7 +257,7 @@
                                 <font class="pro_names">Deleted Users</font>
                                 <span class="m-auto"></span>
                             </div>
-                            <div class="card-footer d-flex" style="border-radius: 0px 0px 10px 10px">
+                            <div class="card-footer d-flex">
                                 <span class="m-auto">
 
                                 </span>

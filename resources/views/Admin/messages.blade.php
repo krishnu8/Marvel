@@ -12,13 +12,15 @@
     @extends('Admin/master_view')
     @section('content')
     <main class="mt-5 pt-3">
-
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col headers">
+                    <h1>Messages</h1>
+                </div>
+            </div>
+        </div>
         <table>
-            <thead>
-                <th colspan="6">Messages</th>
-                </tr>
-            </thead>
-            <tr>
+            <tr style="height: 50px">
                 <th>
                     Id
                 </th>
@@ -65,10 +67,7 @@
 
             @endforeach
         </table>
-
-
     </main>
-    
     @endsection
 </body>
 

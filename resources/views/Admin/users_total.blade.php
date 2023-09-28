@@ -33,18 +33,22 @@
                     });
                 </script>
             @endif
+            <div class="container-fluid bg-light">
+                <div class="row">
+                    <div class="col headers" >
+                        <h1>Total Users</h1>
+                    </div>
+                </div>
+                <div class="row bg-info">
+                    <div class="col header-btn">
+                        <a href="user_add">
+                            <button class="button-70" role="button">Add User</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
             <table>
-                <thead>
-                    <tr>
-                        <th colspan="2">
-                            <a href="user_add">
-                                <button class="button-70" role="button">Add User</button>
-                            </a>
-                        </th>
-                        <th colspan="13">Total Users</th>
-                    </tr>
-                </thead>
-                <tr>
+                <tr style="height: 50px">
                     <th>
                         Id
                     </th>
@@ -129,12 +133,12 @@
 
                             @if ($data['Status'] == 'Inactive')
                                 <a href="{{ URL::to('/') }}/activate_user/{{ $data['Email'] }}"><button id="action"
-                                        class="deactivate">Activate</button></a>
+                                        class="activate">Activate</button></a>
                             @endif
 
                             @if ($data['Status'] == 'Deleted')
                                 <a href="{{ URL::to('/') }}/reactivate_user/{{ $data['Email'] }}"><button id="action"
-                                        class="deactivate">Reactivate</button></a>
+                                        class="reactivate">Reactivate</button></a>
                             @endif
 
 

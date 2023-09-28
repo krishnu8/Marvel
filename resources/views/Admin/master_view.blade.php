@@ -23,6 +23,8 @@
         aria-controls="offcanvasExample">
         <span class="navbar-toggler-icon" data-bs-target="#sidebar"></span>
       </button>
+      <a href=""><img src="{{ URL::to('/') }}/pictures/Logo/logo.png" alt="" height="45px" width="45" style="margin-left: 20px"></a>
+
       <a class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold" href="#">
         <div class="textt">Admin Dashboard</div>
       </a>
@@ -45,7 +47,7 @@
               aria-expanded="false">
               <i class="bi bi-person-fill"></i>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end">    
+            <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item" href="{{ URL::to('/') }}/admin_profile">View Profile</a></li>
               <li><a class="dropdown-item" href="{{ URL::to('/') }}/logout">Logout</a></li>
             </ul>
