@@ -13,6 +13,27 @@
     @section('content')
         <main class="mt-5 pt-3">
 
+            {{-- @if (session('reg'))
+            <script>
+                swal({
+                    title: "Sorry!",
+                    text: "{{ session('error') }}",
+                    icon: "warning",
+                    button: "OK",
+                });
+
+                setTimeout(function() {
+                    $('.alert').alert('close');
+                }, 3000);
+            </script>
+
+            <script>
+                // Automatically close the alert after 5 seconds
+                setTimeout(function() {
+                    $('.alert').alert('close');
+                }, 3000);
+            </script>
+        @endif --}}
             @if (session('error'))
                 <script>
                     swal({
@@ -21,6 +42,9 @@
                         icon: "warning",
                         button: "OK",
                     });
+                    setTimeout(function() {
+                        $('.alert').alert('close');
+                    }, 3000);
                 </script>
             @endif
             @if (session('succ'))
@@ -31,11 +55,14 @@
                         icon: "success",
                         button: "OK",
                     });
+                    setTimeout(function() {
+                        $('.alert').alert('close');
+                    }, 3000);
                 </script>
             @endif
             <div class="container-fluid bg-light">
                 <div class="row">
-                    <div class="col headers" >
+                    <div class="col headers">
                         <h1>Total Users</h1>
                     </div>
                 </div>
@@ -114,7 +141,15 @@
                             {{ $data['Status'] }}
                         </td>
                         <td style="text-align: center;">
+                            @php
+                                $imgname = $data['Profile_Pic'];
+                            @endphp
+                            @if ($imgname == "Default.png")
+                                <img src="{{ URL::to('/') }}/pictures/default/Deafult.png">
+                                {{-- <p>{{ $imgname }}</p> --}}
+                            @else
                             <img src="{{ URL::to('/') }}/pictures/{{ $data['Profile_Pic'] }}">
+                            @endif
                         </td>
                         <td style="text-align: center;">
                             <a href="{{ URL::to('/') }}/update_account1/{{ $data['Email'] }}"><button id="action"

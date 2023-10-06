@@ -17,8 +17,8 @@
     <script src="Before_login_js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" href="After_login_css/style.css">
-    <script src="Before_login_js/script.js"></script>
+    <link rel="stylesheet" href="{{ URL::to('/') }}/After_login_css/style.css">
+    <script src="{{ URL::to('/') }}/Before_login_js/script.js"></script>
     <style>
         a {
             text-decoration: none;
@@ -333,28 +333,28 @@
 
 <nav>
     <div class="logo">
-        <a href="index.php"><img src="pictures/hen.png" height="40px" width="100px">
+        <a href="index.php"><img src="{{ URL::to('/') }}/pictures/hen.png" height="40px" width="100px">
         </a>
     </div>
     <div class="navigation">
         <div class="nav1" id="nav1">
             <ul>
-                <a href="After_home">
+                <a href="{{ URL::to('/') }}/After_home">
                     <li>Home</li>
                 </a>
-                <a href="After_Gallery">
+                <a href="{{ URL::to('/') }}/After_Gallery">
                     <li>Gallery</li>
                 </a>
-                <a href="After_Movies">
+                <a href="{{ URL::to('/') }}/After_Movies">
                     <li>Movies</li>
                 </a>
-                <a href="After_Franchise">
+                <a href="{{ URL::to('/') }}/After_Franchise">
                     <li>Franchise</li>
                 </a>
-                <a href="After_Contact_Us">
+                <a href="{{ URL::to('/') }}/After_Contact_Us">
                     <li>Contact Us</li>
                 </a>
-                <a href="After_About_Us">
+                <a href="{{ URL::to('/') }}/After_About_Us">
                     <li>About Us</li>
                 </a>
                 {{-- <a href="Login">
@@ -369,10 +369,10 @@
                         </button>
                         <div class="dropdown-menu dropmenu">
                             {{-- <a class="dropdown-item drop list1" href=""><b>Play Quiz</b></a> --}}
-                            <a class="dropdown-item drop list1" href="After_profile"><b>My profile</b></a>
+                            <a class="dropdown-item drop list1" href="{{ URL::to('/') }}/After_profile"><b>My profile</b></a>
                             <a class="dropdown-item drop list1" href=""><b>Orders</b></a>
                             <a class="dropdown-item drop list1" href=""><b>Tickets</b></a>
-                            <a class="dropdown-item drop list1" href="logout"
+                            <a class="dropdown-item drop list1" href="{{ URL::to('/') }}/logout"
                                 onclick="alert('Are you sure want to logout')"><b>Logout</b></a>
 
                         </div>

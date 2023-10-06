@@ -60,7 +60,10 @@
                 <div class="row">
                     <div class="col gen">
                         <input type="radio" name="gen" value="M"> Male
-                        <input type="radio" name="gen" value="F"> Female
+                        <input type="radio" name="gen" value="F"> Female <br>
+                        @error('gen')
+                        <span style="color: red;">{{$message}}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row" style="text-align:center;">

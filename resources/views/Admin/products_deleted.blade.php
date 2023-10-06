@@ -47,6 +47,7 @@
             @foreach ($del_product as $del_pro)
             <tr>
                 <td>
+                    {{ $del_pro['id'] }}
                 </td>
                 <td style="text-align: center;">
                     <img src="{{ URL::to('/') }}/pictures/products/{{ $del_pro['product_image'] }}">

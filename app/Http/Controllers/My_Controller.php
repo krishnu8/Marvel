@@ -13,6 +13,7 @@ use App\Models\Admin\review_rating;
 use App\Models\register;
 use App\Models\top_movies_model;
 use App\Models\contact_msg;
+use Illuminate\Support\Facades\Mail;
 
 class My_Controller extends Controller
 {
@@ -23,8 +24,9 @@ class My_Controller extends Controller
                 'un' => 'required',
                 'em' => 'required',
                 'mob' => 'required|numeric|Digits:10',
-                'pwd' => 'required|min:10|max:16|confirmed',
+                'pwd' => 'required|min:8|max:16|confirmed',
                 'pwd_confirmation' => 'required',
+                'gen' => 'required',
             ],
             [
                 'un.required' => 'Username is required.',
@@ -35,32 +37,35 @@ class My_Controller extends Controller
                 'pwd.min' => 'Minimum Digits must be of 8 characters.',
                 'pwd.max' => 'Maximum Digits must be of 16 characters.',
                 'pwd_confirmation.required' => 'Confirm Password is required.',
+                'gen.required' => 'Please select gender.',
             ],
         );
-        if ($ob->hasFile('pic')) {
-            $file = $ob->file('pic');
 
-            $filename = uniqid() . '_' . $file->getClientOriginalName();
-            $ob->pic->move('pictures/users/', $filename);
-            // $pic_data = register::where('email', $ob->em)->first();
+        $user = new register();
+        $user->Username = $ob->un;
+        $user->Email = $ob->em;
+        $user->Password = $ob->pwd;
+        $user->Mobile_No = $ob->mob;
+        $user->Gender = $ob->gen;
+        $user->Profile_Pic = 'Default.png';
+        $user->Status = 'Inactive';
+        $user->Role = 'User';
 
-            // if ($pic_data['Picture'] != 'Deafult.png') {
-            //     $previousFilePath = 'pictures/' . $pic_data['Picture']; // Example path
+        if ($user->save()) {
+            $data = ['fn' => $ob->un, 'em' => $ob->em];
+            Mail::send(['text' => 'account_created_mail_admin'], ['data' => $data], function ($message) use ($data) {
+                $message->to($data['em'], $data['fn']);
+                $message->from('abhuj145@rku.ac.in', 'Marvel');
+                $message->subject('Activation Link');
+            });
 
-            //     if (File::exists($previousFilePath)) {
-            //         File::delete($previousFilePath);
-            //     }
-            // }
+            session()->flash('succ', 'Registration Completed Pleace check Your mail for Activation Link');
+        } else {
+            session()->flash('error', 'Something went Wrong Please try latter');
         }
 
-        register::where('email', $ob->em)->update([
-            'Username' => $ob->un,
-            'Password' => $ob->pwd,
-            'Mobile_No' => $ob->mob,
-            'Gender' => $ob->gender,
-            'Profile_Pic' => $ob->pic,
-            'Role' => $ob->role,
-        ]);
+        // return redirect('login_form');
+        return redirect()->action([My_Controller::class, 'fetch_total']);
     }
 
     public function validate_movie(request $ob)
@@ -186,9 +191,7 @@ class My_Controller extends Controller
 
     public function fetch_admin()
     {
-        $admin_data = admin_data::select()
-            ->where('Role', 'Admin')
-            ->get();
+        $admin_data = admin_data::select()->where('Role', 'Admin')->get();
         return view('Admin/users_admin', compact('admin_data'));
     }
 

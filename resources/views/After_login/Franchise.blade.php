@@ -137,10 +137,8 @@
                                     {{$d['Price']}}<br><br>
                                     <div class="container">
                                         {{-- <button href=""  title="Buy" class="btn btn-outline-danger book_tkt">Buy Now</button> --}}
-                                        <a href="product_detail" class="btn btn-outline-danger book_tkt">Buy Now</a>
+                                        <a href="{{ URL::to('/') }}/product_detail/{{ $d['Product_id'] }}" class="btn btn-outline-danger book_tkt">Buy Now</a>
                                     </div>
-
-
                                 </div>
                             </center>
                         </div>
@@ -162,9 +160,8 @@
                                     Price:
                                     {{$d['Price']}}<br><br>
                                     <div class="container">
-                                        <button href="#" data-toggle="popover" title="Buy"
-                                            class="btn btn-outline-danger book_tkt" data-content="Login to buy product">Buy
-                                            Now</button>
+                                        {{-- <button href=""  title="Buy" class="btn btn-outline-danger book_tkt">Buy Now</button> --}}
+                                        <a href="{{ URL::to('/') }}/product_detail/{{ $d['Product_id'] }}" class="btn btn-outline-danger book_tkt">Buy Now</a>
                                     </div>
 
                             <script>
@@ -192,9 +189,8 @@
                                     Price:
                                     {{$d['Price']}}<br><br>
                                     <div class="container">
-                                        <button href="#" data-toggle="popover" title="Buy"
-                                            class="btn btn-outline-danger book_tkt" data-content="Login to buy product">Buy
-                                            Now</button>
+                                        {{-- <button href=""  title="Buy" class="btn btn-outline-danger book_tkt">Buy Now</button> --}}
+                                        <a href="{{ URL::to('/') }}/product_detail/{{ $d['Product_id'] }}" class="btn btn-outline-danger book_tkt">Buy Now</a>
                                     </div>
 
                             <script>
@@ -222,9 +218,8 @@
                                     Price:
                                     {{$d['Price']}}<br><br>
                                     <div class="container">
-                                        <button href="#" data-toggle="popover" title="Buy"
-                                            class="btn btn-outline-danger book_tkt" data-content="Login to buy product">Buy
-                                            Now</button>
+                                        {{-- <button href=""  title="Buy" class="btn btn-outline-danger book_tkt">Buy Now</button> --}}
+                                        <a href="{{ URL::to('/') }}/product_detail/{{ $d['Product_id'] }}" class="btn btn-outline-danger book_tkt">Buy Now</a>
                                     </div>
 
                             <script>
@@ -252,9 +247,8 @@
                                     Price:
                                     {{$d['Price']}}<br><br>
                                     <div class="container">
-                                        <button href="#" data-toggle="popover" title="Buy"
-                                            class="btn btn-outline-danger book_tkt" data-content="Login to buy product">Buy
-                                            Now</button>
+                                        {{-- <button href=""  title="Buy" class="btn btn-outline-danger book_tkt">Buy Now</button> --}}
+                                        <a href="{{ URL::to('/') }}/product_detail/{{ $d['Product_id'] }}" class="btn btn-outline-danger book_tkt">Buy Now</a>
                                     </div>
 
                             <script>

@@ -8,7 +8,7 @@
 
     <style type="text/css">
         .texttt {
-            color: #000
+            color: #ffffff
         }
 
         .pro_names {
@@ -19,7 +19,7 @@
 
         .pro_link {
             font-family: Fira Code;
-            color: rgb(58, 58, 58);
+            color: rgb(255, 255, 255);
             padding: 0px 10px;
             border-radius: 15px;
             inset: 10px;
@@ -32,7 +32,7 @@
 
         .pro_link:hover {
             /* font-weight: bold; */
-            color: #000;
+            color: #ffffff;
             transform: scale(1.05);
         }
     </style>

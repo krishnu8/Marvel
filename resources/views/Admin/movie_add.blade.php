@@ -12,6 +12,13 @@
     @extends('Admin/master_view')
     @section('content')
         <main class="mt-5 pt-3">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col headers">
+                        <h1>Add Movies</h1>
+                    </div>
+                </div>
+            </div>
             <center class="cont_add">
                 @if (session('error'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert"
@@ -38,9 +45,8 @@
                         }, 3000);
                     </script>
                 @endif
-                <form class="user_add" action="movie_controller" method="post" enctype="multipart/form-data">
+                <form class="movie_add" action="movie_controller" method="post" enctype="multipart/form-data">
                     @csrf
-                    <h1>Add Movie</h1>
                     <div class="row">
                         <div class="col">
                             <input type="text" name="mn" placeholder="Movie Name" id="mn1"

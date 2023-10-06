@@ -6,19 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="Before_login_css/bootstrap.min.css"
+    <link rel="stylesheet" href="{{ URL::to('/') }}/Before_login_css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="Before_login_js/jquery-3.2.1.slim.min.js"
+    <script src="{{ URL::to('/') }}/Before_login_js/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
-    <script src="Before_login_js/popper.min.js"
+    <script src="{{ URL::to('/') }}/Before_login_js/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
     </script>
-    <script src="Before_login_js/bootstrap.min.js"
+    <script src="{{ URL::to('/') }}/Before_login_js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" href="After_login_css/style.css">
-    <script src="Before_login_js/script.js"></script>
+    <link rel="stylesheet" href="{{ URL::to('/') }}/After_login_css/style.css">
+    <script src="{{ URL::to('/') }}/Before_login_js/script.js"></script>
     <style>
         a {
             text-decoration: none;
@@ -231,28 +231,28 @@
 </head>
 <nav>
     <div class="logo">
-        <a href="index.php"><img src="pictures/hen.png" height="40px" width="100px">
+        <a href="index.php"><img src="{{ URL::to('/') }}/pictures/hen.png" height="40px" width="100px">
         </a>
     </div>
     <div class="navigation">
         <div class="nav1" id="nav1">
             <ul>
-                <a href="After_home">
+                <a href="{{ URL::to('/') }}/After_home">
                     <li>Home</li>
                 </a>
-                <a href="After_Gallery">
+                <a href="{{ URL::to('/') }}/After_Gallery">
                     <li>Gallery</li>
                 </a>
-                <a href="After_Movies">
+                <a href="{{ URL::to('/') }}/After_Movies">
                     <li>Movies</li>
                 </a>
-                <a href="After_Franchise">
+                <a href="{{ URL::to('/') }}/After_Franchise">
                     <li>Franchise</li>
                 </a>
-                <a href="After_Contact_Us">
+                <a href="{{ URL::to('/') }}/After_Contact_Us">
                     <li>Contact Us</li>
                 </a>
-                <a href="After_About_Us">
+                <a href="{{ URL::to('/') }}/After_About_Us">
                     <li>About Us</li>
                 </a>
                 {{-- <a href="Login">
@@ -262,12 +262,12 @@
                     <div class="dropdown check">
                         <button style="background-color: transparent;" type="button"
                             class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                            <img src="pictures/set.png" alt="" height="25px" weight="30px">
+                            <img src="{{ URL::to('/') }}/pictures/set.png" alt="" height="25px" weight="30px">
                             More:
                         </button>
                         <div class="dropdown-menu dropmenu">
                             <a class="dropdown-item drop list1" href=""><b>Play Quiz</b></a>
-                            <a class="dropdown-item drop list1" href="After_profile"><b>My profile</b></a>
+                            <a class="dropdown-item drop list1" href="{{ URL::to('/') }}/After_profile"><b>My profile</b></a>
                             <a class="dropdown-item drop list1" href=""><b>Orders</b></a>
                             <a class="dropdown-item drop list1" href=""><b>Tickets</b></a>
                             <a class="dropdown-item drop list1" href="logout" onclick="alert('Are you sure want to logout')"><b>Logout</b></a>

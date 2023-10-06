@@ -11,6 +11,7 @@ use App\Models\top_movies_model;
 use App\Models\franchise_model;
 use App\Models\about_char;
 use App\Models\about_us;
+use App\Models\order;
 use App\Models\register;
 use Illuminate\Support\Facades\File;
 
@@ -222,5 +223,47 @@ class After_login_controller extends Controller
             return redirect()->action([After_login_controller::class, 'profile_data']);
         }
         return redirect()->action([After_login_controller::class, 'profile_data']);
+    }
+
+    public function product_detail($id)
+    {
+        // echo $id;
+        $data = franchise_model::where('Product_id', $id)->first();
+
+        $suggestion = franchise_model::where('Category', $data['Category'])
+            ->get()
+            ->take(4);
+
+        return view('After_login/product_detail', compact('data', 'suggestion'));
+        // return view('After_login/product_detail',compact('data'));
+    }
+
+    // buy product
+
+    public function Buy_product($id, $qt)
+    {
+        $User_id = session('user_id');
+        $product = franchise_model::where('Product_id', $id)->first();
+        if ($product) {
+            if ($product['Quantity'] >= 0) {
+                order::insert([
+                    'Product_id' => $id,
+                    'User_id' => $User_id,
+                    'Quantity' => $qt,
+                    'Price' => $product['Price'],
+                    'Discount_Amount' => '0',
+                    'Delivery_status' => 'Pandding',
+                ]);
+                franchise_model::where('Product_id', $id)->update([
+                    'Quantity' =>$product['Quantity']-$qt,
+                ]);
+                session()->flash('succ', 'Product Ordered Successfully');
+            } else {
+                session()->flash('error', 'Product is out of Stock, please wait till the new stock of this product arrive');
+            }
+        } else {
+            return redirect('After_Franchise');
+        }
+        return redirect('After_Franchise');
     }
 }

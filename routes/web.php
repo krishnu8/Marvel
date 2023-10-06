@@ -82,6 +82,7 @@ Route::middleware('Admin')->group(function () {
     Route::get('delete_msg1/{msg_id}', [My_Controller::class, 'delete_msg']);
 
     Route::post('form_controller', [My_controller::class, 'validate_form']);
+
     Route::post('movie_controller', [My_controller::class, 'validate_movie']);
 
     Route::post('upcom_movie_controller', [My_controller::class, 'validate_upcom_movie']);
@@ -131,8 +132,6 @@ Route::middleware('non_login')->group(function () {
 
 Route::get('logout', [Before_login_Controller::class, 'logout']);
 
-// buy
-Route::view('product_detail', 'After_login/product_detail');
 
 //After login---------------------------------------------------------------------------------------------
 Route::middleware('user')->group(function () {
@@ -153,7 +152,16 @@ Route::middleware('user')->group(function () {
 
     // Route::view('change_password','After_login/Change_password');
     Route::get('delete', [After_login_controller::class, 'delete_acc']);
-    
+
     Route::post('update_profile_pic', [After_login_controller::class, 'update_profile_pic']);
-    Route::get('after_charProfile/{char}', [After_login_Controller::class, 'charData']);
+    Route::get('after_charProfile/{char}',[After_login_Controller::class, 'charData']);
+
+    // Route::view('product_detail', 'After_login/product_detail');
+    Route::get('product_detail/{char}',[After_login_Controller::class, 'product_detail']);
+
+    // buy product
+    Route::get('Buy_product/{id}/{qt}',[After_login_Controller::class, 'Buy_product']);
+
+
+
 });

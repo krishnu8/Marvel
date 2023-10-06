@@ -33,14 +33,10 @@ button {
   font-weight: bold;
 }
 
-.textt {
-  color: rgb(255, 255, 255);
-  margin-left: 80px;
-}
-
 .card-footer{
-  background-color: #ffa8B6;
-  color: rgb(58, 58, 58);
+  /* background-color: #ffa8B6; */
+  background-color: #294d61;
+  color: #d9e7ff;
 }
 .card1{
   border-radius: 10px 10px 0px 0px;
@@ -49,13 +45,15 @@ button {
 }
 .card{
   border-radius: 10px 10px 0px 0px;
+  color: #d9e7ff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   -webkit-border-radius: 10px 10px 0px 0px;
   -moz-border-radius: 10px 10px 0px 0px;
   -ms-border-radius: 10px 10px 0px 0px;
   -o-border-radius: 10px 10px 0px 0px;
   /* background-color: #d0bdf4; */
-  background: linear-gradient(90deg, #0700b8 0%, #00ff88 100%);
+  /* background: linear-gradient(90deg, #0600b8c5 0%, #00ff88c5 100%); */
+  background: linear-gradient(90deg, #072e33 0%, #072e33 100%);
   z-index: 1;
 }
 
@@ -66,8 +64,9 @@ button {
     content: '';
     height: 100%;
     width: 100%;
+    visibility: hidden;
     /* background-color: rgb(9, 186, 20); */
-    background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+    background: linear-gradient(90deg, #00C9FFc5 0%, #072e33 100%);
     /* background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%); */
     border-radius: 30% 70% 67% 33% / 30% 30% 70% 70% ;
     z-index: -1;

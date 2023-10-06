@@ -37,7 +37,7 @@
                     }, 3000);
                 </script>
             @endif
-            <center class="cont_add">
+            <center class="pro__add">
                 <h1>Add Products</h1>
                 <form class="user_add" action="product_controller" method="post" enctype="multipart/form-data">
                     @csrf
@@ -54,7 +54,7 @@
                     <div class="row">
                         <div class="col">
                             <!-- <input type="text" name="rt" placeholder="Description" id="rt1" class="form-control"> -->
-                            <textarea name="pro_des" cols="41" rows="5" placeholder="Description"></textarea>
+                            <textarea name="pro_des" class="form-control style="width: 100%; background-color: transparent; border: 2px solid black;" rows="5" placeholder="Description"></textarea>
                             @error('pro_des')
                                 <span style="color: red;">{{ $message }}</span> <br>
                             @enderror

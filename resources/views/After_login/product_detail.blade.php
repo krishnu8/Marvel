@@ -1,5 +1,5 @@
 @extends('layouts.After_header')
-
+<title>Product Detail</title>
 <style>
     body {
         font-family: 'Roboto Condensed', sans-serif;
@@ -62,43 +62,56 @@
         <div class="col-lg-12 border  main-section bg-white">
             <div class="row m-0">
                 <div class="col-lg-4 left-side-product-box pb-3">
-                    <img src="http://nicesnippets.com/demo/pd-image1.jpg" class="border p-3">
+                    <img src="{{ URL::to('/') }}/pictures/{{ $data['Image'] }}" class="border p-3">
                 </div>
                 <div class="col-lg-8">
                     <div class="right-side-pro-detail border p-3 m-0">
                         <div class="row">
                             <div class="col-lg-12">
-                                <span>Who What Wear</span>
-                                <p class="m-0 p-0">Women's Velvet Dress</p>
+                                <span>Marvel</span>
+                                <p class="m-0 p-0">{{ $data['Product_name'] }}</p>
                             </div>
                             <div class="col-lg-12">
-                                <p class="m-0 p-0 price-pro">$30</p>
+                                <p class="m-0 p-0 price-pro">RS {{ $data['Price'] }}</p>
                                 <hr class="p-0 m-0">
                             </div>
                             <div class="col-lg-12 pt-2">
                                 <h5>Product Detail</h5>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    quis nostrud exercitation ullamco laboris.</span>
+                                <span></span>
                                 <hr class="m-0 pt-2 mt-2">
                             </div>
                             <div class="col-lg-12">
-                                <p class="tag-section"><strong>Tag : </strong><a href="">Woman</a><a
-                                        href="">,Man</a></p>
+                                <p class="tag-section"><strong>Category : </strong>{{ $data['Category'] }} </p>
                             </div>
+                            {{-- <form action="Buy_product" style="width: 100%;" method="post"> --}}
                             <div class="col-lg-12">
                                 <h6>Quantity :</h6>
-                                <div class="form-group">
-                                    <select class="form-control" id="selectOptions" name="quantity" >
-                                        <option value="1"> 1</option>
-                                        <option value="2"> 2</option>
-                                        <option value="3"> 3</option>
-                                        <option value="4"> 4</option>
-                                        <option value="5"> 5</option>
-                                        <option value="6"> 6</option>
-                                        <!-- Add more options as needed -->
-                                    </select>
-                                </div>
+                                @if ($data['Quantity'] <= 0)
+                                    <p style="color: red; font-weight: 1px; size: 5px">out of stock</p>
+                                @else
+                                    @if ($data['Quantity'] > 5)
+                                        <div class="form-group">
+                                            <select class="form-control" id="selectOptions" name="quantity">
+
+                                                <option value="1"> 1</option>
+                                                <option value="2"> 2</option>
+                                                <option value="3"> 3</option>
+                                                <option value="4"> 4</option>
+                                                <option value="5"> 5</option>
+                                                <!-- Add more options as needed -->
+                                            </select>
+                                        </div>
+                                    @else
+                                    @endif
+                                    <div class="form-group">
+                                        <select class="form-control" id="selectOptions" name="quantity">
+
+                                            @for ($i = 1; $i <= $data['Quantity']; $i++)
+                                                <option value="{{ $i }}">{{ $i }}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                @endif
                             </div>
                             <div class="col-lg-12 mt-3">
                                 <div class="row">
@@ -106,41 +119,42 @@
                                         <a href="#" class="btn btn-danger w-100">Add To Cart</a>
                                     </div>
                                     <div class="col-lg-6">
-                                        <a href="#" class="btn btn-success w-100">Shop Now</a>
+                                        <Button onclick="Buy()" class="btn btn-success w-100">Shop Now</Button>
                                     </div>
                                 </div>
                             </div>
+                            {{-- </form> --}}
                         </div>
                     </div>
+
+                    {{-- similar product  --}}
+                    <div class="row">
+                        <div class="col-lg-12 text-center pt-3">
+                            <h4>Similar Product</h4>
+                        </div>
+                    </div>
+                    <div class="row mt-3 p-0 text-center pro-box-section">
+
+                        @foreach ($suggestion as $sug)
+                            <div class="col-lg-3 pb-2">
+                                <a href="{{ URL::to('/') }}/product_detail/{{ $sug['Product_id'] }}">
+                                    <div class="pro-box border p-0 m-0">
+                                        <img src="{{ URL::to('/') }}/pictures/{{ $sug['Image'] }}">
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
+
             </div>
-            <!-- <div class="row">
-                <div class="col-lg-12 text-center pt-3">
-                    <h4>More Product</h4>
-                </div>
-            </div>
-            <div class="row mt-3 p-0 text-center pro-box-section">
-                <div class="col-lg-3 pb-2">
-                    <div class="pro-box border p-0 m-0">
-                        <img src="http://nicesnippets.com/demo/pd-b-image1.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3 pb-2">
-                    <div class="pro-box border p-0 m-0">
-                        <img src="http://nicesnippets.com/demo/pd-b-images2.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3 pb-2">
-                    <div class="pro-box border p-0 m-0">
-                        <img src="http://nicesnippets.com/demo/pd-b-images3.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3 pb-2">
-                    <div class="pro-box border p-0 m-0">
-                        <img src="http://nicesnippets.com/demo/pd-b-images4.jpg">
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
 @endsection
+
+<script>
+    function Buy() {
+        var x = document.getElementById('selectOptions').value;
+        window.location.href = 'http://127.0.0.1:8000/Buy_product/{{ $data['Product_id'] }}/' + x;
+    }
+</script>

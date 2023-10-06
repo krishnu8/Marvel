@@ -104,20 +104,26 @@ input[type=submit], input[type=reset], input[type=button] {
     align-items: center;
 }
 .cont_add > form{
-    background-color: #b5f6ee;
+    /* background-color: #b5f6ee; */
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 350px;
+}
+.pro_add > form{
+    /* background-color: #b5f6ee; */
     padding: 10px 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     width: 350px;
 }
 .user_updt > form{
-    background-color: #b5f6ee;
+    /* background-color: #b5f6ee; */
     padding: 10px 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     /* width: 350px; */
 }
 .user_add {
     width: 350px;
-    height: 500px;
+    height: max-content;
 }
 
 .gen {
