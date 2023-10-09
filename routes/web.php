@@ -162,6 +162,7 @@ Route::middleware('user')->group(function () {
     // buy product
     Route::get('Buy_product/{id}/{qt}',[After_login_Controller::class, 'Buy_product']);
 
+    Route::view('order_list','After_login/order_list');
 
 
 });

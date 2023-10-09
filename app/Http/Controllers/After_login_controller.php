@@ -252,7 +252,7 @@ class After_login_controller extends Controller
                     'Quantity' => $qt,
                     'Price' => $product['Price'],
                     'Discount_Amount' => '0',
-                    'Delivery_status' => 'Pandding',
+                    'Delivery_status' => 'Pending',
                 ]);
                 franchise_model::where('Product_id', $id)->update([
                     'Quantity' =>$product['Quantity']-$qt,

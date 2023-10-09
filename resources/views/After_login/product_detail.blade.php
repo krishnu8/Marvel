@@ -102,15 +102,15 @@
                                             </select>
                                         </div>
                                     @else
-                                    @endif
-                                    <div class="form-group">
-                                        <select class="form-control" id="selectOptions" name="quantity">
+                                        <div class="form-group">
+                                            <select class="form-control" id="selectOptions" name="quantity">
 
-                                            @for ($i = 1; $i <= $data['Quantity']; $i++)
-                                                <option value="{{ $i }}">{{ $i }}</option>
-                                            @endfor
-                                        </select>
-                                    </div>
+                                                @for ($i = 1; $i <= $data['Quantity']; $i++)
+                                                    <option value="{{ $i }}">{{ $i }}</option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                    @endif
                                 @endif
                             </div>
                             <div class="col-lg-12 mt-3">
