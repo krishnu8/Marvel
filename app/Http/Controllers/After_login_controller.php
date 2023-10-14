@@ -238,6 +238,7 @@ class After_login_controller extends Controller
         // return view('After_login/product_detail',compact('data'));
     }
 
+    // funcanality
     // buy product
 
     public function Buy_product($id, $qt)
@@ -255,7 +256,7 @@ class After_login_controller extends Controller
                     'Delivery_status' => 'Pending',
                 ]);
                 franchise_model::where('Product_id', $id)->update([
-                    'Quantity' =>$product['Quantity']-$qt,
+                    'Quantity' => $product['Quantity'] - $qt,
                 ]);
                 session()->flash('succ', 'Product Ordered Successfully');
             } else {
@@ -265,5 +266,27 @@ class After_login_controller extends Controller
             return redirect('After_Franchise');
         }
         return redirect('After_Franchise');
+    }
+
+    public function order_list()
+    {
+        $User_id = session('user_id');
+        $order = order::where('User_id', $User_id)->get();
+
+        $Product_id = [];
+        foreach ($order as $order1) {
+            $Product_id[] = $order1['Product_id'];
+        }
+
+        $product_detail = franchise_model::whereIn('Product_id', $Product_id)->get();
+
+        return view('After_login/order_list', compact('order', 'product_detail'));
+    }
+
+    public function cancle_order($id)
+    {
+        $check = order::where('Order_id', $id)->delete();
+
+        return redirect('order_list');
     }
 }
