@@ -116,7 +116,7 @@
                             <div class="col-lg-12 mt-3">
                                 <div class="row">
                                     <div class="col-lg-6 pb-2">
-                                        <a href="#" class="btn btn-danger w-100">Add To Cart</a>
+                                        <button onclick="cart()" class="btn btn-danger w-100">Add To Cart</button>
                                     </div>
                                     <div class="col-lg-6">
                                         <Button onclick="Buy()" class="btn btn-success w-100">Shop Now</Button>
@@ -156,5 +156,9 @@
     function Buy() {
         var x = document.getElementById('selectOptions').value;
         window.location.href = 'http://127.0.0.1:8000/Buy_product/{{ $data['Product_id'] }}/' + x;
+    }
+    function cart() {
+        var x = document.getElementById('selectOptions').value;
+        window.location.href = 'http://127.0.0.1:8000/add_to_cart/{{ $data['Product_id'] }}/' + x;
     }
 </script>

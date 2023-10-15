@@ -1,5 +1,5 @@
 @extends('layouts.After_header')
-<title>Orders</title>
+<title>Cart</title>
 
 <body>
     @section('body')
@@ -48,7 +48,7 @@
         <div class="container-fluid mt-5 mb-5">
             <div class="d-flex justify-content-center row">
                 <div class="col-md-10">
-                    @foreach ($order as $o)
+                    @foreach ($cart as $o)
                         @foreach ($product_detail as $p)
                             @if ($o['Product_id'] == $p['Product_id'])
                                 <div class="row p-2 bg-white border rounded">
@@ -89,12 +89,8 @@
                                             {{-- <button class="btn btn-primary btn-sm" type="button">Cancle Order</button> --}}
                                             {{-- <button class="btn btn-outline-primary btn-sm mt-2" type="button">Give Feedback</button> --}}
 
-                                            @if ($o['Delivery_status'] == 'Pending')
-                                                <a href="Cancle_order/{{  $o['Order_id'] }}" class="btn btn-primary btn-sm">Cancel Order</a>
-                                            @else
-                                                <a href="" class="btn btn-outline-primary btn-sm mt-2">Give
-                                                    Feedback</a>
-                                            @endif
+                                            
+                                                <a href="remove/{{  $o['cart_id'] }}" class="btn btn-danger btn-sm">Remove</a>
                                         </div>
                                     </div>
                                 </div>

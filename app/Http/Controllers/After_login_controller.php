@@ -12,6 +12,7 @@ use App\Models\franchise_model;
 use App\Models\about_char;
 use App\Models\about_us;
 use App\Models\order;
+use App\Models\cart;
 use App\Models\register;
 use Illuminate\Support\Facades\File;
 
@@ -288,5 +289,47 @@ class After_login_controller extends Controller
         $check = order::where('Order_id', $id)->delete();
 
         return redirect('order_list');
+    }
+
+    public function cart($id, $qt)
+    {
+        $User_id = session('user_id');
+        $product = franchise_model::where('Product_id', $id)->first();
+        if ($product) {
+            if ($product['Quantity'] >= 0) {
+                cart::insert([
+                    'Product_id' => $id,
+                    'User_id' => $User_id,
+                    'Quantity' => $qt,
+                    'Price' => $product['Price'],
+                    'Discount_Amount' => '0',
+                ]);
+                
+                session()->flash('succ', 'Product Added to Cart');
+            } else {
+                session()->flash('error', 'Product is out of Stock, please wait till the new stock of this product arrive');
+            }
+        } else {
+            return redirect('After_Franchise');
+        }
+        return redirect('After_Franchise');
+    }
+    public function cart_list()
+    {
+        $User_id = session('user_id');
+        $cart = cart::where('User_id', $User_id)->get();
+        $Product_id = [];
+        foreach ($cart as $cart1) {
+            $Product_id[] = $cart1['Product_id'];
+        }
+
+        $product_detail = franchise_model::whereIn('Product_id', $Product_id)->get();
+        return view('After_login/cart_list', compact('cart', 'product_detail'));
+    }
+    public function remove_from_cart($id)
+    {
+        $check = cart::where('cart_id', $id)->delete();
+
+        return redirect('cart_list');
     }
 }

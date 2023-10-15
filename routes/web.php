@@ -166,6 +166,10 @@ Route::middleware('user')->group(function () {
     Route::get('order_list',[After_login_Controller::class, 'order_list']);
     Route::get('Cancle_order/{id}',[After_login_Controller::class, 'cancle_order']);
 
+    Route::get('add_to_cart/{id}/{qt}',[After_login_Controller::class, 'cart']);
+    Route::get('cart_list',[After_login_Controller::class, 'cart_list']);
+    Route::get('remove/{id}',[After_login_Controller::class, 'remove_from_cart']);
+
 
 
 
