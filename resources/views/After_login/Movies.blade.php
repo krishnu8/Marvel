@@ -117,21 +117,23 @@
                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Book Ticket</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div style="text-align: center"><img
-                                                src="{{ URL::to('/') }}/pictures/{{ $r['pic'] }}" alt=""
-                                                height="40%" width="40%"></div>
-                                        <form action="">
+                                    <form action="Book_Ticket" method="POST">
+                                        @csrf
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Book Ticket</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div style="text-align: center"><img
+                                                    src="{{ URL::to('/') }}/pictures/{{ $r['pic'] }}" alt=""
+                                                    height="40%" width="40%"></div>
+
                                             <div class="form-group">
                                                 <label for="Quantity">Quantity</label>
-                                                <select name="" id="Quantity" class="form-control"
-                                                    onchange="setprice()">
+                                                <select name="" id="Quantity" class="form-control" required>
+                                                    <option value="">Select Quantity</option>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
@@ -144,7 +146,7 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="Time">Select Time</label>
-                                                        <select name="" id="Time" class="form-control">
+                                                        <select name="" id="Time" class="form-control" required>
                                                             <option value="">Select Time</option>
                                                             <option value="">10AM</option>
                                                             <option value="">1PM</option>
@@ -163,26 +165,21 @@
 
 
                                             <div class="form-group">
-                                                <label for="Price">Price</label>
-                                                <input type="text" class="form-control" id="Price">
+                                                <label for="Price">Each Ticket</label>
+                                                <input type="text" class="form-control" id="Price"
+                                                    value="RS.{{ $r['Price'] }}" readonly>
                                             </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Book Ticket</button>
-                                    </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Book Ticket</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-
-                        <script>
-                            function setprice(){
-                             var Quantity = parseInt(document.getElementById('Quantity').value);
-                            //  var Price ={{ $r['Price'] }};
-                             alert(Quantity);
-                            }
-                        </script>
                     @endforeach
                 </div>
             </div><br>
@@ -238,4 +235,3 @@
                 </div>
             </div><br>
         @endsection
-

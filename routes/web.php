@@ -166,6 +166,9 @@ Route::middleware('user')->group(function () {
     Route::get('order_list',[After_login_Controller::class, 'order_list']);
     Route::get('Cancle_order/{id}',[After_login_Controller::class, 'cancle_order']);
 
+    //Book Ticket
+    Route::post('Book_Ticket',[After_login_Controller::class, 'Book_Ticket']);
+
 
 
 
