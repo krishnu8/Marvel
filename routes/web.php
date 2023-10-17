@@ -172,6 +172,12 @@ Route::middleware('user')->group(function () {
     //Book Ticket
     Route::post('Book_Ticket',[After_login_Controller::class, 'Book_Ticket']);
 
+    // Route::view('ticket_list','ticket_list');
+    Route::get('ticket_list',[After_login_Controller::class, 'Ticket_list']);
+    Route::get('remove_ticket/{id}',[After_login_Controller::class, 'remove_ticket']);
+
+
+
 
 
 
