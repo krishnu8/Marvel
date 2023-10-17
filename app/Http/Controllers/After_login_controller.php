@@ -13,7 +13,9 @@ use App\Models\about_char;
 use App\Models\about_us;
 use App\Models\order;
 use App\Models\register;
+use App\Models\ticket_book;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 
 class After_login_controller extends Controller
 {
@@ -290,7 +292,27 @@ class After_login_controller extends Controller
         return redirect('order_list');
     }
 
-    public function Book_Ticket(){
-         echo "hello";
+    public function Book_Ticket(Request $req)
+    {
+        $User_id = session('user_id');
+        $check = ticket_book::insert([
+            'User_id' => $User_id,
+            'Quantity' => $req->Quantity,
+            'Movie_id' => $req->Movie_id,
+            'Movie_picture' => $req->pic,
+            'Time' => $req->Time,
+            'Ticket_date' => $req->Date,
+        ]);
+
+        if ($check) {
+            session()->flash('succ', 'Ticket Boocked Successfully');
+            DB::table('movies')
+                ->where('Movie_id', $req->Movie_id)
+                ->decrement('available_tickets', $req->Quantity);
+        }else{
+            session()->flash('err', 'Something Went wrong try again lateer');
+        }
+
+        return redirect('After_Movies');
     }
 }

@@ -72,6 +72,34 @@
 
     <body>
         @section('body')
+            @if (session('succ'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert"
+                    style="min-width: 500px; right: 20px; top: 100px; z-index:1; position: absolute;">
+                    {{ session('succ') }}
+                </div>
+
+                <script>
+                    // Automatically close the alert after 5 seconds
+                    setTimeout(function() {
+                        $('.alert').alert('close');
+                    }, 3000);
+                </script>
+            @endif
+
+            @if (session('err'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert"
+                    style="min-width: 500px; right: 20px; top: 100px; z-index:1; position: absolute;">
+                    {{ session('err') }}
+                </div>
+
+                <script>
+                    // Automatically close the alert after 5 seconds
+                    setTimeout(function() {
+                        $('.alert').alert('close');
+                    }, 3000);
+                </script>
+            @endif
+
             <div class="space"></div>
             <div class="poster">
                 <button type="button" class="btn btn-outline-danger green book_btn1"><b>Hurry Up!</b></button><br>
@@ -132,13 +160,11 @@
 
                                             <div class="form-group">
                                                 <label for="Quantity">Quantity</label>
-                                                <select name="" id="Quantity" class="form-control" required>
+                                                <select name="Quantity" id="Quantity" class="form-control" required>
                                                     <option value="">Select Quantity</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
+                                                    @for ($i = 1; $i <= $r['available_tickets'] && $i <= 5; $i++)
+                                                        <option value="{{ $i }}">{{ $i }}</option>
+                                                    @endfor
                                                 </select>
                                             </div>
 
@@ -146,19 +172,20 @@
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="Time">Select Time</label>
-                                                        <select name="" id="Time" class="form-control" required>
+                                                        <select name="Time" id="Time" class="form-control" required>
                                                             <option value="">Select Time</option>
-                                                            <option value="">10AM</option>
-                                                            <option value="">1PM</option>
-                                                            <option value="">5PM</option>
-                                                            <option value="">12Am</option>
+                                                            <option value="10AM">10AM</option>
+                                                            <option value="1PM">1PM</option>
+                                                            <option value="5PM">5PM</option>
+                                                            <option value="12Am">12Am</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col col-md-6">
                                                     <div class="form-group">
                                                         <label for="dateInput">Date</label>
-                                                        <input type="date" class="form-control" id="dateInput">
+                                                        <input type="date" name="Date" class="form-control"
+                                                            id="dateInput" min="<?= date('Y-m-d') ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -166,10 +193,11 @@
 
                                             <div class="form-group">
                                                 <label for="Price">Each Ticket</label>
-                                                <input type="text" class="form-control" id="Price"
+                                                <input type="text" class="form-control" id="Price" name="price"
                                                     value="RS.{{ $r['Price'] }}" readonly>
                                             </div>
-
+                                            <input type="text" name="Movie_id" hidden value="{{ $r['Movie_ID'] }}">
+                                            <input type="text" name="pic" hidden value="{{ $r['pic'] }}">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
@@ -180,6 +208,16 @@
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            document.getElementById('dateInput').addEventListener('input', function() {
+                                let today = new Date().toISOString().split('T')[0];
+                                if (this.value < today) {
+                                    this.setCustomValidity('Please select a date in the future.');
+                                } else {
+                                    this.setCustomValidity('');
+                                }
+                            });
+                        </script>
                     @endforeach
                 </div>
             </div><br>
