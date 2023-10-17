@@ -88,7 +88,7 @@
                                         {{ $r['Movie_Name'] }} <br>
                                         Release Date:
                                         {{ $r['Release_Date'] }}<br><br>
-                                        @if ($r['available_tickets'] <=0)
+                                        @if ($r['available_tickets'] <= 0)
                                             <div class="container">
                                                 <a href="" class="btn btn-outline-danger book_tkt"><strike>Book
                                                         Ticket</strike></a> <br>
@@ -96,14 +96,88 @@
                                             </div>
                                         @else
                                             <div class="container">
-                                                <a href="" class="btn btn-outline-danger book_tkt">Book
-                                                    Ticket</a> <br>
+                                                {{-- <a href="" class="btn btn-outline-danger book_tkt">Book
+                                                    Ticket</a> <br> --}}
+
+                                                <button type="button" class="btn btn-outline-danger book_tkt"
+                                                    data-toggle="modal" data-target="#{{ $r['Movie_Name'] }}">
+                                                    Book Ticket
+                                                </button>
                                             </div>
                                         @endif
                                         <br><br>
                                     </div>
 
                                 </center>
+                            </div>
+                        </div>
+
+
+                        <div class="modal fade" id="{{ $r['Movie_Name'] }}" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <form action="Book_Ticket" method="POST">
+                                        @csrf
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Book Ticket</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div style="text-align: center"><img
+                                                    src="{{ URL::to('/') }}/pictures/{{ $r['pic'] }}" alt=""
+                                                    height="40%" width="40%"></div>
+
+                                            <div class="form-group">
+                                                <label for="Quantity">Quantity</label>
+                                                <select name="" id="Quantity" class="form-control" required>
+                                                    <option value="">Select Quantity</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="Time">Select Time</label>
+                                                        <select name="" id="Time" class="form-control" required>
+                                                            <option value="">Select Time</option>
+                                                            <option value="">10AM</option>
+                                                            <option value="">1PM</option>
+                                                            <option value="">5PM</option>
+                                                            <option value="">12Am</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="dateInput">Date</label>
+                                                        <input type="date" class="form-control" id="dateInput">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="Price">Each Ticket</label>
+                                                <input type="text" class="form-control" id="Price"
+                                                    value="RS.{{ $r['Price'] }}" readonly>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Book Ticket</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     @endforeach

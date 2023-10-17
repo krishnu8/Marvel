@@ -332,4 +332,7 @@ class After_login_controller extends Controller
 
         return redirect('cart_list');
     }
+    public function Book_Ticket(){
+         echo "hello";
+    }
 }
