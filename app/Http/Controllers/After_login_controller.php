@@ -289,7 +289,6 @@ class After_login_controller extends Controller
     public function cancle_order($id)
     {
         $check = order::where('Order_id', $id)->delete();
-
         return redirect('order_list');
     }
 
@@ -306,7 +305,7 @@ class After_login_controller extends Controller
                     'Price' => $product['Price'],
                     'Discount_Amount' => '0',
                 ]);
-
+                
                 session()->flash('succ', 'Product Added to Cart');
             } else {
                 session()->flash('error', 'Product is out of Stock, please wait till the new stock of this product arrive');
@@ -334,6 +333,37 @@ class After_login_controller extends Controller
 
         return redirect('cart_list');
     }
+    public function place_cart_order()
+    {    
+        $User_id = session('user_id');
+        $cart = cart::where('User_id', $User_id)->get();
+        foreach($cart as $cart1){
+            $qt = $cart1['Quantity'];
+            $product = franchise_model::where('Product_id', $cart1['Product_id'])->first(); 
+        if ($product) {
+            if ($product['Quantity'] > 0) {
+                order::insert([
+                    'Product_id' => $product['Product_id'],
+                    'User_id' => $User_id,
+                    'Quantity' => $qt,
+                    'Price' => $product['Price'],
+                    'Discount_Amount' => '0',
+                    'Delivery_status' => 'Pending',
+                ]);
+                cart::where('cart_id', $cart1['cart_id'])->delete();
+                franchise_model::where('Product_id', $product['Product_id'])->update([
+                    'Quantity' => $product['Quantity'] - $qt,
+                ]);
+            } else {
+                session()->flash('error', 'Product is out of Stock, please wait till the new stock of this product arrive');
+            }
+        } else {
+            return redirect('After_Franchise');
+        }
+    }
+        session()->flash('succ', 'Products Ordered Successfully');
+        return redirect('After_Franchise');
+    }
     public function Book_Ticket(Request $req)
     {
         $User_id = session('user_id');
@@ -351,32 +381,10 @@ class After_login_controller extends Controller
             DB::table('movies')
                 ->where('Movie_id', $req->Movie_id)
                 ->decrement('available_tickets', $req->Quantity);
-        } else {
+        }else{
             session()->flash('err', 'Something Went wrong try again lateer');
         }
 
         return redirect('After_Movies');
-    }
-
-    public function Ticket_list()
-    {
-        $User_id = session('user_id');
-
-        $t_data = ticket_book::where('User_id', $User_id)->get();
-
-        $Movie_id = [];
-        foreach ($t_data as $tic) {
-            $Movie_id[] = $tic['Movie_id'];
-        }
-        $movie_detail = movies_model::whereIn('Movie_ID', $Movie_id)->get();
-
-        return view('After_login/ticket_list', compact('t_data', 'movie_detail'));
-    }
-
-    public function remove_ticket($id)
-    {
-        $check = ticket_book::where('Ticket_id', $id)->delete();
-
-        return redirect('ticket_list');
     }
 }

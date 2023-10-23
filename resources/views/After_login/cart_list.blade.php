@@ -82,15 +82,12 @@
                                             <h4 class="mr-1">Rs.{{ $o['Price'] * $o['Quantity'] }}</h4>
                                             {{-- <span class="strike-text">299</span> --}}
                                         </div>
-                                        <h6 class="text-success">Free shipping</h6>
-
-
                                         <div class="d-flex flex-column" style="margin-top:60px;">
                                             {{-- <button class="btn btn-primary btn-sm" type="button">Cancle Order</button> --}}
                                             {{-- <button class="btn btn-outline-primary btn-sm mt-2" type="button">Give Feedback</button> --}}
 
-                                            
-                                                <a href="remove/{{  $o['cart_id'] }}" class="btn btn-danger btn-sm">Remove</a>
+
+                                            <a href="remove/{{ $o['cart_id'] }}" class="btn btn-danger btn-sm">Remove</a>
                                         </div>
                                     </div>
                                 </div>
@@ -98,6 +95,16 @@
                         @endforeach
                     @endforeach
                 </div>
+                @if ($cart->isEmpty())
+                    <div class="col-lg-6" style="font-size: 40px;color:rgb(129, 126, 126);">
+                        <center>Cart is Empty</center>
+                    </div>
+                @else
+                    <div class="col-lg-6">
+                        <a href="place_cart_order"><button class="btn btn-primary w-100">Place Order</button></a>
+                    </div>
+                @endif
+
             </div>
         </div>
     @endsection

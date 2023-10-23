@@ -96,7 +96,6 @@
         }
 
         input[type=password] {
-            background-color: transparent;
             border: white solid 0.5px;
             color: white;
         }

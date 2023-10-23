@@ -113,6 +113,12 @@
                                     @endif
                                 @endif
                             </div>
+                            <div class="col-lg-12 pt-2">
+                                <h5>Offers (Optional)</h5>
+                                <span></span>
+                                <input class="form-control" type="text" placeholder="Coupon Code">
+                                <Button onclick="" class="btn btn-primary w-100" style="margin-top: 5px">Apply Coupon</Button>
+                            </div>
                             <div class="col-lg-12 mt-3">
                                 <div class="row">
                                     <div class="col-lg-6 pb-2">
