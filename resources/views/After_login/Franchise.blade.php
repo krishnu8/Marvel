@@ -130,6 +130,8 @@
         padding-bottom: 20px;
     }
 </style>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 
 <body>
@@ -163,6 +165,17 @@
         @endif
 
         <section class="nav">
+
+            <form action="{{ URL::to('/') }}/search_franchise"  style="align-items: center; margin: 15px; width: 100%" method="POST">
+                @csrf
+                <div class="input-group">
+                    <div class="form-outline" style="width: 80%; margin-left: 10%">
+                        <input type="search" class="form-control" name="search"/>
+                    </div>
+                    <input type="submit" value="Search" class="btn btn-primary">
+                </div>
+            </form>
+
             <br>
             <div class="container-fluid">
                 <div class="title"><u>Cosplay</u></div><br>

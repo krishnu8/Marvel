@@ -379,4 +379,15 @@ class After_login_controller extends Controller
 
         return redirect('ticket_list');
     }
+
+    public function search_franchise(Request $req)
+    {
+        // echo $req->search;
+        $cosplay = franchise_model::select()
+            ->where('Product_name', 'like', '%' . $req->search . '%')
+            ->take(3)
+            ->get();
+
+            return view('After_login/search_franchise',compact('cosplay'));
+    }
 }
