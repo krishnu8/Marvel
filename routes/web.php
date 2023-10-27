@@ -180,6 +180,8 @@ Route::middleware('user')->group(function () {
 
 
 
+    // search funcanality
 
-
+    Route::post('search_franchise',[After_login_Controller::class, 'search_franchise']);
+    // Route::view('search_franchise','search_franchise');
 });

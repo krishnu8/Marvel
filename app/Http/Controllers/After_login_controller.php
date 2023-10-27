@@ -387,4 +387,37 @@ class After_login_controller extends Controller
 
         return redirect('After_Movies');
     }
+
+    public function Ticket_list()
+    {
+        $User_id = session('user_id');
+
+        $t_data = ticket_book::where('User_id', $User_id)->get();
+
+        $Movie_id = [];
+        foreach ($t_data as $tic) {
+            $Movie_id[] = $tic['Movie_id'];
+        }
+        $movie_detail = movies_model::whereIn('Movie_ID', $Movie_id)->get();
+
+        return view('After_login/ticket_list', compact('t_data', 'movie_detail'));
+    }
+
+    public function remove_ticket($id)
+    {
+        $check = ticket_book::where('Ticket_id', $id)->delete();
+
+        return redirect('ticket_list');
+    }
+
+    public function search_franchise(Request $req)
+    {
+        // echo $req->search;
+        $cosplay = franchise_model::select()
+            ->where('Product_name', 'like', '%' . $req->search . '%')
+            ->take(3)
+            ->get();
+
+            return view('After_login/search_franchise',compact('cosplay'));
+    }
 }
