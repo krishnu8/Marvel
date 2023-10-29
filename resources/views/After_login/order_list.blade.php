@@ -78,8 +78,9 @@
                                             randomised words which don't look even slightly believable.<br><br></p> --}}
                                     </div>
                                     <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                                        <div style="color: red"><b><h4>Final Price</h4></b></div>
                                         <div class="d-flex flex-row align-items-center">
-                                            <h4 class="mr-1">Rs.{{ $o['Price'] * $o['Quantity'] }}</h4>
+                                            <h4 class="mr-1">Rs.{{ $o['Price'] * $o['Quantity']-$o['Discount_Amount'] }}</h4>
                                             {{-- <span class="strike-text">299</span> --}}
                                         </div>
                                         <h6 class="text-success">Free shipping</h6>

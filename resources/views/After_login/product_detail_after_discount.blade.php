@@ -72,7 +72,9 @@
                                 <p class="m-0 p-0">{{ $data['Product_name'] }}</p>
                             </div>
                             <div class="col-lg-12">
-                                <p class="m-0 p-0 price-pro">RS {{ $data['Price'] }}</p>
+                                
+                                <p class="m-0 p-0 price-pro"><strike>RS {{ $data['Price'] }}</strike></p>
+                                <p class="m-0 p-0 price">RS {{$calculatedPrice}}</p>
                                 <hr class="p-0 m-0">
                             </div>
                             <div class="col-lg-12 pt-2">
@@ -114,25 +116,8 @@
                                 @endif
                             </div>
                             <div class="col-lg-12 pt-2">
-                                <h5>Offers (Optional)</h5>
-                                <span></span>
-                                {{-- <form action="apply_coupon" method="get">
-                                    <input class="form-control" name="Coupon" type="text" placeholder="Coupon Code" >
-                                    <small>
-                                        @error('Coupon')
-                                            {{ $message }}
-                                        @enderror
-                                    </small>
-                                    <Button type="submit" class="btn btn-primary w-100" style="margin-top: 5px">Apply Coupon</Button>
-                                </form> --}}
-                                <input class="form-control" id="Coupon" type="text" placeholder="Coupon Code">
-                                @if (session('error'))
-                                    <small id="coup_err" style="color: red">{{ session('error') }}</small>
-                                @endif
-                                <small id="coup_err" style="color: red"></small>
-                                <Button onclick="Coupon()" class="btn btn-primary w-100" style="margin-top: 5px">Apply
-                                    Coupon</Button>
-
+                                <div style="color: green">
+                                    <b><h4>Coupon Applied Successfully</h4></b></div>    
                             </div>
                             <div class="col-lg-12 mt-3">
                                 <div class="row">
@@ -190,7 +175,7 @@
         if (x == '') {
             coupErrElement.innerText = "Field cannot be empty.";;
         } else {
-            window.location.href = 'http://127.0.0.1:8000/apply_coupon/{{ $data['Product_id'] }}/'+x;
+            window.location.href = 'http://127.0.0.1:8000/apply_coupon/' + x;
         }
     }
 </script>

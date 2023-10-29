@@ -78,8 +78,9 @@
                                             randomised words which don't look even slightly believable.<br><br></p> --}}
                                     </div>
                                     <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                                        <div style="color: red"><b><h4>Final Price</h4></b></div>
                                         <div class="d-flex flex-row align-items-center">
-                                            <h4 class="mr-1">Rs.{{ $o['Price'] * $o['Quantity'] }}</h4>
+                                            <h4 class="mr-1">Rs.{{ $o['Price'] * $o['Quantity']-$o['Discount_Amount'] }}</h4>
                                             {{-- <span class="strike-text">299</span> --}}
                                         </div>
                                         <div class="d-flex flex-column" style="margin-top:60px;">
@@ -100,8 +101,8 @@
                         <center>Cart is Empty</center>
                     </div>
                 @else
-                    <div class="col-lg-6">
-                        <a href="place_cart_order"><button class="btn btn-primary w-100">Place Order</button></a>
+                    <div class="col-lg-6" style="margin-top:20px;">
+                        <a href="place_cart_order"><button class="btn btn-primary w-100" >Place Order</button></a>
                     </div>
                 @endif
 

@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class franchise_model extends Model
+class offers extends Model
 {
     use HasFactory;
-    public $timestamps = false;
-    public $table="franchise";
+    public $table="offers";
     protected $fillable = [
-        'Quantity',
+        // Other fields here
+        'Status',
     ];
-    protected $primaryKey = 'Product_id';
+    protected $primaryKey = 'Offer_ID';
+    public $timestamps = false; 
 }
+

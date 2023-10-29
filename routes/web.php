@@ -159,6 +159,8 @@ Route::middleware('user')->group(function () {
     // Route::view('product_detail', 'After_login/product_detail');
     Route::get('product_detail/{char}',[After_login_Controller::class, 'product_detail']);
 
+    
+
     // buy product
     Route::get('Buy_product/{id}/{qt}',[After_login_Controller::class, 'Buy_product']);
 
@@ -166,6 +168,8 @@ Route::middleware('user')->group(function () {
     Route::get('order_list',[After_login_Controller::class, 'order_list']);
     Route::get('Cancle_order/{id}',[After_login_Controller::class, 'cancle_order']);
 
+    
+    //Add to cart
     Route::get('add_to_cart/{id}/{qt}',[After_login_Controller::class, 'cart']);
     Route::get('cart_list',[After_login_Controller::class, 'cart_list']);
     Route::get('remove/{id}',[After_login_Controller::class, 'remove_from_cart']);
@@ -184,4 +188,8 @@ Route::middleware('user')->group(function () {
 
     Route::post('search_franchise',[After_login_Controller::class, 'search_franchise']);
     // Route::view('search_franchise','search_franchise');
+
+    //Offers
+    Route::get('apply_coupon/{id}/{coupon}',[After_login_Controller::class, 'validate_coupon']);
+    Route::get('product_detail_after_discount/{char}',[After_login_Controller::class, 'product_detail_after_discount']);
 });
