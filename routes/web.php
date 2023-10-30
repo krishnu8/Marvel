@@ -98,9 +98,9 @@ Route::middleware('Admin')->group(function () {
 
     Route::post('order_controller_route', [My_controller::class, 'place_order']);
     Route::get('complete_ord1/{ord_id}', [My_Controller::class, 'complete_ord']);
-    Route::get('cancel_ord1/{ord_id}', [My_Controller::class, 'cancel_ord']);
+    Route::get('cancel_ord1/{ord_id}/{qty}/{pid}', [My_Controller::class, 'cancel_ord']);
     Route::get('delete_ord1/{ord_id}', [My_Controller::class, 'delete_ord']);
-    Route::get('reorder1/{ord_id}', [My_Controller::class, 'reorder']);
+    Route::get('reorder1/{ord_id}/{qty}/{pid}', [My_Controller::class, 'reorder']);
 
     //Tickets
     Route::get('tickets', [My_Controller::class, 'fetch_ticket']);

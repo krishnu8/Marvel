@@ -12,6 +12,27 @@
     @extends('Admin/master_view')
     @section('content')
         <main class="mt-5 pt-3">
+            @if (session('error'))
+                <script>
+                    swal({
+                        title: "Sorry!",
+                        text: "{{ session('error') }}",
+                        icon: "warning",
+                        button: "OK",
+                    });
+                </script>
+            @endif
+
+            @if (session('succ'))
+                <script>
+                    swal({
+                        title: "Congratulations!",
+                        text: "{{ session('succ') }}",
+                        icon: "success",
+                        button: "OK",
+                    });
+                </script>
+            @endif
             <div class="container-fluid bg-light">
                 <div class="row">
                     <div class="col headers">
@@ -110,12 +131,12 @@
                                                 id="action" class="activate">Complete</button></a>
                                     </td>
                                     <td style="text-align: center;">
-                                        <a href="{{ URL::to('/') }}/cancel_ord1/{{ $ord['Order_id'] }}"><button id="action"
+                                        <a href="{{ URL::to('/') }}/cancel_ord1/{{ $ord['Order_id'] }}/{{ $ord['Quantity'] }}/{{ $ord['Product_id'] }}"><button id="action"
                                                 class="delete">Cancel</button></a>
                                     </td>
                                 @elseif ($ord['Delivery_status'] == 'Cancelled')
                                 <td colspan="2" style="text-align: center;">
-                                    <a href="{{ URL::to('/') }}/reorder1/{{ $ord['Order_id'] }}"><button id="action"
+                                    <a href="{{ URL::to('/') }}/reorder1/{{ $ord['Order_id'] }}/{{ $ord['Quantity'] }}/{{ $ord['Product_id'] }}"><button id="action"
                                             class="delete" style="background-color: rgb(84, 173, 245);">Reorder</button></a>
                                 </td>
                                 @else

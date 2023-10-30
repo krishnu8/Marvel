@@ -565,22 +565,61 @@ class My_Controller extends Controller
 
     public function complete_ord($ord_id)
     {
-        order::where('Order_id', $ord_id)->update(['Delivery_status' => 'Delivered']);
+        $check = order::where('Order_id', $ord_id)->update(['Delivery_status' => 'Delivered']);
+        if ($check) {
+            session()->flash('succ', 'Order completed');
+        } else {
+            session()->flash('error', 'Something Went Wrong');
+        }
         return redirect()->action([My_Controller::class, 'fetch_order']);
     }
-    public function cancel_ord($ord_id)
+    public function cancel_ord($ord_id, $pqty, $pid)
     {
-        order::where('Order_id', $ord_id)->update(['Delivery_status' => 'Cancelled']);
+        // products::where('Product_id', $pid)->update(['Quantity' => ]);
+
+        $product = products::where('Product_id', $pid)->first();
+
+        if ($product) {
+            $newQuantity = $product->Quantity + $pqty;
+
+            $product->update(['Quantity' => $newQuantity]);
+        }
+
+        $check = order::where('Order_id', $ord_id)->update(['Delivery_status' => 'Cancelled']);
+        if ($check) {
+            session()->flash('succ', 'Order cancelled');
+        } else {
+            session()->flash('error', 'Something Went Wrong');
+        }
         return redirect()->action([My_Controller::class, 'fetch_order']);
     }
-    public function delete_ord($ord_id)
-    {
-        order::where('Order_id', $ord_id)->update(['deleted' => 'Yes']);
+
+    public function delete_ord($ord_id){
+
+        $check = order::where('Order_id', $ord_id)->update(['deleted' => 'Yes']);
+        if ($check) {
+            session()->flash('succ', 'Order deleted');
+        } else {
+            session()->flash('error', 'Something Went Wrong');
+        }
         return redirect()->action([My_Controller::class, 'fetch_order']);
     }
-    public function reorder($ord_id)
-    {
-        order::where('Order_id', $ord_id)->update(['Delivery_status' => 'Pending']);
+
+    public function reorder($ord_id, $pqty, $pid){
+        $product = products::where('Product_id', $pid)->first();
+
+        if ($product) {
+            $newQuantity = $product->Quantity - $pqty;
+
+            $product->update(['Quantity' => $newQuantity]);
+        }
+
+        $check = order::where('Order_id', $ord_id)->update(['Delivery_status' => 'Pending']);
+        if ($check) {
+            session()->flash('succ', 'Reordered successfully');
+        } else {
+            session()->flash('error', 'Something Went Wrong');
+        }
         return redirect()->action([My_Controller::class, 'fetch_order']);
     }
 
@@ -667,11 +706,11 @@ class My_Controller extends Controller
             'Mobile_No' => $req->mob,
             'Gender' => $req->Gender,
         ]);
-        // if ($check) {
-        //     session()->flash('succ', 'Profile Updated Successfuly');
-        // } else {
-        //     session()->flash('error', 'Something Went Wrong');
-        // }
+        if ($check) {
+            session()->flash('succ', 'Profile Updated Successfuly');
+        } else {
+            session()->flash('error', 'Something Went Wrong');
+        }
         return redirect()->action([My_Controller::class, 'profile_data']);
     }
 
