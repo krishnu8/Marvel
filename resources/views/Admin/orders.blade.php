@@ -28,6 +28,10 @@
             </div>
             <table>
                 <tr style="height: 50px">
+
+                    <th>
+                        Pro Id
+                    </th>
                     <th>
                         Pro Id
                     </th>
@@ -63,10 +67,13 @@
                     </th>
                 </tr>
 
-                @foreach ($orders as $ord)
-                    @foreach ($product_details as $product)
+                @foreach ($product_details as $product)
+                    @foreach ($orders as $ord)
                         @if ($product['Product_id'] == $ord['Product_id'])
                             <tr>
+                                <td>
+                                    {{ $ord['Order_id'] }}
+                                </td>
                                 <td>
                                     {{ $ord['Product_id'] }}
                                 </td>
@@ -99,18 +106,23 @@
                                 </td>
                                 @if ($ord['Delivery_status'] == 'Pending')
                                     <td style="text-align: center;">
-                                        <a href="{{ URL::to('/') }}/complete_ord/{{$ord['id']}}"><button id="action"
-                                                class="activate">Complete</button></a>
+                                        <a href="{{ URL::to('/') }}/complete_ord1/{{ $ord['Order_id'] }}"><button
+                                                id="action" class="activate">Complete</button></a>
                                     </td>
                                     <td style="text-align: center;">
-                                        <a href="{{ URL::to('/') }}/deactivate_user/"><button id="action"
+                                        <a href="{{ URL::to('/') }}/cancel_ord1/{{ $ord['Order_id'] }}"><button id="action"
                                                 class="delete">Cancel</button></a>
                                     </td>
-                                @else
+                                @elseif ($ord['Delivery_status'] == 'Cancelled')
                                 <td colspan="2" style="text-align: center;">
-                                    <a href="{{ URL::to('/') }}/deactivate_user/"><button id="action"
-                                            class="delete">Delete Record</button></a>
+                                    <a href="{{ URL::to('/') }}/reorder1/{{ $ord['Order_id'] }}"><button id="action"
+                                            class="delete" style="background-color: rgb(84, 173, 245);">Reorder</button></a>
                                 </td>
+                                @else
+                                    <td colspan="2" style="text-align: center;">
+                                        <a href="{{ URL::to('/') }}/delete_ord1/{{ $ord['Order_id'] }}"><button id="action"
+                                                class="delete" style="background-color: rgb(129, 20, 20); color: aliceblue;">Delete Record</button></a>
+                                    </td>
                                 @endif
 
 

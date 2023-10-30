@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class order extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     public $table="orders";
 
 }
