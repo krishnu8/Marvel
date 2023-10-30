@@ -44,22 +44,16 @@
                         Pro Quantity
                     </th>
                     <th>
-                        Total Price
-                    </th>
-                    <th>
                         User Id
                     </th>
                     <th>
-                        Address1
+                        Total Price
                     </th>
                     <th>
-                        Address2
+                        Discount Amount
                     </th>
                     <th>
-                        Mobile
-                    </th>
-                    <th>
-                        Email
+                        Price After Disc.
                     </th>
                     <th>
                         Order Status
@@ -69,47 +63,59 @@
                     </th>
                 </tr>
 
-                @foreach ($order as $ord)
-                    @foreach ($product_detail as $product)
+                @foreach ($orders as $ord)
+                    @foreach ($product_details as $product)
                         @if ($product['Product_id'] == $ord['Product_id'])
                             <tr>
                                 <td>
                                     {{ $ord['Product_id'] }}
                                 </td>
                                 <td style="text-align: center;">
-                                    <img src="{{ URL::to('/') }}/pictures/wall.jpg">
+                                    <img src="{{ URL::to('/') }}/pictures/products/{{ $product['Image'] }}">
                                 </td>
                                 <td>
                                     {{ $product['Product_name'] }}
                                 </td>
                                 <td>
+                                    {{ $ord['Price'] }}
                                 </td>
                                 <td>
+                                    {{ $ord['Quantity'] }}
                                 </td>
                                 <td>
+                                    {{ $ord['Price'] * $ord['Quantity'] }}
                                 </td>
                                 <td>
+                                    {{ $ord['User_id'] }}
                                 </td>
                                 <td>
+                                    {{ $ord['Discount_Amount'] }}
                                 </td>
                                 <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
+                                    {{ $ord['Price'] * $ord['Quantity'] - $ord['Discount_Amount'] }}
                                 </td>
                                 <td style="text-align: center;">
-                                    {{-- <a href="{{ URL::to('/') }}/delete_registration/"><button id="action" class="edit">Accept</button></a> --}}
+                                    {{ $ord['Delivery_status'] }}
                                 </td>
-                                <td style="text-align: center;">
+                                @if ($ord['Delivery_status'] == 'Pending')
+                                    <td style="text-align: center;">
+                                        <a href="{{ URL::to('/') }}/complete_ord/{{$ord['id']}}"><button id="action"
+                                                class="activate">Complete</button></a>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <a href="{{ URL::to('/') }}/deactivate_user/"><button id="action"
+                                                class="delete">Cancel</button></a>
+                                    </td>
+                                @else
+                                <td colspan="2" style="text-align: center;">
                                     <a href="{{ URL::to('/') }}/deactivate_user/"><button id="action"
-                                            class="delete">Complete</button></a>
+                                            class="delete">Delete Record</button></a>
+                                </td>
+                                @endif
 
-                                </td>
-                                <td style="text-align: center;">
-                                    <a href="{{ URL::to('/') }}/deactivate_user/"><button id="action"
-                                            class="delete">Cancel</button></a>
-                                </td>
+
+
+
                             </tr>
                         @endif
                     @endforeach

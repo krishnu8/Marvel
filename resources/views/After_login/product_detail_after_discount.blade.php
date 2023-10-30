@@ -62,7 +62,7 @@
         <div class="col-lg-12 border  main-section bg-white">
             <div class="row m-0">
                 <div class="col-lg-4 left-side-product-box pb-3">
-                    <img src="{{ URL::to('/') }}/pictures/{{ $data['Image'] }}" class="border p-3">
+                    <img src="{{ URL::to('/') }}/pictures/products/{{ $data['Image'] }}" class="border p-3">
                 </div>
                 <div class="col-lg-8">
                     <div class="right-side-pro-detail border p-3 m-0">
@@ -72,7 +72,7 @@
                                 <p class="m-0 p-0">{{ $data['Product_name'] }}</p>
                             </div>
                             <div class="col-lg-12">
-                                
+
                                 <p class="m-0 p-0 price-pro"><strike>RS {{ $data['Price'] }}</strike></p>
                                 <p class="m-0 p-0 price">RS {{$calculatedPrice}}</p>
                                 <hr class="p-0 m-0">
@@ -117,7 +117,7 @@
                             </div>
                             <div class="col-lg-12 pt-2">
                                 <div style="color: green">
-                                    <b><h4>Coupon Applied Successfully</h4></b></div>    
+                                    <b><h4>Coupon Applied Successfully</h4></b></div>
                             </div>
                             <div class="col-lg-12 mt-3">
                                 <div class="row">
@@ -145,7 +145,7 @@
                             <div class="col-lg-3 pb-2">
                                 <a href="{{ URL::to('/') }}/product_detail/{{ $sug['Product_id'] }}">
                                     <div class="pro-box border p-0 m-0">
-                                        <img src="{{ URL::to('/') }}/pictures/{{ $sug['Image'] }}">
+                                        <img src="{{ URL::to('/') }}/pictures/products/{{ $sug['Image'] }}">
                                     </div>
                                 </a>
                             </div>

@@ -71,8 +71,8 @@ Route::middleware('Admin')->group(function () {
     Route::post('update_pro', [My_controller::class, 'update_pro']);
     Route::get('delete_product1/{pro_id}', [My_Controller::class, 'delete_product']);
 
-    Route::view('orders', 'Admin/orders');
-    // Route::get('orders', [My_Controller::class, 'fetch_order']);
+    // Route::view('orders', 'Admin/orders');
+    Route::get('orders', [My_Controller::class, 'fetch_order']);
     Route::view('order_add', 'Admin/order_add');
 
     Route::get('review_rating', [My_Controller::class, 'fetch_review_rating']);

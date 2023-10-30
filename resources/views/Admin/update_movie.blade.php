@@ -14,6 +14,13 @@
     @section('content')
         <main class="mt-5 pt-3">
 
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col headers">
+                        <h1>Update Movie</h1>
+                    </div>
+                </div>
+            </div>
             <div class="container col-4">
                 <form method="POST" enctype="multipart/form-data" action="{{ URL::to('/') }}/update_movie">
                     @csrf
@@ -35,24 +42,30 @@
                         @enderror
                     </div> --}}
                     <div class="form-group">
-                        <label for="rd">Release_Date</label>
-                        <input type="date" id="em1" name="rd" class="form-control" placeholder="Enter email"
+                        <label for="rd1">Release_Date</label>
+                        <input type="date" id="rd1" name="rd" class="form-control" placeholder="Enter email"
                             style="border: 1px solid black" value="{{ $movies['Release_Date'] }}">
                         @error('rd')
                             <small style="color: red">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="status1">Status</label></label>
-                        <input type="tel" id="status1" name="status" class="form-control" placeholder="Enter number"
-                            style="border: 1px solid black" value="{{ $movies['Status'] }}">
-                        @error('status')
-                            <small style="color: red">{{ $message }}</small>
-                        @enderror
+                        <label for="status1">Status</label>
+                        <select class="form-select" id="status1" name="status">
+                            @if ($movies['Status'] == 'Deleted')
+                                <option value="Deleted" selected>Deleted</option>
+                            @elseif ($movies['Status'] == 'Upcoming')
+                                <option value="Upcoming" selected>Upcoming</option>
+                            @else
+                                <option value="Available">Available</option>
+                            @endif
+                        </select>
+
                     </div>
 
                     <div class="row">
                         <div class="col">
+                            <label for="tkt1">No. of Tickets</label>
                             <input type="number" name="tkt" id="tkt1" value="{{ $movies['available_tickets'] }}"
                                 class="form-control">
                             @error('tkt')
@@ -62,6 +75,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
+                            <label for="pr1">Price</label>
                             <input type="number" name="pr" value="{{ $movies['Price'] }}" id="pr1"
                                 class="form-control">
                             @error('pr')
@@ -82,7 +96,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Update" class="reset">
+                        <input type="submit" value="Update">
                     </div>
 
                 </form>

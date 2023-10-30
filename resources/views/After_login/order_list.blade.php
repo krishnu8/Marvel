@@ -74,7 +74,7 @@
                 }, 3000);
             </script>
         @endif
-        
+
         <div class="container-fluid mt-5 mb-5">
             <div class="d-flex justify-content-center row">
                 <div class="col-md-10">
@@ -84,7 +84,7 @@
                                 <div class="row p-2 bg-white border rounded">
                                     <div class="col-md-3 mt-1" style="text-align: center"><img class=" img-responsive rounded"
                                             height="175px" width="175px"
-                                            src="{{ URL::to('/') }}/pictures/{{ $p['Image'] }}">
+                                            src="{{ URL::to('/') }}/pictures/products/{{ $p['Image'] }}">
                                     </div>
                                     <div class="col-md-6 mt-1">
                                         <h5>{{ $p['Product_name'] }}</h5>

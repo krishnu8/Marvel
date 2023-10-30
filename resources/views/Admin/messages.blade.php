@@ -31,7 +31,7 @@
                     Email
                 </th>
                 <th>
-                    Number
+                    Message
                 </th>
                 <th>
                     Deleted

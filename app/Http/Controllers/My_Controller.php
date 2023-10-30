@@ -134,18 +134,20 @@ class My_Controller extends Controller
     {
         $ob->validate(
             [
-                'pro_name' => 'required',
-                'pro_des' => 'required',
+                'pro_name' => 'required|regex:/^[a-zA-Z0-9\s,]+$/',
+                'category' => 'required',
                 'qty' => 'required|numeric',
-                'price' => 'required',
+                'price' => 'required|numeric',
                 'pro_pic' => 'required|mimes:jpg,png,gif,bmp', //|size:5120
             ],
             [
                 'pro_name.required' => 'Product name is required.',
-                'pro_des.required' => 'Product description is required.',
+                'pro_name.regex' => 'Product name must be only alphabet and number',
+                'category.required' => 'Category is required.',
                 'qty.required' => 'Product quantity is required.',
-                'qty.numeric' => 'Product quantity must be number.',
+                'qty.numeric' => 'Quantity must be number.',
                 'price.required' => 'Product price is required.',
+                'price.numeric' => 'Price must be number.',
                 'pro_pic.required' => 'Please select picture.',
             ],
         );
@@ -157,10 +159,10 @@ class My_Controller extends Controller
         }
 
         $check = products::insert([
-            'product_name' => $ob->pro_name,
-            'product_desc' => $ob->pro_des,
-            'product_image' => $filename,
-            'price' => $ob->price,
+            'Product_name' => $ob->pro_name,
+            'Category' => $ob->category,
+            'Image' => $filename,
+            'Price' => $ob->price,
             'Quantity' => $ob->qty,
         ]);
         if ($check) {
@@ -351,7 +353,6 @@ class My_Controller extends Controller
                 'mn' => 'required',
                 'rd' => 'required|',
                 'tkt' => 'required|',
-                'qty' => 'required',
                 'pr' => 'required|',
                 'status' => 'required',
                 'pic' => 'mimes:jpg,png|max:2048',
@@ -359,11 +360,10 @@ class My_Controller extends Controller
             [
                 'mn.required' => 'Movie name is required.',
                 'rd.required' => 'Release date is required.',
-                'qty.required' => 'Quantity is required.',
                 'tkt.required' => 'No. of ticket is required.',
                 'pr.required' => 'ticket price is required.',
                 'status.required' => 'Status is required.',
-                
+
                 'pic.required' => 'Picture is required.',
                 'pic.mimes' => 'Picture types must be jpg,png',
                 'pic.max' => 'Picture size must be less than 2MB',
@@ -426,14 +426,15 @@ class My_Controller extends Controller
         $ob->validate(
             [
                 'pn' => 'required',
-                'pd' => 'required',
+                'category' => 'required',
                 'p' => 'required',
+                'qty' => 'required',
                 'pic' => 'mimes:jpg,png|max:2048',
             ],
             [
                 'pn.required' => 'Product name is required.',
-                'pd.required' => 'Description is required.',
                 'p.required' => 'Price is required.',
+                'qty.required' => 'Quantity is required.',
                 'pic.required' => 'Picture is required.',
                 'pic.mimes' => 'Picture types must be jpg,png',
                 'pic.max' => 'Picture size must be less than 2MB',
@@ -446,7 +447,7 @@ class My_Controller extends Controller
             $filename = uniqid() . '_' . $file->getClientOriginalName();
             $ob->pic->move('pictures/products/', $filename);
 
-            $pic_data = products::where('product_id', $ob->pro_id)->first();
+            $pic_data = products::where('Product_id', $ob->pro_id)->first();
 
             $previousFilePath = 'pictures/products' . $pic_data['product_image']; // Example path
 
@@ -454,32 +455,45 @@ class My_Controller extends Controller
                 File::delete($previousFilePath);
             }
 
-            products::where('product_id', $ob->pro_id)->update([
-                'product_image' => $filename,
+            products::where('Product_id', $ob->pro_id)->update([
+                'Image' => $filename,
             ]);
         }
 
-        products::where('product_id', $ob->pro_id)->update([
-            'product_name' => $ob->pn,
-            'product_desc' => $ob->pd,
-            'price' => $ob->p,
-            'quantity' => $ob->qty,
+        products::where('Product_id', $ob->pro_id)->update([
+            'Product_name' => $ob->pn,
+            'Category' => $ob->category,
+            'Price' => $ob->p,
+            'Quantity' => $ob->qty,
         ]);
 
         return redirect()->action([My_Controller::class, 'fetch_products']);
     }
     public function delete_product($pro_id)
     {
-        products::where('product_id', $pro_id)->update(['deleted' => 'Yes']);
+        products::where('Product_id', $pro_id)->update(['deleted' => 'Yes']);
         return redirect()->action([My_Controller::class, 'fetch_products']);
     }
 
     //Order
     // public function fetch_order(){
-    //     $order = order::all();
-    //     $product_detail=products::where('Product_id',$order['Product_id'])->get();
-    //     return view('Admin/orders',compact('order','product_detail'));
+    //     $order = order::select()->get();
+    //     $product_detail=products::where('Product_id', $order['Product_id'])->get();
+    //     return view('Admin/orders', compact('order','product_detail'));
     // }
+
+    public function fetch_order(){
+    $orders = order::select()->get();
+    $product_details = [];
+
+    foreach ($orders as $order) {
+        $product_detail = products::where('Product_id', $order->Product_id)->first();
+        $product_details[] = $product_detail;
+        
+    }
+
+    return view('Admin/orders', compact('orders', 'product_details'));
+}
 
     //Review Rating
     public function fetch_review_rating()
