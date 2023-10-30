@@ -49,8 +49,7 @@
                     @csrf
                     <div class="row">
                         <div class="col">
-                            <input type="text" name="mn" placeholder="Movie Name" id="mn1"
-                                class="form-control">
+                            <input type="text" name="mn" placeholder="Movie Name" id="mn1" class="form-control"  value="{{ old('mn') }}">
                             @error('mn')
                                 <span style="color: red;">{{ $message }}</span> <br>
                             @enderror
@@ -66,8 +65,7 @@
                     </div> --}}
                     <div class="row">
                         <div class="col">
-                            <input type="date" name="rd" placeholder="Release Date" id="rd1"
-                                class="form-control">
+                            <input type="date" name="rd" placeholder="Release Date" id="rd1" class="form-control"  value="{{ old('rd') }}">
                             @error('rd')
                                 <span style="color: red;">{{ $message }}</span> <br>
                             @enderror
@@ -83,8 +81,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="number" name="tkt" placeholder="No. of Tickets" id="tkt1"
-                                class="form-control">
+                            <input type="number" name="tkt" placeholder="No. of Tickets" id="tkt1" class="form-control"  value="{{ old('tkt') }}">
                             @error('tkt')
                                 <span style="color: red;">{{ $message }}</span> <br>
                             @enderror
@@ -92,8 +89,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="number" name="pr" placeholder="Price of ticket" id="pr1"
-                                class="form-control">
+                            <input type="number" name="pr" placeholder="Price of ticket" id="pr1" class="form-control"  value="{{ old('pr') }}">
                             @error('pr')
                                 <span style="color: red;">{{ $message }}</span> <br>
                             @enderror

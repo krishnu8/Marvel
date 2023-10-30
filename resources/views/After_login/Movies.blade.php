@@ -193,9 +193,9 @@
 
 
                                             <div class="form-group">
-                                                <label for="Price">Each Ticket</label>
-                                                <input type="text" class="form-control" id="Price" name="price"
-                                                    value="RS.{{ $r['Price'] }}" readonly>
+                                                <label for="Price">Price of each Ticket</label>
+                                                <input type="text" class="form-control" id="Price" name="Price"
+                                                    value="{{ $r['Price'] }}" readonly>
                                             </div>
                                             <input type="text" name="Movie_id" hidden value="{{ $r['Movie_ID'] }}">
                                             <input type="text" name="pic" hidden value="{{ $r['pic'] }}">

@@ -11,70 +11,52 @@
 <body>
     @extends('Admin/master_view')
     @section('content')
-    <main class="mt-5 pt-3">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col headers">
-                    <h1>Deleted Products</h1>
+        <main class="mt-5 pt-3">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col headers">
+                        <h1>Deleted Products</h1>
+                    </div>
                 </div>
             </div>
-        </div>
-        <table>
-            <tr style="height: 50px">
-                <th>
-                    Id
-                </th>
-                <th>
-                    Photo
-                </th>
-                <th>
-                    Product Name
-                </th>
-                <th>
-                    Description
-                </th>
-                <th>
-                    Quantity
-                </th>
-                <th>
-                    Price
-                </th>
-                {{-- <th>
-                    Status
-                </th> --}}
-            </tr>
+            <table>
+                <tr style="height: 50px">
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Photo
+                    </th>
+                    <th>
+                        Product Name
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                </tr>
 
-            @foreach ($del_product as $del_pro)
-            <tr>
-                <td>
-                    {{ $del_pro['id'] }}
-                </td>
-                <td style="text-align: center;">
-                    <img src="{{ URL::to('/') }}/pictures/products/{{ $del_pro['product_image'] }}">
-                </td>
-                <td>
-                    {{ $del_pro['product_name'] }}
-                </td>
-                <td style="padding: 10px">
-                    <div  style="height:100px; overflow-y: scroll; word-break: break-all" >
-                        {{ $del_pro['product_desc'] }}
-                    </div>
-                </td>
-                <td>
-                    {{ $del_pro['Quantity'] }}
-                </td>
-                <td>
-                    {{ $del_pro['price'] }}
-                </td>
-                {{-- <td style="text-align: center;">
-                    <a href="{{ URL::to('/') }}/deactivate_user/"><button id="action" class="edit">Reactivate</button></a>
-                </td> --}}
-            </tr>
-            @endforeach
-        </table>
+                @foreach ($del_product as $del_pro)
+                    <tr>
+                        <td>
+                            {{ $del_pro['Product_id'] }}
+                        </td>
+                        <td style="text-align: center;">
+                            <img src="{{ URL::to('/') }}/pictures/products/{{ $del_pro['Image'] }}">
+                        </td>
+                        <td style="padding: 10px">
+                            <div style="height:100px; overflow-y: scroll; word-break: break-all">
+                                {{ $del_pro['Product_name'] }}
+                            </div>
+                        </td>
+                        <td>
+                            {{ $del_pro['Price'] }}
+                        </td>
+                    </tr>
+                @endforeach
+            </table>
 
 
-    </main>
+        </main>
     @endsection
 </body>
 

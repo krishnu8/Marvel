@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ticket_book extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     public $table="ticket_book";
 
 }

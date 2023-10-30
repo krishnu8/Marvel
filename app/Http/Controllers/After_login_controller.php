@@ -413,6 +413,7 @@ class After_login_controller extends Controller
         $check = ticket_book::insert([
             'User_id' => $User_id,
             'Quantity' => $req->Quantity,
+            'Price' => $req->Price,
             'Movie_id' => $req->Movie_id,
             'Movie_picture' => $req->pic,
             'Time' => $req->Time,

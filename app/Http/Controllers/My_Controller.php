@@ -12,6 +12,7 @@ use App\Models\Admin\products;
 use App\Models\Admin\review_rating;
 use App\Models\register;
 use App\Models\offers;
+use App\Models\ticket_book;
 use App\Models\top_movies_model;
 use App\Models\contact_msg;
 use App\Models\order;
@@ -171,27 +172,6 @@ class My_Controller extends Controller
             session()->flash('error', 'Failed to add product.');
         }
         return redirect()->action([My_Controller::class, 'fetch_products']);
-    }
-
-    public function validate_order(request $ob)
-    {
-        $ob->validate(
-            [
-                'name' => 'required',
-                'number' => 'required|numeric|Digits:10',
-                'qty' => 'required|numeric',
-                'cat' => 'required',
-                'pro_pic' => 'required|size:5120|mimes:jpg,png,gif,bmp',
-            ],
-            [
-                'pro_name.required' => 'Product name is required.',
-                'pro_des.required' => 'Product description is required.',
-                'qty.required' => 'Product quantity is required.',
-                'qty.numeric' => 'Product quantity must be number.',
-                'cat.required' => 'Product category is required.',
-                'pro_pic.required' => 'Please select picture.',
-            ],
-        );
     }
 
     // Fetching Data Start
@@ -484,16 +464,67 @@ class My_Controller extends Controller
     //     return view('Admin/orders', compact('order','product_detail'));
     // }
 
+    public function place_order(Request $req)
+    {
+        $req->validate(
+            [
+                'uid' => 'required',
+                'pro_id' => 'required',
+                'pro_qty' => 'required',
+            ],
+            [
+                'uid.required' => 'Product name is required.',
+                'uid.same' => 'User is not registered.',
+                'pro_id.required' => 'Price is required.',
+                'pro_qty.required' => 'Quantity is required.',
+            ],
+        );
+
+        $user = register::where('id', $req->uid)->first();
+        $product = products::where('Product_id', $req->pro_id)->first();
+        if ($user) {
+            if ($product) {
+                if ($product['Quantity'] > $req->pro_qty) {
+                    order::insert([
+                        'Product_id' => $req->pro_id,
+                        'User_id' => $req->uid,
+                        'Quantity' => $req->pro_qty,
+                        'Price' => $product['Price'],
+                        'Discount_Amount' => '0',
+                        'Delivery_status' => 'Pending',
+                    ]);
+                    $check = products::where('Product_id', $req->pro_id)->update([
+                        'Quantity' => $product['Quantity'] - $req->pro_qty,
+                    ]);
+                    // session()->flash('succ', 'Product Ordered Successfully');
+
+                    if ($check) {
+                        session()->flash('succ', 'Ordered successfully');
+                    } else {
+                        session()->flash('error', 'Something Went Wrong');
+                    }
+                } else {
+                    session()->flash('error', 'Product out of stock');
+                }
+            } else {
+                session()->flash('error', 'Please enter valid product id.');
+            }
+        } else {
+            session()->flash('error', 'User is not registered');
+        }
+
+        return redirect('order_add');
+    }
     public function fetch_order()
     {
-        $orders = order::where('deleted','No')->get();
+        $orders = order::where('deleted', 'No')->get();
         $product_detail = [];
 
         foreach ($orders as $order) {
             $product_detail[] = $order['Product_id'];
         }
 
-        $product_details= products::whereIn('Product_id',$product_detail)->get();
+        $product_details = products::whereIn('Product_id', $product_detail)->get();
 
         return view('Admin/orders', compact('orders', 'product_details'));
     }
@@ -519,6 +550,17 @@ class My_Controller extends Controller
         return redirect()->action([My_Controller::class, 'fetch_order']);
     }
 
+    //tickets
+    public function fetch_ticket()
+    {
+        $ticket = ticket_book::where('deleted', 'No')->get();
+        return view('Admin\ticket', compact('ticket'));
+    }
+    public function del_tkt($tkt_id)
+    {
+        ticket_book::where('Ticket_id', $tkt_id)->update(['deleted' => 'Yes']);
+        return redirect()->action([My_Controller::class, 'fetch_ticket']);
+    }
 
     //Review Rating
     public function fetch_review_rating()
