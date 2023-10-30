@@ -158,7 +158,7 @@
                         <center>
                             <h2 style="color: green">Total Price: Rs.{{ $totalPrice }}</h2>
                         </center>
-                        <button class="btn btn-danger w-100">Order can not be placed </button>
+                        <button class="btn btn-danger w-100">Order can not be placed</button>
                     </div>
                     @endif
                 @endif
