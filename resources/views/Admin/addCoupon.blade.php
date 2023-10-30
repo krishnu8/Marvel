@@ -38,39 +38,29 @@
                 </script>
             @endif
             <center class="pro__add">
-                <h1>Add Products</h1>
-                <form class="user_add" action="product_controller" method="post" enctype="multipart/form-data">
+                <h1>Add Coupon</h1>
+                <form class="user_add" action="add_coupon" method="post" enctype="multipart/form-data">
                     @csrf
-
                     <div class="row">
                         <div class="col">
-                            <input type="text" name="pro_name" placeholder="Product Name" id="pro_name1"
-                                class="form-control">
-                            @error('pro_name')
+                            <input type="text" name="coupon" placeholder="Coupon" id="coupon1"
+                                class="form-control" >
+                            @error('coupon')
                                 <span style="color: red;">{{ $message }}</span> <br>
                             @enderror
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <!-- <input type="text" name="rt" placeholder="Description" id="rt1" class="form-control"> -->
-                            <textarea name="pro_des" class="form-control style="width: 100%; background-color: transparent; border: 2px solid black;" rows="5" placeholder="Description"></textarea>
-                            @error('pro_des')
+                            <input type="text" name="dis" placeholder="Discount Amount" id="dis1" class="form-control">
+                            @error('dis')
                                 <span style="color: red;">{{ $message }}</span> <br>
                             @enderror
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="text" name="qty" placeholder="Quantity" id="qty1" class="form-control">
-                            @error('qty')
-                                <span style="color: red;">{{ $message }}</span> <br>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" name="price" placeholder="Price" id="price1" class="form-control">
+                            <input type="text" name="price" placeholder="Minimum Price" id="price1" class="form-control">
                             @error('price')
                                 <span style="color: red;">{{ $message }}</span> <br>
                             @enderror
@@ -78,9 +68,9 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <img src="" alt="">
-                            <input type="file" name="pro_pic" id="pro_pic1" class="form-control">
-                            @error('pro_pic')
+                            Expiry Date
+                            <input type="date" name="date" id="date1" class="form-control" >
+                            @error('date')
                                 <span style="color: red;">{{ $message }}</span> <br>
                             @enderror
                         </div>
