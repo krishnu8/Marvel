@@ -148,26 +148,9 @@
                             </div>
 
                             @if ($data['Quantity'] > 0)
-                                <div class="col-lg-12 mt-3">
-                                    <div class="row">
-                                        <div class="col-lg-6 pb-2">
-                                            <button onclick="cart()" class="btn btn-danger w-100">Add To Cart</button>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <Button onclick="Buy()" class="btn btn-success w-100">Shop Now</Button>
-                                        </div>
                             <div class="col-lg-12 pt-2">
                                 <h5>Offers (Optional)</h5>
                                 <span></span>
-                                {{-- <form action="apply_coupon" method="get">
-                                    <input class="form-control" name="Coupon" type="text" placeholder="Coupon Code" >
-                                    <small>
-                                        @error('Coupon')
-                                            {{ $message }}
-                                        @enderror
-                                    </small>
-                                    <Button type="submit" class="btn btn-primary w-100" style="margin-top: 5px">Apply Coupon</Button>
-                                </form> --}}
                                 <input class="form-control" id="Coupon" type="text" placeholder="Coupon Code">
                                 @if (session('error'))
                                     <small id="coup_err" style="color: red">{{ session('error') }}</small>
@@ -177,14 +160,14 @@
                                     Coupon</Button>
 
                             </div>
-                            <div class="col-lg-12 mt-3">
-                                <div class="row">
-                                    <div class="col-lg-6 pb-2">
-                                        <button onclick="cart()" class="btn btn-danger w-100">Add To Cart</button>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <Button onclick="Buy()" class="btn btn-success w-100">Shop Now</Button>
-                                    </div>
+                                <div class="col-lg-12 mt-3">
+                                    <div class="row">
+                                        <div class="col-lg-6 pb-2">
+                                            <button onclick="cart()" class="btn btn-danger w-100">Add To Cart</button>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <Button onclick="Buy()" class="btn btn-success w-100">Shop Now</Button>
+                                        </div>
                                 </div>
                             @endif
 

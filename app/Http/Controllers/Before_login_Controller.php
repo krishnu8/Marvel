@@ -216,18 +216,7 @@ class Before_login_Controller extends Controller
         $otp = rand(100000, 999999);
         // $check = password_reset_tokens::where('email', $email)->count();
 
-<<<<<<< Updated upstream
         $token_data = password_reset_tokens::where('email', $email)->first();
-=======
-        if ($count == 1) {
-            Session::put('Forget_password_email', $user->Email);
-            $data = ['fn' => $user->un, 'em' => $req->em];
-            Mail::send(['text' => 'forget_password_mail'], ['data' => $data], function ($message) use ($data) {
-                $message->to($data['em'], $data['fn']);
-                $message->from('abhuj145@rku.ac.in', 'Marvel');
-                $message->subject('Forget Password Link');
-            });
->>>>>>> Stashed changes
 
         if ($token_data) {
             if ($token_data['Expire_date'] >= $date) {
@@ -276,19 +265,12 @@ class Before_login_Controller extends Controller
     // change password forget password
     public function change_password(Request $req)
     {
-<<<<<<< Updated upstream
         $email = $req->email;
         if ($email == '') {
             session()->flash('reg', 'Please click to forget Password and change your password.');
             return redirect('login_form');
         }
         // echo $email;
-=======
-        $email = session('Forget_password_email');
-        if($email==''){
-            session()->flash('fail', 'Please click to forget Password and change your password.');
-        }
->>>>>>> Stashed changes
         $req->validate(
             [
                 'pwd' => 'required|regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
@@ -302,7 +284,6 @@ class Before_login_Controller extends Controller
             ],
         );
 
-<<<<<<< Updated upstream
         $gg = register::where('Email', $email)->first();
         if ($gg['password'] == $req->pwd) {
             session()->flash('login', 'Entered Password is your Password');
@@ -343,16 +324,5 @@ class Before_login_Controller extends Controller
     {
         Session::flush();
         return redirect('/');
-=======
-        $result = register::where('Email', $email)->update(['Password' => $req->pwd]);
-        if ($result) {
-            session()->flash('Active', 'Password changed Successfully');
-            session()->forget('Forget_password_email');
-        } else {
-            session()->flash('login', 'Something Went Wrong');
-        }
-
-        return redirect('login_form');
->>>>>>> Stashed changes
     }
 }
