@@ -141,6 +141,12 @@
             </a>
           </li>
           <li>
+            <a href="{{ URL::to('/') }}/coupon" class="nav-link px-3">
+              <span class="me-2"><i class="bi bi-gift-fill"></i></span>
+              <span>Coupons</span>
+            </a>
+          </li>
+          <li>
             <a href="{{ URL::to('/') }}/orders" class="nav-link px-3">
               <span class="me-2"><i class="bi bi-cart-check-fill"></i></span>
               <span>Orders</span>

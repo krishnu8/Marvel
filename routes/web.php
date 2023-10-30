@@ -63,6 +63,9 @@ Route::middleware('Admin')->group(function () {
 
     Route::get('products', [My_Controller::class, 'fetch_products']);
     Route::view('products_add', 'Admin/products_add');
+    //Coupon
+    Route::get('coupon', [My_Controller::class, 'fetch_coupon']);
+    Route::view('addCoupon', 'Admin/addCoupon');
 
     Route::get('update_product1/{pro_id}', [My_Controller::class, 'fetch_product_detail']);
     Route::post('update_pro', [My_controller::class, 'update_pro']);

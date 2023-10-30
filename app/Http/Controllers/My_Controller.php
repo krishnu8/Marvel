@@ -11,6 +11,7 @@ use App\Models\Admin\movies;
 use App\Models\Admin\products;
 use App\Models\Admin\review_rating;
 use App\Models\register;
+use App\Models\offers;
 use App\Models\top_movies_model;
 use App\Models\contact_msg;
 use App\Models\order;
@@ -405,6 +406,13 @@ class My_Controller extends Controller
     {
         $products = products::where('deleted', 'No')->get();
         return view('Admin/products', compact('products'));
+    }
+
+    //coupon
+    public function fetch_coupon()
+    {
+        $coupons = offers::select()->get();
+        return view('Admin/coupon', compact('coupons'));
     }
 
     public function fetch_product_detail($pro_id)
