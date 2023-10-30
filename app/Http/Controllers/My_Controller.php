@@ -198,7 +198,9 @@ class My_Controller extends Controller
 
     public function fetch_admin()
     {
-        $admin_data = admin_data::select()->where('Role', 'Admin')->get();
+        $admin_data = admin_data::select()
+            ->where('Role', 'Admin')
+            ->get();
         return view('Admin/users_admin', compact('admin_data'));
     }
 
@@ -516,18 +518,41 @@ class My_Controller extends Controller
     //     return view('Admin/orders', compact('order','product_detail'));
     // }
 
-    public function fetch_order(){
-    $orders = order::select()->get();
-    $product_details = [];
+    public function fetch_order()
+    {
+        $orders = order::where('deleted','No')->get();
+        $product_detail = [];
 
-    foreach ($orders as $order) {
-        $product_detail = products::where('Product_id', $order->Product_id)->first();
-        $product_details[] = $product_detail;
-        
+        foreach ($orders as $order) {
+            $product_detail[] = $order['Product_id'];
+        }
+
+        $product_details= products::whereIn('Product_id',$product_detail)->get();
+
+        return view('Admin/orders', compact('orders', 'product_details'));
     }
 
-    return view('Admin/orders', compact('orders', 'product_details'));
-}
+    public function complete_ord($ord_id)
+    {
+        order::where('Order_id', $ord_id)->update(['Delivery_status' => 'Delivered']);
+        return redirect()->action([My_Controller::class, 'fetch_order']);
+    }
+    public function cancel_ord($ord_id)
+    {
+        order::where('Order_id', $ord_id)->update(['Delivery_status' => 'Cancelled']);
+        return redirect()->action([My_Controller::class, 'fetch_order']);
+    }
+    public function delete_ord($ord_id)
+    {
+        order::where('Order_id', $ord_id)->update(['deleted' => 'Yes']);
+        return redirect()->action([My_Controller::class, 'fetch_order']);
+    }
+    public function reorder($ord_id)
+    {
+        order::where('Order_id', $ord_id)->update(['Delivery_status' => 'Pending']);
+        return redirect()->action([My_Controller::class, 'fetch_order']);
+    }
+
 
     //Review Rating
     public function fetch_review_rating()

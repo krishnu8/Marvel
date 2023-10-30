@@ -33,9 +33,9 @@
                 <th>
                     Message
                 </th>
-                <th>
+                {{-- <th>
                     Deleted
-                </th>
+                </th> --}}
                 <th>
                     Delete
                 </th>
@@ -55,9 +55,9 @@
                 <td>
                     {{ $msg['Message'] }}
                 </td>
-                <td>
+                {{-- <td>
                     {{ $msg['deleted'] }}
-                </td>
+                </td> --}}
                 <td style="text-align: center;">
                     <a href="{{ URL::to('/') }}/delete_msg1/{{$msg['id']}}">
                         <button id="action" class="delete"><i class="bi bi-trash"></i></button>
