@@ -84,9 +84,7 @@
         }
 
         input[type=text], input[type=tel], input[type=password] {
-            background-color: transparent;
             border: white solid 0.5px;
-            color: white;
         }
 
         input[type=submit] {

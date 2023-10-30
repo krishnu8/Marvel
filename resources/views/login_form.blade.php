@@ -104,15 +104,11 @@
         }
 
         input[type=text] {
-            background-color: transparent;
             border: white solid 0.5px;
-            color: white;
         }
 
         input[type=password] {
-            background-color: transparent;
             border: white solid 0.5px;
-            color: white;
         }
 
         input[type=submit] {

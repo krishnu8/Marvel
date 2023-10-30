@@ -1,7 +1,5 @@
 @extends('layouts.After_header')
 <title>Product Detail</title>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <style>
     body {
         font-family: 'Roboto Condensed', sans-serif;
@@ -60,42 +58,11 @@
     }
 </style>
 @section('body')
-
     <div class="container-fluid" style="width: 100%">
         <div class="col-lg-12 border  main-section bg-white">
             <div class="row m-0">
                 <div class="col-lg-4 left-side-product-box pb-3">
                     <img src="{{ URL::to('/') }}/pictures/{{ $data['Image'] }}" class="border p-3">
-
-                    <div class="card rev" style="height: 235px;">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item" style="color: blue; font-weight: bold;">Rating & Review</li>
-                        </ul>
-                        @if ($feedback->isNotEmpty())
-                            <div class="card"
-                                style="height: 215px; scroll-behavior: smooth; overflow-y: scroll; background-color: #d5ceceb5;">
-                                @foreach ($feedback as $f)
-                                    <div class="card" style="margin: 5px; padding: 5px;     ">
-                                        <div style="display: inline-flex">
-                                            @for ($i = 0; $i < $f['Rating']; $i++)
-                                                <i class="fas fa-star" style="color: yellow;"></i>
-                                            @endfor
-                                        </div>
-                                        <p>{{ $f['Description'] }}</p>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @else
-                            <div class="card"
-                                style="height: 215px; scroll-behavior: smooth; overflow-y: scroll; background-color: #d5ceceb5">
-
-                                <div class="card" style="margin: 5px">
-                                    <p>No review rating</p>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-
                 </div>
                 <div class="col-lg-8">
                     <div class="right-side-pro-detail border p-3 m-0">
@@ -105,7 +72,9 @@
                                 <p class="m-0 p-0">{{ $data['Product_name'] }}</p>
                             </div>
                             <div class="col-lg-12">
-                                <p class="m-0 p-0 price-pro">RS {{ $data['Price'] }}</p>
+                                
+                                <p class="m-0 p-0 price-pro"><strike>RS {{ $data['Price'] }}</strike></p>
+                                <p class="m-0 p-0 price">RS {{$calculatedPrice}}</p>
                                 <hr class="p-0 m-0">
                             </div>
                             <div class="col-lg-12 pt-2">
@@ -146,36 +115,9 @@
                                     @endif
                                 @endif
                             </div>
-
-                            @if ($data['Quantity'] > 0)
-                                <div class="col-lg-12 mt-3">
-                                    <div class="row">
-                                        <div class="col-lg-6 pb-2">
-                                            <button onclick="cart()" class="btn btn-danger w-100">Add To Cart</button>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <Button onclick="Buy()" class="btn btn-success w-100">Shop Now</Button>
-                                        </div>
                             <div class="col-lg-12 pt-2">
-                                <h5>Offers (Optional)</h5>
-                                <span></span>
-                                {{-- <form action="apply_coupon" method="get">
-                                    <input class="form-control" name="Coupon" type="text" placeholder="Coupon Code" >
-                                    <small>
-                                        @error('Coupon')
-                                            {{ $message }}
-                                        @enderror
-                                    </small>
-                                    <Button type="submit" class="btn btn-primary w-100" style="margin-top: 5px">Apply Coupon</Button>
-                                </form> --}}
-                                <input class="form-control" id="Coupon" type="text" placeholder="Coupon Code">
-                                @if (session('error'))
-                                    <small id="coup_err" style="color: red">{{ session('error') }}</small>
-                                @endif
-                                <small id="coup_err" style="color: red"></small>
-                                <Button onclick="Coupon()" class="btn btn-primary w-100" style="margin-top: 5px">Apply
-                                    Coupon</Button>
-
+                                <div style="color: green">
+                                    <b><h4>Coupon Applied Successfully</h4></b></div>    
                             </div>
                             <div class="col-lg-12 mt-3">
                                 <div class="row">
@@ -186,9 +128,7 @@
                                         <Button onclick="Buy()" class="btn btn-success w-100">Shop Now</Button>
                                     </div>
                                 </div>
-                            @endif
-
-
+                            </div>
                             {{-- </form> --}}
                         </div>
                     </div>
@@ -235,7 +175,7 @@
         if (x == '') {
             coupErrElement.innerText = "Field cannot be empty.";;
         } else {
-            window.location.href = 'http://127.0.0.1:8000/apply_coupon/{{ $data['Product_id'] }}/'+x;
+            window.location.href = 'http://127.0.0.1:8000/apply_coupon/' + x;
         }
     }
 </script>

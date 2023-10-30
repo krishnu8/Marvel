@@ -11,9 +11,11 @@ use App\Models\top_movies_model;
 use App\Models\franchise_model;
 use App\Models\about_char;
 use App\Models\about_us;
+use Carbon\Carbon;
 use App\Models\order;
 use App\Models\cart;
 use App\Models\Admin\review_rating;
+use App\Models\offers;
 use App\Models\register;
 use App\Models\ticket_book;
 use Illuminate\Support\Facades\File;
@@ -253,12 +255,25 @@ class After_login_controller extends Controller
         $product = franchise_model::where('Product_id', $id)->first();
         if ($product) {
             if ($product['Quantity'] >= 0) {
+                if(session('Discount_Amt')){
+                    $discount = session('Discount_Amt');
+                    session()->forget('Discount_Amt');
+                }else{
+                    $discount = 0;
+                }
+                if(session('Coupon_Status')){
+                    $coupon = session('Coupon_Status');
+                    $offer = offers::where('Coupon', $coupon)->first();
+                    if ($offer) {
+                    $offer->update(['Status' => 'Used']);
+                    }
+                }
                 order::insert([
                     'Product_id' => $id,
                     'User_id' => $User_id,
                     'Quantity' => $qt,
                     'Price' => $product['Price'],
-                    'Discount_Amount' => '0',
+                    'Discount_Amount' => $discount,
                     'Delivery_status' => 'Pending',
                 ]);
                 franchise_model::where('Product_id', $id)->update([
@@ -277,7 +292,7 @@ class After_login_controller extends Controller
     public function order_list()
     {
         $User_id = session('user_id');
-        $order = order::where('User_id', $User_id)->get();
+        $order = order::where('User_id', $User_id)->orderBy('Order_id', 'desc')->get();
 
         $Product_id = [];
         foreach ($order as $order1) {
@@ -291,8 +306,18 @@ class After_login_controller extends Controller
 
     public function cancle_order($id)
     {
-        $check = order::where('Order_id', $id)->delete();
 
+        $order = order::where('Order_id', $id)->first();
+        $qt = $order['Quantity'];
+        $product = franchise_model::where('Product_id',$order['Product_id']);
+        $franchise = franchise_model::where('Product_id', $order['Product_id'])->first();
+
+        if ($franchise) {
+            $franchise->update([
+            'Quantity' => $franchise->Quantity + $qt,
+            ]);
+        }
+        $check = order::where('Order_id', $id)->delete();
         return redirect('order_list');
     }
 
@@ -302,15 +327,27 @@ class After_login_controller extends Controller
         $product = franchise_model::where('Product_id', $id)->first();
         if ($product) {
             if ($product['Quantity'] >= 0) {
+                if(session('Discount_Amt')){
+                    $discount = session('Discount_Amt');
+                    session()->forget('Discount_Amt');
+                }else{
+                    $discount = 0;
+                }
+                if(session('Coupon_ID')){
+                    $offer = offers::where('Offer_ID', session('Coupon_ID'))->first();
+                    if ($offer) {
+                    $offer->update(['Status' => 'Used']);
+                    }
+                }
                 cart::insert([
                     'Product_id' => $id,
                     'User_id' => $User_id,
                     'Quantity' => $qt,
                     'Price' => $product['Price'],
-                    'Discount_Amount' => '0',
+                    'Discount_Amount' => $discount,
                 ]);
 
-                session()->flash('succ', 'Product Added to Cart');
+                 session()->flash('succ', 'Product Successfully Added to Cart');
             } else {
                 session()->flash('error', 'Product is out of Stock, please wait till the new stock of this product arrive');
             }
@@ -322,7 +359,9 @@ class After_login_controller extends Controller
     public function cart_list()
     {
         $User_id = session('user_id');
-        $cart = cart::where('User_id', $User_id)->get();
+        // $cart = cart::where('User_id', $User_id)->get();
+        $cart = cart::where('User_id', $User_id)->orderBy('cart_id', 'desc')->get();
+
         $Product_id = [];
         foreach ($cart as $cart1) {
             $Product_id[] = $cart1['Product_id'];
@@ -336,6 +375,37 @@ class After_login_controller extends Controller
         $check = cart::where('cart_id', $id)->delete();
 
         return redirect('cart_list');
+    }
+    public function place_cart_order()
+    {
+        $User_id = session('user_id');
+        $cart = cart::where('User_id', $User_id)->get();
+        foreach($cart as $cart1){
+            $qt = $cart1['Quantity'];
+            $product = franchise_model::where('Product_id', $cart1['Product_id'])->first();
+        if ($product) {
+            if ($product['Quantity'] > 0) {
+                order::insert([
+                    'Product_id' => $cart1['Product_id'],
+                    'User_id' => $User_id,
+                    'Quantity' => $qt,
+                    'Price' => $cart1['Price'],
+                    'Discount_Amount' => $cart1['Discount_Amount'],
+                    'Delivery_status' => 'Pending',
+                ]);
+                cart::where('cart_id', $cart1['cart_id'])->delete();
+                franchise_model::where('Product_id', $product['Product_id'])->update([
+                    'Quantity' => $product['Quantity'] - $qt,
+                ]);
+            } else {
+                session()->flash('error', 'Product is out of Stock, please wait till the new stock of this product arrive');
+            }
+        } else {
+            return redirect('After_Franchise');
+        }
+    }
+        session()->flash('succ', 'Products Ordered Successfully');
+        return redirect('After_Franchise');
     }
     public function Book_Ticket(Request $req)
     {
@@ -354,7 +424,7 @@ class After_login_controller extends Controller
             DB::table('movies')
                 ->where('Movie_id', $req->Movie_id)
                 ->decrement('available_tickets', $req->Quantity);
-        } else {
+        }else{
             session()->flash('err', 'Something Went wrong try again lateer');
         }
 
@@ -410,5 +480,48 @@ class After_login_controller extends Controller
             session()->flash('error', 'Something went wrong');
         }
         return redirect('order_list');
+    }
+    //Offers
+    public function validate_coupon($id , $coupon) {
+        $offer = offers::where('Coupon', $coupon)->first();
+        $franchise = franchise_model::where('Product_id', $id)->first();
+        if ($offer) {
+            // Check if the offer has an expiry date
+            if ($offer->Expiry_Date) {
+                $currentDate = Carbon::now('Asia/Kolkata');
+                $expiryDate = Carbon::parse($offer->Expiry_Date);
+
+                if ($currentDate->lte($expiryDate)) {
+                        if($offer->Status=="Unused"){
+                            if($offer->Minimum_price <= $franchise->Price){
+                                session(['Discount_Amt' => $offer->Discount_amount]);
+                            session(['Coupon_ID' => $offer->Offer_ID]);
+                            return redirect('product_detail_after_discount/'.$id);
+                            }else{
+                                return redirect()->back()->with('error', 'Coupon doesnot meet the requirements.');
+                            }
+
+                        }else{
+                            return redirect()->back()->with('error', 'Coupon is already Used.');
+                        }
+                } else {
+                    return redirect()->back()->with('error', 'Coupon has expired.');
+                }
+            } else {
+            }
+        } else {
+            return redirect()->back()->with('error', 'Invalid coupon code.');
+        }
+    }
+    public function product_detail_after_discount($id)
+    {
+        $data = franchise_model::where('Product_id', $id)->first();
+
+        $suggestion = franchise_model::where('Category', $data['Category'])
+            ->get()
+            ->take(4);
+            $discountAmount = session('Discount_Amt');
+            $calculatedPrice = $data['Price'] - $discountAmount;
+        return view('After_login/product_detail_after_discount', compact('data', 'suggestion','calculatedPrice'));
     }
 }
