@@ -13,6 +13,7 @@ use App\Models\Admin\review_rating;
 use App\Models\register;
 use App\Models\top_movies_model;
 use App\Models\contact_msg;
+use App\Models\order;
 use Illuminate\Support\Facades\Mail;
 
 class My_Controller extends Controller
@@ -73,13 +74,15 @@ class My_Controller extends Controller
         $ob->validate(
             [
                 'mn' => 'required',
-                'rt' => 'required',
                 'rd' => 'required',
+                'tkt' => 'required',
+                'pr' => 'required',
                 'movie_pic' => 'required|mimes:jpg,png,gif,bmp', //|size:5120
             ],
             [
                 'mn.required' => 'Movie name is required.',
-                'rt.required' => 'Run time is required.',
+                'tkt.required' => 'No. of ticket is required.',
+                'pr.required' => 'Price is required',
                 'rd.required' => 'Release date is required.',
                 'movie_pic.required' => 'Please select picture.',
             ],
@@ -95,8 +98,9 @@ class My_Controller extends Controller
         $check = movies::insert([
             'Movie_Name' => $ob->mn,
             'Release_Date' => $ob->rd,
-            'Run_Time' => $ob->rt,
             'Status' => $ob->status,
+            'available_tickets' => $ob->tkt,
+            'Price' => $ob->pr,
             'pic' => $filename,
         ]);
         if ($check) {
@@ -107,23 +111,23 @@ class My_Controller extends Controller
         return redirect()->action([My_Controller::class, 'fetch_movies']);
     }
 
-    public function validate_upcom_movie(request $ob)
-    {
-        $ob->validate(
-            [
-                'mn' => 'required',
-                'rt' => 'required',
-                'rd' => 'required',
-                'movie_pic' => 'required|size:5120|mimes:jpg,png,gif,bmp',
-            ],
-            [
-                'mn.required' => 'Movie name is required.',
-                'rt.required' => 'Run time is required.',
-                'rd.required' => 'Release date is required.',
-                'movie_pic.required' => 'Please select picture.',
-            ],
-        );
-    }
+    // public function validate_upcom_movie(request $ob)
+    // {
+    //     $ob->validate(
+    //         [
+    //             'mn' => 'required',
+    //             'rt' => 'required',
+    //             'rd' => 'required',
+    //             'movie_pic' => 'required|size:5120|mimes:jpg,png,gif,bmp',
+    //         ],
+    //         [
+    //             'mn.required' => 'Movie name is required.',
+    //             'rt.required' => 'Run time is required.',
+    //             'rd.required' => 'Release date is required.',
+    //             'movie_pic.required' => 'Please select picture.',
+    //         ],
+    //     );
+    // }
 
     public function validate_product(request $ob)
     {
@@ -344,16 +348,21 @@ class My_Controller extends Controller
         $ob->validate(
             [
                 'mn' => 'required',
-                'rt' => 'required',
                 'rd' => 'required|',
+                'tkt' => 'required|',
+                'qty' => 'required',
+                'pr' => 'required|',
                 'status' => 'required',
                 'pic' => 'mimes:jpg,png|max:2048',
             ],
             [
                 'mn.required' => 'Movie name is required.',
-                'rt.required' => 'runtime is required.',
                 'rd.required' => 'Release date is required.',
+                'qty.required' => 'Quantity is required.',
+                'tkt.required' => 'No. of ticket is required.',
+                'pr.required' => 'ticket price is required.',
                 'status.required' => 'Status is required.',
+                
                 'pic.required' => 'Picture is required.',
                 'pic.mimes' => 'Picture types must be jpg,png',
                 'pic.max' => 'Picture size must be less than 2MB',
@@ -381,8 +390,9 @@ class My_Controller extends Controller
 
         movies::where('Movie_ID', $ob->m_id)->update([
             'Movie_Name' => $ob->mn,
-            'Run_Time' => $ob->rt,
             'Release_Date' => $ob->rd,
+            'available_tickets' => $ob->tkt,
+            'Price' => $ob->pr,
             'Status' => $ob->status,
         ]);
 
@@ -455,6 +465,13 @@ class My_Controller extends Controller
         products::where('product_id', $pro_id)->update(['deleted' => 'Yes']);
         return redirect()->action([My_Controller::class, 'fetch_products']);
     }
+
+    //Order
+    // public function fetch_order(){
+    //     $order = order::all();
+    //     $product_detail=products::where('Product_id',$order['Product_id'])->get();
+    //     return view('Admin/orders',compact('order','product_detail'));
+    // }
 
     //Review Rating
     public function fetch_review_rating()

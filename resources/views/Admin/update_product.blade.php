@@ -20,23 +20,15 @@
                 <div class="form-group">
                     <label for="pn1">Movie Name</label>
                     <input type="text" id="pn1" name="pn" class="form-control"
-                        value="{{ $pro['product_name'] }}">
+                        value="{{ $pro['Product_name'] }}">
                     @error('pn')
-                        <small style="color: red">{{ $message }}</small>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="pd1">Description</label>
-                    <textarea type="text" id="pd1" name="pd" class="form-control"
-                        style="border: 1px solid black">{{ $pro['product_desc'] }}</textarea>
-                        @error('pd')
                         <small style="color: red">{{ $message }}</small>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="p">Price</label>
                     <input type="number" id="p1" name="p" class="form-control"
-                        style="border: 1px solid black" value="{{ $pro['price'] }}">
+                        style="border: 1px solid black" value="{{ $pro['Price'] }}">
                         @error('p')
                         <small style="color: red">{{ $message }}</small>
                     @enderror

@@ -48,7 +48,8 @@
                     {{$movie['Movie_ID']}}
                 </td>
                 <td style="text-align: center;">
-                    <img src="{{ URL::to('/') }}/pictures/wall.jpg">
+                    {{-- <img src="{{ URL::to('/') }}/pictures/wall.jpg"> --}}
+                    <img src="{{ URL::to('/') }}/pictures/movies/{{ $movie['pic'] }}">
                 </td>
                 <td>
                     {{$movie['Movie_Name']}}

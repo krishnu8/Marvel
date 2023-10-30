@@ -171,11 +171,12 @@
                             </div>
                         </div>
                     @endforeach
-
-                    @unless ($cosplay == null)
-                        <p style="color: Red; text-align: center; font-size: 30px; width: 100%; padding-top:50px ;padding-bottom: 200px">There is no any product with
+                    @if ($cosplay->isEmpty())
+                        <p
+                            style="color: Red; text-align: center; font-size: 30px; width: 100%; padding-top:50px ;padding-bottom: 200px">
+                            There is no any product with
                             this name sorry!😒</p>
-                    @endunless
+                    @endif
 
                 </div>
                 <br>

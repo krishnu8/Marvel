@@ -13,6 +13,7 @@ use App\Models\about_char;
 use App\Models\about_us;
 use App\Models\order;
 use App\Models\cart;
+use App\Models\Admin\review_rating;
 use App\Models\register;
 use App\Models\ticket_book;
 use Illuminate\Support\Facades\File;
@@ -237,7 +238,9 @@ class After_login_controller extends Controller
             ->get()
             ->take(4);
 
-        return view('After_login/product_detail', compact('data', 'suggestion'));
+        $feedback=review_rating::where('Product_id',$id)->get();
+
+        return view('After_login/product_detail', compact('data', 'suggestion','feedback'));
         // return view('After_login/product_detail',compact('data'));
     }
 
@@ -388,6 +391,24 @@ class After_login_controller extends Controller
             ->take(3)
             ->get();
 
-            return view('After_login/search_franchise',compact('cosplay'));
+        return view('After_login/search_franchise', compact('cosplay'));
+    }
+
+    public function review_rating(Request $req)
+    {
+        $User_id = session('user_id');
+
+        $check = review_rating::insert([
+            'Product_id' => $req->product_id,
+            'Description' => $req->review,
+            'Rating' => $req->rating,
+            'User_id' => $User_id,
+        ]);
+        if ($check) {
+            session()->flash('succ', 'Feedback Submitted');
+        } else {
+            session()->flash('error', 'Something went wrong');
+        }
+        return redirect('order_list');
     }
 }

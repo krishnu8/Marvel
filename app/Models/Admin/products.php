@@ -9,5 +9,5 @@ class products extends Model
 {
     use HasFactory;
     public $timestamps=false;
-    public $table="product";
+    public $table="franchise";
 }

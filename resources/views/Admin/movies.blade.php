@@ -38,13 +38,16 @@
                         Movie Name
                     </th>
                     <th>
-                        Run-time
-                    </th>
-                    <th>
                         Release Date
                     </th>
                     <th>
                         Status
+                    </th>
+                    <th>
+                        Tickets
+                    </th>
+                    <th>
+                        Price of Ticket
                     </th>
                     <th>
                         Edit
@@ -66,13 +69,16 @@
                             {{ $movie['Movie_Name'] }}
                         </td>
                         <td>
-                            {{ $movie['Run_Time'] }}
-                        </td>
-                        <td>
-                            {{ $movie['Release_Date'] }}Run_Time
+                            {{ $movie['Release_Date'] }}
                         </td>
                         <td>
                             {{ $movie['Status'] }}
+                        </td>
+                        <td>
+                            {{ $movie['available_tickets'] }}
+                        </td>
+                        <td>
+                            {{ $movie['Price'] }}
                         </td>
                         <td style="text-align: center;">
                             <a href="{{ URL::to('/') }}/update_movie1/{{ $movie['Movie_ID'] }}"><button id="action"

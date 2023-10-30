@@ -69,6 +69,7 @@ Route::middleware('Admin')->group(function () {
     Route::get('delete_product1/{pro_id}', [My_Controller::class, 'delete_product']);
 
     Route::view('orders', 'Admin/orders');
+    // Route::get('orders', [My_Controller::class, 'fetch_order']);
     Route::view('order_add', 'Admin/order_add');
 
     Route::get('review_rating', [My_Controller::class, 'fetch_review_rating']);
@@ -183,4 +184,8 @@ Route::middleware('user')->group(function () {
 
     Route::post('search_franchise',[After_login_Controller::class, 'search_franchise']);
     // Route::view('search_franchise','search_franchise');
+
+
+    // review rating
+    Route::post('review_rating',[After_login_Controller::class, 'review_rating']);
 });

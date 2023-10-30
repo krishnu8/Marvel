@@ -56,14 +56,14 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col">
                             <input type="time" name="rt" placeholder="Run Time" id="rt1" class="form-control">
                             @error('rt')
                                 <span style="color: red;">{{ $message }}</span> <br>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="row">
                         <div class="col">
                             <input type="date" name="rd" placeholder="Release Date" id="rd1"
@@ -78,8 +78,25 @@
                             <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="status">
                                 <option value="Upcoming" selected>Upcoming</option>
                                 <option value="Deleted">Available</option>
-                                <option value="Deleted">Deleted</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="number" name="tkt" placeholder="No. of Tickets" id="tkt1"
+                                class="form-control">
+                            @error('tkt')
+                                <span style="color: red;">{{ $message }}</span> <br>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="number" name="pr" placeholder="Price of ticket" id="pr1"
+                                class="form-control">
+                            @error('pr')
+                                <span style="color: red;">{{ $message }}</span> <br>
+                            @enderror
                         </div>
                     </div>
                     <div class="row">

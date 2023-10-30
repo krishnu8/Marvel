@@ -38,9 +38,6 @@
                         Product Name
                     </th>
                     <th>
-                        Description
-                    </th>
-                    <th>
                         Quantity
                     </th>
                     <th>
@@ -63,24 +60,21 @@
                 @foreach ($products as $product)
                     <tr>
                         <td>
-                            {{ $product['product_id'] }}
+                            {{ $product['Product_id'] }}
                         </td>
                         <td style="text-align: center;">
-                            <img src="{{ URL::to('/') }}/pictures/products/{{ $product['product_image'] }}">
-                        </td>
-                        <td>
-                            {{ $product['product_name'] }}
+                            <img src="{{ URL::to('/') }}/pictures/products/{{ $product['Image'] }}">
                         </td>
                         <td style="padding: 10px">
                             <div  style="height:100px; overflow-y: scroll; word-break: break-all" >
-                                {{ $product['product_desc'] }}
+                                {{ $product['Product_name'] }}
                             </div>
                         </td>
                         <td>
                             {{ $product['Quantity'] }}
                         </td>
                         <td>
-                            {{ $product['price'] }}
+                            {{ $product['Price'] }}
                         </td>
                         <td>
                             {{ $product['deleted'] }}
@@ -89,11 +83,11 @@
                     {{$product['category_id']}}
                 </td> --}}
                         <td style="text-align: center;">
-                            <a href="{{ URL::to('/') }}/update_product1/{{ $product['product_id'] }}"><button
+                            <a href="{{ URL::to('/') }}/update_product1/{{ $product['Product_id'] }}"><button
                                     id="action" class="edit"><i class="bi bi-pencil-square"></i></button></a>
                         </td>
                         <td style="text-align: center;">
-                            <a href="{{ URL::to('/') }}/delete_product1/{{ $product['product_id'] }}"><button
+                            <a href="{{ URL::to('/') }}/delete_product1/{{ $product['Product_id'] }}"><button
                                     id="action" class="delete"><i class="bi bi-trash"></i></button></a>
                         </td>
                     </tr>

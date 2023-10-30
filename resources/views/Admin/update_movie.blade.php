@@ -26,14 +26,14 @@
                             <small style="color: red">{{ $message }}</small>
                         @enderror
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="rt1">Runtime</label>
                         <input type="time" id="rt1" name="rt" class="form-control" placeholder="Enter email"
                             style="border: 1px solid black" value="{{ $movies['Run_Time'] }}">
                         @error('rt')
                             <small style="color: red">{{ $message }}</small>
                         @enderror
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label for="rd">Release_Date</label>
                         <input type="date" id="em1" name="rd" class="form-control" placeholder="Enter email"
@@ -49,6 +49,25 @@
                         @error('status')
                             <small style="color: red">{{ $message }}</small>
                         @enderror
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <input type="number" name="tkt" id="tkt1" value="{{ $movies['available_tickets'] }}"
+                                class="form-control">
+                            @error('tkt')
+                                <span style="color: red;">{{ $message }}</span> <br>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="number" name="pr" value="{{ $movies['Price'] }}" id="pr1"
+                                class="form-control">
+                            @error('pr')
+                                <span style="color: red;">{{ $message }}</span> <br>
+                            @enderror
+                        </div>
                     </div>
 
                     <div class="form-group">

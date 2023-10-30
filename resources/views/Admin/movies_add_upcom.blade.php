@@ -16,7 +16,7 @@
         <h1>Add Upcoming Movie</h1>
             <form class="user_add" action="upcom_movie_controller" method="post" enctype="multipart/form-data">
                 @csrf
-                
+
                 <div class="row">
                     <div class="col">
                         <input type="text" name="mn" placeholder="Movie Name" id="mn1" class="form-control">

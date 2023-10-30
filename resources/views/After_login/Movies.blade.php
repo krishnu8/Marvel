@@ -140,6 +140,7 @@
                             </div>
                         </div>
 
+                        {{-- modal  --}}
 
                         <div class="modal fade" id="{{ $r['Movie_Name'] }}" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

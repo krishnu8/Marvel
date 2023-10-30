@@ -1,5 +1,7 @@
 @extends('layouts.After_header')
 <title>Product Detail</title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <style>
     body {
         font-family: 'Roboto Condensed', sans-serif;
@@ -58,11 +60,42 @@
     }
 </style>
 @section('body')
+
     <div class="container-fluid" style="width: 100%">
         <div class="col-lg-12 border  main-section bg-white">
             <div class="row m-0">
                 <div class="col-lg-4 left-side-product-box pb-3">
                     <img src="{{ URL::to('/') }}/pictures/{{ $data['Image'] }}" class="border p-3">
+
+                    <div class="card rev" style="height: 235px;">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" style="color: blue; font-weight: bold;">Rating & Review</li>
+                        </ul>
+                        @if ($feedback->isNotEmpty())
+                            <div class="card"
+                                style="height: 215px; scroll-behavior: smooth; overflow-y: scroll; background-color: #d5ceceb5;">
+                                @foreach ($feedback as $f)
+                                    <div class="card" style="margin: 5px; padding: 5px;     ">
+                                        <div style="display: inline-flex">
+                                            @for ($i = 0; $i < $f['Rating']; $i++)
+                                                <i class="fas fa-star" style="color: yellow;"></i>
+                                            @endfor
+                                        </div>
+                                        <p>{{ $f['Description'] }}</p>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <div class="card"
+                                style="height: 215px; scroll-behavior: smooth; overflow-y: scroll; background-color: #d5ceceb5">
+
+                                <div class="card" style="margin: 5px">
+                                    <p>No review rating</p>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+
                 </div>
                 <div class="col-lg-8">
                     <div class="right-side-pro-detail border p-3 m-0">
@@ -113,16 +146,21 @@
                                     @endif
                                 @endif
                             </div>
-                            <div class="col-lg-12 mt-3">
-                                <div class="row">
-                                    <div class="col-lg-6 pb-2">
-                                        <button onclick="cart()" class="btn btn-danger w-100">Add To Cart</button>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <Button onclick="Buy()" class="btn btn-success w-100">Shop Now</Button>
+
+                            @if ($data['Quantity'] > 0)
+                                <div class="col-lg-12 mt-3">
+                                    <div class="row">
+                                        <div class="col-lg-6 pb-2">
+                                            <button onclick="cart()" class="btn btn-danger w-100">Add To Cart</button>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <Button onclick="Buy()" class="btn btn-success w-100">Shop Now</Button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
+
+
                             {{-- </form> --}}
                         </div>
                     </div>
@@ -157,6 +195,7 @@
         var x = document.getElementById('selectOptions').value;
         window.location.href = 'http://127.0.0.1:8000/Buy_product/{{ $data['Product_id'] }}/' + x;
     }
+
     function cart() {
         var x = document.getElementById('selectOptions').value;
         window.location.href = 'http://127.0.0.1:8000/add_to_cart/{{ $data['Product_id'] }}/' + x;

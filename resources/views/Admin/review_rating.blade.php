@@ -24,9 +24,9 @@
                 <th>
                     Id
                 </th>
-                <th>
+                {{-- <th>
                     Product Image
-                </th>
+                </th> --}}
                 <th>
                     Product Id
                 </th>
@@ -36,9 +36,6 @@
                 </th>
                 <th>
                     Review
-                </th>
-                <th>
-                    Date
                 </th>
                 <th>
                     Deleted
@@ -54,9 +51,9 @@
                 <td>
                     {{$rating['Rating_id']}}
                 </td>
-                <td style="text-align: center;">
+                {{-- <td style="text-align: center;">
                     <img src="{{ URL::to('/') }}/pictures/wall.jpg" alt="" height="80px" width="80px" style="border-radius: 50%;">
-                </td>
+                </td> --}}
                 <td>
                     {{$rating['Product_id']}}
                 </td>
@@ -65,9 +62,6 @@
                 </td>
                 <td>
                     {{$rating['Rating']}}
-                </td>
-                <td>
-                    {{$rating['Description']}}
                 </td>
                 <td>
                     {{$rating['Description']}}
