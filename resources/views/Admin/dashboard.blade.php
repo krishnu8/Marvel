@@ -88,7 +88,7 @@
                         <div class="card h-100 dash_pro">
                             <div class="card-body py-5 m-auto">
                                 <h4 class="m-auto" style="font-size: 20px;">Total Admins</h4>
-                                <center>1</center>
+                                {{-- <center>1</center> --}}
                             </div>
                             <div class="card-footer d-flex center">
                                 <span class="m-auto"></span>
@@ -112,7 +112,7 @@
                         <div class="card h-100 dash_pro">
                             <div class="card-body py-5 m-auto">
                                 <h4 class="m-auto" style="font-size: 20px;">Total Normal Users</h4>
-                                <center>1</center>
+                                {{-- <center>1</center> --}}
                             </div>
                             <div class="card-footer d-flex center">
                                 <span class="m-auto"></span>
@@ -136,7 +136,7 @@
                         <div class="card h-100 dash_pro">
                             <div class="card-body py-5 m-auto">
                                 <h4 class="m-auto" style="font-size: 20px;">Total Users</h4>
-                                <center>1</center>
+                                {{-- <center>1</center> --}}
                             </div>
                             <div class="card-footer d-flex center">
                                 <span class="m-auto"></span>
@@ -160,7 +160,7 @@
                         <div class="card h-100 dash_pro">
                             <div class="card-body py-5 m-auto">
                                 <h4 class="m-auto" style="font-size: 20px;">Total Movies</h4>
-                                <center>1</center>
+                                {{-- <center>1</center> --}}
                             </div>
                             <div class="card-footer d-flex center">
                                 <span class="m-auto"></span>
@@ -182,7 +182,7 @@
                         <div class="card h-100 dash_pro">
                             <div class="card-body py-5 m-auto">
                                 <h4 class="m-auto" style="font-size: 20px;">Total Products</h4>
-                                <center>1</center>
+                                {{-- <center>1</center> --}}
                             </div>
                             <div class="card-footer d-flex center">
                                 <span class="m-auto"></span>
@@ -204,7 +204,7 @@
                         <div class="card h-100 dash_pro">
                             <div class="card-body py-5 m-auto">
                                 <h4 class="m-auto" style="font-size: 20px;">Total Orders</h4>
-                                <center>1</center>
+                                {{-- <center>1</center> --}}
                             </div>
                             <div class="card-footer d-flex center">
                                 <span class="m-auto"></span>
@@ -226,7 +226,7 @@
                         <div class="card h-100 dash_pro">
                             <div class="card-body py-5 m-auto">
                                 <h4 class="m-auto" style="font-size: 20px;">Total Messages</h4>
-                                <center>1</center>
+                                {{-- <center>1</center> --}}
                             </div>
                             <div class="card-footer d-flex center">
                                 <span class="m-auto"></span>
@@ -250,7 +250,7 @@
                         <div class="card h-100 dash_pro">
                             <div class="card-body py-5 m-auto">
                                 <h4 class="m-auto" style="font-size: 20px;">Total Deleted Users</h4>
-                                <center>1</center>
+                                {{-- <center>1</center> --}}
                             </div>
                             <div class="card-footer d-flex center">
                                 <span class="m-auto"></span>

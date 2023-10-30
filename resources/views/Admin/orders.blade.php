@@ -30,7 +30,7 @@
                 <tr style="height: 50px">
 
                     <th>
-                        Pro Id
+                        Order Id
                     </th>
                     <th>
                         Pro Id
