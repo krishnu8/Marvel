@@ -48,6 +48,9 @@
         <div class="container-fluid mt-5 mb-5">
             <div class="d-flex justify-content-center row">
                 <div class="col-md-10">
+                    @php
+                    $totalPrice = 0; 
+                @endphp
                     @foreach ($cart as $o)
                         @foreach ($product_detail as $p)
                             @if ($o['Product_id'] == $p['Product_id'])
@@ -78,9 +81,12 @@
                                             randomised words which don't look even slightly believable.<br><br></p> --}}
                                     </div>
                                     <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                                        <div style="color: red"><b><h4>Final Price</h4></b></div>
+                                        <div style="color: red"><b>
+                                                <h4>Final Price</h4>
+                                            </b></div>
                                         <div class="d-flex flex-row align-items-center">
-                                            <h4 class="mr-1">Rs.{{ $o['Price'] * $o['Quantity']-$o['Discount_Amount'] }}</h4>
+                                            <h4 class="mr-1">Rs.{{ $o['Price'] * $o['Quantity'] - $o['Discount_Amount'] }}
+                                            </h4>
                                             {{-- <span class="strike-text">299</span> --}}
                                         </div>
                                         <div class="d-flex flex-column" style="margin-top:60px;">
@@ -92,6 +98,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                @php
+                                        $subtotal = $o['Price'] * $o['Quantity'] - $o['Discount_Amount'];
+                                        $totalPrice += $subtotal;
+                                    @endphp
                             @endif
                         @endforeach
                     @endforeach
@@ -102,7 +112,8 @@
                     </div>
                 @else
                     <div class="col-lg-6" style="margin-top:20px;">
-                        <a href="place_cart_order"><button class="btn btn-primary w-100" >Place Order</button></a>
+                        <center><h2 style="color: green">Total Price: Rs.{{ $totalPrice }}</h2></center>
+                        <a href="place_cart_order"><button class="btn btn-primary w-100">Place Orders</button></a>
                     </div>
                 @endif
 
