@@ -183,7 +183,7 @@
                     @foreach ($cosplay as $d)
                         <div class="col-sm-12 col-md-6 col-lg-4 p">
                             <div>
-                                <center><img src="pictures/{{ $d['Image'] }}" class="fluid mov_img"><br>
+                                <center><img src="pictures/products/{{ $d['Image'] }}" class="fluid mov_img"><br>
                                     <div class="mov_text">
                                         {{ $d['Product_name'] }} <br>
                                         Price:
@@ -208,7 +208,7 @@
                     @foreach ($toy as $d)
                         <div class="col-sm-12 col-md-6 col-lg-4 p">
                             <div>
-                                <center><img src="pictures/{{ $d['Image'] }}" class="fluid mov_img"><br>
+                                <center><img src="pictures/products/{{ $d['Image'] }}" class="fluid mov_img"><br>
                                     <div class="mov_text">
                                         {{ $d['Product_name'] }} <br>
                                         Price:
@@ -238,7 +238,7 @@
                     @foreach ($collection as $d)
                         <div class="col-sm-12 col-md-6 col-lg-4 p">
                             <div>
-                                <center><img src="pictures/{{ $d['Image'] }}" class="fluid mov_img"><br>
+                                <center><img src="pictures/products/{{ $d['Image'] }}" class="fluid mov_img"><br>
                                     <div class="mov_text">
                                         {{ $d['Product_name'] }} <br>
                                         Price:
@@ -268,7 +268,7 @@
                     @foreach ($clothing as $d)
                         <div class="col-sm-12 col-md-6 col-lg-4 p">
                             <div>
-                                <center><img src="pictures/{{ $d['Image'] }}" class="fluid mov_img"><br>
+                                <center><img src="pictures/products/{{ $d['Image'] }}" class="fluid mov_img"><br>
                                     <div class="mov_text">
                                         {{ $d['Product_name'] }} <br>
                                         Price:
@@ -298,7 +298,7 @@
                     @foreach ($accessories as $d)
                         <div class="col-sm-12 col-md-6 col-lg-4 p">
                             <div>
-                                <center><img src="pictures/{{ $d['Image'] }}" class="fluid mov_img"><br>
+                                <center><img src="pictures/products/{{ $d['Image'] }}" class="fluid mov_img"><br>
                                     <div class="mov_text">
                                         {{ $d['Product_name'] }} <br>
                                         Price:

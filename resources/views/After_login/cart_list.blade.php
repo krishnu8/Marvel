@@ -44,12 +44,38 @@
                 font-size: 16px
             }
         </style>
+        @if (session('succ'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert"
+            style="min-width: 500px; right: 20px; top: 100px; z-index:1; position: absolute;">
+            {{ session('succ') }}
+        </div>
 
+        <script>
+            // Automatically close the alert after 5 seconds
+            setTimeout(function() {
+                $('.alert').alert('close');
+            }, 3000);
+        </script>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert"
+            style="min-width: 500px; right: 20px; top: 100px; z-index:1; position: absolute;">
+            {{ session('error') }}
+        </div>
+
+        <script>
+            // Automatically close the alert after 5 seconds
+            setTimeout(function() {
+                $('.alert').alert('close');
+            }, 3000);
+        </script>
+    @endif
         <div class="container-fluid mt-5 mb-5">
             <div class="d-flex justify-content-center row">
                 <div class="col-md-10">
                     @php
-                    $totalPrice = 0; 
+                    $totalPrice = 0;
                 @endphp
                     @foreach ($cart as $o)
                         @foreach ($product_detail as $p)
@@ -57,7 +83,7 @@
                                 <div class="row p-2 bg-white border rounded">
                                     <div class="col-md-3 mt-1" style="text-align: center"><img class=" img-responsive rounded"
                                             height="175px" width="175px"
-                                            src="{{ URL::to('/') }}/pictures/{{ $p['Image'] }}">
+                                            src="{{ URL::to('/') }}/pictures/products/{{ $p['Image'] }}">
                                     </div>
                                     <div class="col-md-6 mt-1">
                                         <h5>{{ $p['Product_name'] }}</h5>

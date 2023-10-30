@@ -76,7 +76,7 @@ class Before_login_Controller extends Controller
     {
         $top = top_movies_model::select()->get();
         $current = movies_model::select()
-            ->where('Status', 'Current')
+            ->where('Status', 'Available')
             ->get();
         $upcoming = movies_model::select()
             ->where('Status', 'Upcoming')

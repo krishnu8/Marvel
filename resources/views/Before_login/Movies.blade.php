@@ -62,7 +62,7 @@
         @foreach ($current as $r)
             <div class="col-sm-12 col-md-6 col-lg-4" style="padding-bottom:20px;">
                 <div>
-                    <center><img src="pictures/{{$r['pic']}}" class="fluid mov_img"><br>
+                    <center><img src="pictures/movies/{{$r['pic']}}" class="fluid mov_img"><br>
                         <div class="mov_text">
                             {{$r['Movie_Name']}} <br>
                             Release Date:
@@ -72,7 +72,7 @@
                                 data-content="Login to book tickets">Book Tickets</button>
                         </div><br><br>
                         </div>
-                        
+
 
                         <script>
                             $(document).ready(function () {
@@ -95,7 +95,7 @@
         @foreach ($upcoming as $r)
         <div class="col-sm-12 col-md-6 col-lg-4" style="padding-bottom:20px;">
             <div>
-                <center><img src="pictures/{{$r['pic']}}" class="fluid mov_img"><br>
+                <center><img src="pictures/movies/{{$r['pic']}}" class="fluid mov_img"><br>
                     <div class="mov_text">
                         {{$r['Movie_Name']}} <br>
                         Release Date:
@@ -122,7 +122,7 @@
             @endphp
             <div class="col-sm-12 col-md-6 col-lg-4" style="padding-bottom:20px;">
                 <div>
-                    <center><img src="pictures/{{$r['Image']}}" class="fluid mov_img"><br>
+                    <center><img src="pictures/movies/{{$r['Image']}}" class="fluid mov_img"><br>
                         <div class="mov_text">
                             <b>#{{$count}}<br></b>
                             {{$r['Movie_Name']}}<br>
@@ -137,5 +137,5 @@
         @endforeach
     </div>
 </div><br>
-    
+
 @endsection

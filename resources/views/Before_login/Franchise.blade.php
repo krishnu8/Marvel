@@ -130,7 +130,7 @@
                     @foreach ($cosplay as $d)
                     <div class="col-sm-12 col-md-6 col-lg-4 p" >
                         <div>
-                            <center><img src="pictures/{{$d['Image']}}" class="fluid mov_img"><br>
+                            <center><img src="pictures/products/{{$d['Image']}}" class="fluid mov_img"><br>
                                 <div class="mov_text">
                                     {{$d['Product_name']}} <br>
                                     Price:
@@ -139,7 +139,7 @@
                                         <button href="#" data-toggle="popover" title="Buy"
                                             class="btn btn-outline-danger book_tkt" data-content="Login to buy product">Buy
                                             Now</button>
-                                    </div>                
+                                    </div>
 
                             <script>
                                 $(document).ready(function () {
@@ -161,7 +161,7 @@
                 @foreach ($toy as $d)
                     <div class="col-sm-12 col-md-6 col-lg-4 p" >
                         <div>
-                            <center><img src="pictures/{{$d['Image']}}" class="fluid mov_img"><br>
+                            <center><img src="pictures/products/{{$d['Image']}}" class="fluid mov_img"><br>
                                 <div class="mov_text">
                                     {{$d['Product_name']}} <br>
                                     Price:
@@ -170,7 +170,7 @@
                                         <button href="#" data-toggle="popover" title="Buy"
                                             class="btn btn-outline-danger book_tkt" data-content="Login to buy product">Buy
                                             Now</button>
-                                    </div>                
+                                    </div>
 
                             <script>
                                 $(document).ready(function () {
@@ -191,7 +191,7 @@
                 @foreach ($collection as $d)
                     <div class="col-sm-12 col-md-6 col-lg-4 p" >
                         <div>
-                            <center><img src="pictures/{{$d['Image']}}" class="fluid mov_img"><br>
+                            <center><img src="pictures/products/{{$d['Image']}}" class="fluid mov_img"><br>
                                 <div class="mov_text">
                                     {{$d['Product_name']}} <br>
                                     Price:
@@ -200,7 +200,7 @@
                                         <button href="#" data-toggle="popover" title="Buy"
                                             class="btn btn-outline-danger book_tkt" data-content="Login to buy product">Buy
                                             Now</button>
-                                    </div>                
+                                    </div>
 
                             <script>
                                 $(document).ready(function () {
@@ -221,7 +221,7 @@
                 @foreach ($clothing as $d)
                     <div class="col-sm-12 col-md-6 col-lg-4 p" >
                         <div>
-                            <center><img src="pictures/{{$d['Image']}}" class="fluid mov_img"><br>
+                            <center><img src="pictures/products/{{$d['Image']}}" class="fluid mov_img"><br>
                                 <div class="mov_text">
                                     {{$d['Product_name']}} <br>
                                     Price:
@@ -230,7 +230,7 @@
                                         <button href="#" data-toggle="popover" title="Buy"
                                             class="btn btn-outline-danger book_tkt" data-content="Login to buy product">Buy
                                             Now</button>
-                                    </div>                
+                                    </div>
 
                             <script>
                                 $(document).ready(function () {
@@ -251,7 +251,7 @@
                 @foreach ($accessories as $d)
                     <div class="col-sm-12 col-md-6 col-lg-4 p" >
                         <div>
-                            <center><img src="pictures/{{$d['Image']}}" class="fluid mov_img"><br>
+                            <center><img src="pictures/products/{{$d['Image']}}" class="fluid mov_img"><br>
                                 <div class="mov_text">
                                     {{$d['Product_name']}} <br>
                                     Price:
@@ -260,7 +260,7 @@
                                         <button href="#" data-toggle="popover" title="Buy"
                                             class="btn btn-outline-danger book_tkt" data-content="Login to buy product">Buy
                                             Now</button>
-                                    </div>                
+                                    </div>
 
                             <script>
                                 $(document).ready(function () {

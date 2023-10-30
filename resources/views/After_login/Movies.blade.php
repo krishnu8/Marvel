@@ -111,7 +111,7 @@
                     @foreach ($current as $r)
                         <div class="col-sm-12 col-md-6 col-lg-4" style="padding-bottom:20px;">
                             <div>
-                                <center><img src="pictures/{{ $r['pic'] }}" class="fluid mov_img"><br>
+                                <center><img src="pictures/movies/{{ $r['pic'] }}" class="fluid mov_img"><br>
                                     <div class="mov_text">
                                         {{ $r['Movie_Name'] }} <br>
                                         Release Date:
@@ -156,7 +156,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <div style="text-align: center"><img
-                                                    src="{{ URL::to('/') }}/pictures/{{ $r['pic'] }}" alt=""
+                                                    src="{{ URL::to('/') }}/pictures/movies/{{ $r['pic'] }}" alt=""
                                                     height="40%" width="40%"></div>
 
                                             <div class="form-group">
@@ -231,7 +231,7 @@
                     @foreach ($upcoming as $r)
                         <div class="col-sm-12 col-md-6 col-lg-4" style="padding-bottom:20px;">
                             <div>
-                                <center><img src="pictures/{{ $r['pic'] }}" class="fluid mov_img"><br>
+                                <center><img src="pictures/movies/{{ $r['pic'] }}" class="fluid mov_img"><br>
                                     <div class="mov_text">
                                         {{ $r['Movie_Name'] }} <br>
                                         Release Date:
@@ -258,7 +258,7 @@
                         @endphp
                         <div class="col-sm-12 col-md-6 col-lg-4" style="padding-bottom:20px;">
                             <div>
-                                <center><img src="pictures/{{ $r['Image'] }}" class="fluid mov_img"><br>
+                                <center><img src="pictures/movies/{{ $r['Image'] }}" class="fluid mov_img"><br>
                                     <div class="mov_text">
                                         <b>#{{ $count }}<br></b>
                                         {{ $r['Movie_Name'] }}<br>

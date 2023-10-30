@@ -65,7 +65,7 @@
         <div class="col-lg-12 border  main-section bg-white">
             <div class="row m-0">
                 <div class="col-lg-4 left-side-product-box pb-3">
-                    <img src="{{ URL::to('/') }}/pictures/{{ $data['Image'] }}" class="border p-3">
+                    <img src="{{ URL::to('/') }}/pictures/products/{{ $data['Image'] }}" class="border p-3">
 
                     <div class="card rev" style="height: 235px;">
                         <ul class="list-group list-group-flush">
@@ -188,7 +188,7 @@
                             <div class="col-lg-3 pb-2">
                                 <a href="{{ URL::to('/') }}/product_detail/{{ $sug['Product_id'] }}">
                                     <div class="pro-box border p-0 m-0">
-                                        <img src="{{ URL::to('/') }}/pictures/{{ $sug['Image'] }}">
+                                        <img src="{{ URL::to('/') }}/pictures/products/{{ $sug['Image'] }}">
                                     </div>
                                 </a>
                             </div>

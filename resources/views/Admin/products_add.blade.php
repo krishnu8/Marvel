@@ -51,7 +51,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col">
                             <!-- <input type="text" name="rt" placeholder="Description" id="rt1" class="form-control"> -->
                             <textarea name="pro_des" class="form-control style="width: 100%; background-color: transparent; border: 2px solid black;" rows="5" placeholder="Description"></textarea>
@@ -59,7 +59,24 @@
                                 <span style="color: red;">{{ $message }}</span> <br>
                             @enderror
                         </div>
+                    </div> --}}
+
+                    <div class="row">
+                        <div class="col">
+                            <select class="form-select" name="category" style="border: 1px solid black;">
+                                <option disabled selected>Category</option>
+                                <option value="clothing">clothing</option>
+                                <option value="cosplay">cosplay</option>
+                                <option value="Toy">Toy</option>
+                                <option value="accessories">accessories</option>
+                                <option value="collection">collection</option>
+                            </select>
+                            @error('category')
+                                <span style="color: red;">{{ $message }}</span> <br>
+                            @enderror
+                        </div>
                     </div>
+
                     <div class="row">
                         <div class="col">
                             <input type="text" name="qty" placeholder="Quantity" id="qty1" class="form-control">

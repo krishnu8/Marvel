@@ -76,7 +76,7 @@ class After_login_controller extends Controller
     {
         $top = top_movies_model::select()->get();
         $current = movies_model::select()
-            ->where('Status', 'Current')
+            ->where('Status', 'Available')
             ->get();
         $upcoming = movies_model::select()
             ->where('Status', 'Upcoming')
@@ -405,7 +405,7 @@ class After_login_controller extends Controller
         }
     }
         session()->flash('succ', 'Products Ordered Successfully');
-        return redirect('After_Franchise');
+        return redirect('cart_list');
     }
     public function Book_Ticket(Request $req)
     {
