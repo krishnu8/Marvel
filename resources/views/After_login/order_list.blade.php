@@ -82,12 +82,15 @@
                         @foreach ($product_detail as $p)
                             @if ($o['Product_id'] == $p['Product_id'])
                                 <div class="row p-2 bg-white border rounded">
+                                    <a href="{{ URL::to('/') }}/product_detail/{{ $p['Product_id'] }}" >
                                     <div class="col-md-3 mt-1" style="text-align: center"><img class=" img-responsive rounded"
                                             height="175px" width="175px"
                                             src="{{ URL::to('/') }}/pictures/products/{{ $p['Image'] }}">
                                     </div>
+                                </a>
                                     <div class="col-md-6 mt-1">
-                                        <h5>{{ $p['Product_name'] }}</h5>
+                                        <a href="{{ URL::to('/') }}/product_detail/{{ $p['Product_id'] }}" >
+                                        <h5 style="color:black;">{{ $p['Product_name'] }}</h5></a>
                                         <div class="d-flex flex-row">
                                             <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
                                                     class="fa fa-star"></i><i class="fa fa-star"></i>
