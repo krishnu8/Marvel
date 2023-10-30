@@ -20,7 +20,7 @@
                 </div>
                 <div class="row bg-info">
                     <div class="col header-btn">
-                        <a href="products_add">
+                        <a href="addCoupon">
                             <button class="button-70">Add Coupon</button>
                         </a>
                     </div>
@@ -45,9 +45,6 @@
                     </th>
                     <th>
                         Status
-                    </th>
-                    <th>
-                        Edit
                     </th>
                     <th>
                         Delete
@@ -78,11 +75,7 @@
                     {{$product['category_id']}}
                 </td> --}}
                         <td style="text-align: center;">
-                            <a href="{{ URL::to('/') }}/update_product1/{{ $c['Offer_ID'] }}"><button
-                                    id="action" class="edit"><i class="bi bi-pencil-square"></i></button></a>
-                        </td>
-                        <td style="text-align: center;">
-                            <a href="{{ URL::to('/') }}/delete_product1/{{ $c['Offer_ID'] }}"><button
+                            <a href="{{ URL::to('/') }}/delete_coupon/{{ $c['Offer_ID'] }}"><button
                                     id="action" class="delete"><i class="bi bi-trash"></i></button></a>
                         </td>
                     </tr>

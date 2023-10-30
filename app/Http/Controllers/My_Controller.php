@@ -396,6 +396,40 @@ class My_Controller extends Controller
         $coupons = offers::select()->get();
         return view('Admin/coupon', compact('coupons'));
     }
+    public function delete_coupon($pro_id)
+    {
+        offers::where('Offer_ID', $pro_id)->delete();
+        return redirect()->action([My_Controller::class, 'fetch_coupon']);
+    }
+    public function validate_coupon(request $ob)
+    {
+        $ob->validate(
+            [
+                'coupon' => 'required',
+                'dis' => 'required',
+                'price' => 'required',
+                'date' => 'required',
+            ],
+            [
+                'coupon.required' => 'Coupon is required.',
+                'dis.required' => 'Discount Amount is required.',
+                'price.required' => 'Minimum Price is required.',
+                'date.required' => 'Expiry Date is required',
+            ],
+        );
+        $check = offers::insert([
+            'Coupon' => $ob->coupon,
+            'Discount_amount' => $ob->dis,
+            'Expiry_Date' => $ob->date,
+            'Minimum_price' => $ob->price,
+        ]);
+        if ($check) {
+            session()->flash('succ', 'Coupon added successfully.');
+        } else {
+            session()->flash('error', 'Failed to add coupon.');
+        }
+        return redirect()->action([My_Controller::class, 'fetch_coupon']);
+    }
 
     public function fetch_product_detail($pro_id)
     {
